@@ -2,7 +2,7 @@ Questions to Ask Yeabsira
     - how do you want to handle the icons/flags
         1. are they going to become from the backend
         2. or should we create a an icon for each flag....italy -> (https://localhost:8080)
-        3. 
+        3. Top Sort the data of family Tree
 
 
 Tasks Done

@@ -17,6 +17,7 @@ import {
 } from "@xyflow/react";
 import dagre from "dagre";
 
+// Data fetched from the mock server :
 import { initialNodes, initialEdges } from "./flowData/nodes-edges-tree";
 
 import "@xyflow/react/dist/style.css";

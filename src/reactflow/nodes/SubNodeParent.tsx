@@ -4,34 +4,22 @@ import DetailPeople from "@/components/People/DetailPeople";
 import AddPeople from "@/components/People/AddPeople";
 import { birthJsonData } from "@/components/jsonData";
 import axios from "axios";
-export const SubNodeParent = () => {
-  const [family, setFamily] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/family");
-        console.log("responseeeeeeeeeeeeeee", response?.data);
-        setFamily(response?.data);
-        // console.log("axiosssssssssssss", response?.data[0]?.firstName);
-      } catch (err) {
-        console.log("Error:", err);
-      }
-    };
-    fetchData();
-  }, []);
+export type PersonNode = {
+  id: number;
+  firstName: string;
+  lastName: string;
+};
 
+export const SubNodeParent = ({ firstName, lastName }: PersonNode) => {
   return (
     <div className="nodrag">
       <Handle type="target" position={Position.Top} />
       <div className="">
         <div className="block p-0.5 line">
           <div className="flex rounded bg-white w-44 h-12">
-            <DetailPeople
-              name={family[2]?.lastName + ` ` + family[2]?.firstName}
-              place={family[2]?.birthPlace}
-            />
-            <AddPeople title="Add Spouse" />
+            <DetailPeople name={firstName + ` ` + lastName} place="USA" />
+            {/* <AddPeople title="Add Spouse" /> */}
           </div>
         </div>
       </div>

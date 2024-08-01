@@ -4,6 +4,7 @@ import PersonDetail from "@/components/SavedDataSection/PersonDetail";
 import LayoutFlow from "@/reactflow";
 import { globalStore } from "@/stores/global-store";
 import "@xyflow/react/dist/style.css";
+
 export default function Home() {
   const { peopleDetailModal } = globalStore();
   return (
