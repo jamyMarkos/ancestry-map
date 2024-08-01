@@ -4,22 +4,28 @@ import DetailPeople from "@/components/People/DetailPeople";
 import AddPeople from "@/components/People/AddPeople";
 import { birthJsonData } from "@/components/jsonData";
 import axios from "axios";
+import type { Node, NodeProps } from "@xyflow/react";
 
-export type PersonNode = {
+export type PersonNodeData = {
   id: number;
   firstName: string;
   lastName: string;
+  parents: PersonNode[];
+  label: {};
 };
 
-export const SubNodeParent = ({ firstName, lastName }: PersonNode) => {
+export type PersonNode = Node<PersonNodeData>;
+
+export const SubNodeParent = ({ data }: NodeProps<PersonNode>) => {
+  console.log(data?.label);
+
   return (
     <div className="nodrag">
       <Handle type="target" position={Position.Top} />
       <div className="">
         <div className="block p-0.5 line">
           <div className="flex rounded bg-white w-44 h-12">
-            <DetailPeople name={firstName + ` ` + lastName} place="USA" />
-            {/* <AddPeople title="Add Spouse" /> */}
+            <DetailPeople name={data?.label + ` `} place="USA" />
           </div>
         </div>
       </div>
@@ -27,3 +33,7 @@ export const SubNodeParent = ({ firstName, lastName }: PersonNode) => {
     </div>
   );
 };
+
+{
+  /* <AddPeople title="Add Spouse" /> */
+}
