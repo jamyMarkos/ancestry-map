@@ -1,0 +1,19 @@
+Questions to Ask Yeabsira
+    - how do you want to handle the icons/flags
+        1. are they going to become from the backend
+        2. or should we create a an icon for each flag....italy -> (https://localhost:8080)
+        3. 
+
+
+Tasks Done
+1. was able to display a data for only one Node
+2. Family Tree using topological sort...it works as it should be displayed....meaning after sending it the data received from the backend....it will structure from top to down....from grandparent to the grandchildren
+3. 
+
+
+Remaining Tasks
+1. Figure out how he displayed the parent/children relationship using the nodes 
+2. Figure out how to display the connected nodes....he used just static ways to display
+3. figure out how each node each node accepts from the return type of the topological sort function
+
+

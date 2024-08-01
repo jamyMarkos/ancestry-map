@@ -1,0 +1,31 @@
+{
+    "id": 56,
+    "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+    "type": "marriage",
+    "eventDate": null,
+    "location": null,
+    "details": null,
+    "marriageId": 11,
+    "personId": null,
+    "createdAt": "2024-07-17T12:29:27.371Z",
+    "updatedAt": "2024-07-17T12:29:27.371Z",
+    "marriage": {
+        "id": 11,
+        "personId": 41,
+        "spouseId": 43,
+        "status": "married",
+        "marriageDate": "2024-07-17T12:29:27.371Z",
+        "marriagePlace": "New York, USA",
+        "person": {
+            "id": 41,
+            "firstName": "John",
+            "lastName": "Doe"
+        },
+        "spouse": {
+            "id": 43,
+            "firstName": "Jane",
+            "gender": "female",
+            "lastName": "Doe"
+        }
+    }
+}
