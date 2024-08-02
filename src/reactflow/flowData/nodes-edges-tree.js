@@ -86,9 +86,6 @@ const fetchData = async () => {
 // const result = res.data;
 const result = [];
 
-console.log("resuuuullllllllllltttttttttttt", result);
-console.log(typeof result);
-
 // const transformedData = result.map((item) => {
 //   return {
 //     id: item.id,
@@ -130,6 +127,7 @@ const jsonData = [
     id: 13,
     firstName: "Frank",
     lastName: "Pritchett",
+    spouse: { id: 15, firstName: "Mary", lastName: "Pritchett" },
     parents: [],
   },
   {
@@ -162,7 +160,6 @@ const jsonData = [
 ];
 
 const createNodesAndEdges = (data) => {
-  console.log("yordiiiii", data);
   const nodes = [];
   const edges = [];
   const positionOffset = 100;
@@ -188,8 +185,6 @@ const createNodesAndEdges = (data) => {
       });
     }
   });
-
-  console.log("object yordi 123", { nodes, edges });
 
   return { nodes, edges };
 };
