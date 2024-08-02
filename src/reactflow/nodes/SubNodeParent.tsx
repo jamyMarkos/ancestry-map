@@ -24,9 +24,10 @@ export const SubNodeParent = ({ data }: NodeProps<PersonNode>) => {
       <Handle type="target" position={Position.Top} />
       <div className="">
         <div className="block p-0.5 line">
-          <div className="flex rounded bg-white w-44 h-12">
+          <div className="bg-white">
             <DetailPeople name={data?.label + ` `} place="USA" />
           </div>
+          {/* <div className="flex rounded bg-white w-44 h-12"></div> */}
         </div>
       </div>
       <Handle type="source" position={Position.Bottom} />
