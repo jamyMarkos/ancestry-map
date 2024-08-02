@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from "react-icons/ai";
 import { GrZoomIn } from "react-icons/gr";
 import { GrZoomOut } from "react-icons/gr";
@@ -16,9 +16,11 @@ import {
   Connection,
 } from "@xyflow/react";
 import dagre from "dagre";
+import useNodeStore from "@/stores/node-store";
+import { createNodesAndEdges } from "@/reactflow/flowData/nodes-edges-tree";
 
 // Data fetched from the mock server :
-import { initialNodes, initialEdges } from "./flowData/nodes-edges-tree";
+// import { initialNodes, initialEdges } from "./flowData/nodes-edges-tree";
 
 import "@xyflow/react/dist/style.css";
 import AddParentNode from "./nodes/AddPrentNode";
@@ -79,16 +81,39 @@ const getLayoutedElements = (
   return { nodes: newNodes, edges };
 };
 
-const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-  initialNodes,
-  initialEdges
-);
+// const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
+//   initialNodes,
+//   initialEdges
+// );
 
 const ReactLayoutFlow = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState<any>(layoutedNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState<any>([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const { zoomIn, zoomOut, fitView } = useReactFlow();
   const [isFullScreen, setIsFullScreen] = useState(false);
+  const fetchPeople = useNodeStore((state) => state.fetchPeople);
+  const people = useNodeStore((state) => state.people);
+
+  useEffect(() => {
+    console.log("Fetching people");
+    fetchPeople();
+  }, [fetchPeople]);
+
+  useEffect(() => {
+    if (people.length > 0) {
+      const { nodes: initialNodes, edges: initialEdges } =
+        createNodesAndEdges(people);
+
+      const { nodes: layoutedNodes, edges: layoutedEdges } =
+        getLayoutedElements(initialNodes, initialEdges);
+
+      setNodes(layoutedNodes);
+      setEdges(layoutedEdges);
+
+      console.log("Nodes:", nodes);
+      console.log("Edges:", edges);
+    }
+  }, [people, setNodes, setEdges]);
 
   const toggleFullScreen = () => {
     setIsFullScreen(!isFullScreen);
