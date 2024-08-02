@@ -98,7 +98,7 @@ console.log(typeof result);
 //   };
 // });
 
-const jsonData = [
+export const JSONDATA = [
   {
     id: 12,
     firstName: "You",
@@ -119,18 +119,21 @@ const jsonData = [
         },
       },
     ],
+    spouseId: null, // Assuming "You" doesn't have a spouse info in the data
   },
   {
     id: 1457,
     firstName: "Akilas",
     lastName: "Pritchett",
     parents: [],
+    spouseId: null, // Assuming no spouse info available
   },
   {
     id: 13,
     firstName: "Frank",
     lastName: "Pritchett",
     parents: [],
+    spouseId: 15, // SpouseId from related events of type "marriage"
   },
   {
     id: 14,
@@ -152,30 +155,102 @@ const jsonData = [
         },
       },
     ],
+    spouseId: null, // Assuming no spouse info available
   },
   {
     id: 15,
     firstName: "Mary",
     lastName: "Pritchett",
     parents: [],
+    spouseId: 13, // SpouseId from related events of type "marriage"
   },
 ];
-
 const createNodesAndEdges = (data) => {
   console.log("yordiiiii", data);
+
   const nodes = [];
   const edges = [];
-  const positionOffset = 100;
+  const verticalOffset = 100; // Vertical spacing between levels
+  const horizontalOffset = 150; // Horizontal spacing between spouse and person
 
+  // Keep track of node positions and added nodes
+  const nodePositions = {};
+  const addedNodes = new Set();
+
+  // Calculate the maximum depth of the tree
+  const calculateDepth = (id, depth = 0) => {
+    const person = data.find((p) => p.id === id);
+    if (!person || !person.parents || person.parents.length === 0) {
+      return depth;
+    }
+    const parentDepths = person.parents.map((p) =>
+      calculateDepth(p.parent.id, depth + 1)
+    );
+    return Math.max(...parentDepths);
+  };
+
+  // Initialize levels
+  const nodeLevels = {};
+  data.forEach((person) => (nodeLevels[person.id] = calculateDepth(person.id)));
+
+  // Calculate positions and add nodes
   data.forEach((person, index) => {
     const nodeId = person.id.toString();
+
+    // Skip if node is already added
+    if (addedNodes.has(nodeId)) return;
+
+    // Determine position for the current node
+    const depth = nodeLevels[nodeId];
+    const position = {
+      x: 0,
+      y: depth * verticalOffset,
+    };
+    nodePositions[nodeId] = position;
+
+    // Add the person node
     nodes.push({
       id: nodeId,
       type: "subparent",
-      data: { label: `${person.firstName} ${person.lastName}` },
-      position: { x: 0, y: index * positionOffset },
+      data: {
+        label: `${person.firstName} ${person.lastName}`,
+        spouse: person.spouseId
+          ? data.find((p) => p.id === person.spouseId)?.firstName +
+            " " +
+            data.find((p) => p.id === person.spouseId)?.lastName
+          : null,
+        spouseId: person.spouseId ? person.spouseId.toString() : null,
+      },
+      position,
     });
+    addedNodes.add(nodeId); // Mark person as added
 
+    // Add the spouse node if exists and is not already added
+    if (person.spouseId) {
+      const spouse = data.find((p) => p.id === person.spouseId);
+      if (spouse && !addedNodes.has(spouse.id.toString())) {
+        const spouseId = spouse.id.toString();
+        const spousePosition = {
+          x: position.x + horizontalOffset,
+          y: position.y, // Same vertical position as the person
+        };
+        nodePositions[spouseId] = spousePosition;
+
+        // Add the spouse node
+        nodes.push({
+          id: spouseId,
+          type: "subparent",
+          data: {
+            label: `${spouse.firstName} ${spouse.lastName}`,
+            spouse: null, // No spouse data for the spouse node
+          },
+          position: spousePosition,
+        });
+        addedNodes.add(spouseId); // Mark spouse as added
+      }
+    }
+
+    // Add edges to parents
     if (person.parents && person.parents.length > 0) {
       person.parents.forEach((parent) => {
         const parentId = parent.parent.id.toString();
@@ -183,7 +258,7 @@ const createNodesAndEdges = (data) => {
           id: `e${parentId}-${nodeId}`,
           source: parentId,
           target: nodeId,
-          type: edgeType,
+          type: "smoothstep", // Adjust edge type as needed
         });
       });
     }
@@ -195,4 +270,4 @@ const createNodesAndEdges = (data) => {
 };
 
 export const { nodes: initialNodes, edges: initialEdges } =
-  createNodesAndEdges(jsonData);
+  createNodesAndEdges(JSONDATA);

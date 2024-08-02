@@ -22,7 +22,7 @@ import { initialNodes, initialEdges } from "./flowData/nodes-edges-tree";
 
 import "@xyflow/react/dist/style.css";
 import AddParentNode from "./nodes/AddPrentNode";
-import { SubNodeParent } from "./nodes/SubNodeParent";
+import SubNodeParent from "./nodes/SubNodeParent";
 import AddBirthNode from "./nodes/AddBirthNode";
 import BirthNode from "./nodes/BithNode";
 import AddTree from "./nodes/AddTree";
