@@ -8,32 +8,146 @@ const edgeType = "smoothstep";
 export const createNodesAndEdges = (data) => {
   const nodes = [];
   const edges = [];
-  const positionOffset = 100;
+  const verticalOffset = 100; // Vertical spacing between levels
+  const horizontalOffset = 150; // Horizontal spacing between nodes
+  let maxY = 0; // To track the maximum y position of the tree
 
-  data.forEach((person, index) => {
-    const nodeId = person.id.toString();
-    nodes.push({
-      id: nodeId,
-      type: "subparent",
-      data: { label: `${person.firstName} ${person?.lastName}` },
-      position: { x: 0, y: index * positionOffset },
-    });
-
-    if (person.parents && person.parents.length > 0) {
-      person.parents.forEach((parent) => {
-        const parentId = parent.parent.id.toString();
-        edges.push({
-          id: `e${parentId}-${nodeId}`,
-          source: parentId,
-          target: nodeId,
-          type: edgeType,
-        });
-      });
-    }
+  let maxDepth = 0; // To track the maximum depth of the tree
+  const nodeLevels = {};
+  data.forEach((person) => {
+    nodeLevels[person.id] = calculateDepth(person.id, data);
+    maxDepth = Math.max(maxDepth, nodeLevels[person.id]);
   });
+
+  // Function to add nodes and edges
+  data.forEach((person) => {
+    const nodeId = person.id.toString();
+    const depth = nodeLevels[person.id];
+    const baseX = 0;
+    const baseY = depth * verticalOffset;
+
+    // Add the "Add Parent" nodes only if this person has no parents
+    if (person.parents.length === 0) {
+      addParentNode(
+        `add-parent1-${nodeId}`,
+        "addparent",
+        "Add Parent",
+        baseX - horizontalOffset,
+        baseY - verticalOffset,
+        nodes
+      );
+
+      addEdge(`add-parent1-${nodeId}`, nodeId, edges);
+    }
+
+    let spouseLabel = null;
+    if (person.spouseId) {
+      const spouse = data.find((p) => p.id === person.spouseId);
+      spouseLabel = `${spouse.firstName} ${spouse.lastName}`;
+    }
+
+    // Add the node with or without spouse information
+    addNode(
+      nodeId,
+      "subparent",
+      `${person.firstName} ${person.lastName}`,
+      spouseLabel,
+      baseX,
+      baseY,
+      nodes
+    );
+
+    // Edges to parents
+    person.parents.forEach((parent) => {
+      addEdge(parent.parent.id.toString(), nodeId, edges);
+    });
+  });
+
+  // Add a single "Add Child" node at the very bottom of the tree
+  // if (data.length > 0) {
+  //   addNode(
+  //     "add-child",
+  //     "addChildNode",
+  //     "Add Child",
+  //     0,
+  //     (maxDepth + 1) * verticalOffset,
+  //     nodes
+  //   );
+  // }
 
   return { nodes, edges };
 };
+
+// Helper functions
+function calculateDepth(id, data, depth = 0) {
+  const person = data.find((p) => p.id === id);
+  if (!person || !person.parents || person.parents.length === 0) {
+    return depth;
+  }
+  const parentDepths = person.parents.map((parent) =>
+    calculateDepth(parent.parent.id, data, depth + 1)
+  );
+  return Math.max(...parentDepths);
+}
+
+function addParentNode(id, type, label, x, y, nodes) {
+  const nodeData = {
+    id,
+    type,
+    data: { label },
+    position: { x, y },
+  };
+  nodes.push(nodeData);
+}
+
+function addNode(id, type, personLabel, spouseLabel, x, y, nodes) {
+  const nodeData = {
+    id,
+    type,
+    data: { label: personLabel, spouse: spouseLabel },
+    position: { x, y },
+  };
+  nodes.push(nodeData);
+}
+
+function addEdge(source, target, edges, type = "smoothstep") {
+  edges.push({
+    id: `e-${source}-${target}`,
+    source,
+    target,
+    type,
+  });
+}
+
+// export const createNodesAndEdges = (data) => {
+//   const nodes = [];
+//   const edges = [];
+//   const positionOffset = 100;
+
+//   data.forEach((person, index) => {
+//     const nodeId = person.id.toString();
+//     nodes.push({
+//       id: nodeId,
+//       type: "subparent",
+//       data: { label: `${person.firstName} ${person?.lastName}` },
+//       position: { x: 0, y: index * positionOffset },
+//     });
+
+//     if (person.parents && person.parents.length > 0) {
+//       person.parents.forEach((parent) => {
+//         const parentId = parent.parent.id.toString();
+//         edges.push({
+//           id: `e${parentId}-${nodeId}`,
+//           source: parentId,
+//           target: nodeId,
+//           type: edgeType,
+//         });
+//       });
+//     }
+//   });
+
+//   return { nodes, edges };
+// };
 
 // export const { nodes: initialNodes, edges: initialEdges } =
 //   createNodesAndEdges(result);

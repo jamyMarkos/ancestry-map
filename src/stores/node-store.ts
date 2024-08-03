@@ -1,5 +1,6 @@
-import create from "zustand";
+import { create } from "zustand";
 import axios from "axios";
+import { devtools, persist } from "zustand/middleware";
 
 interface Person {
   id: number;
@@ -27,17 +28,24 @@ interface NodeStore {
   fetchPeople: () => Promise<void>;
 }
 
-const useNodeStore = create<NodeStore>((set) => ({
-  people: [],
-  fetchPeople: async () => {
-    try {
-      const response = await axios.get("http://localhost:5000/family");
-      set({ people: response.data }); // Store the fetched data
-      console.log("Heyyyyyyyyy");
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  },
-}));
+const useNodeStore = create<NodeStore>()(
+  devtools(
+    persist(
+      (set) => ({
+        people: [],
+        fetchPeople: async () => {
+          try {
+            const response = await axios.get("http://localhost:5000/family");
+            set({ people: response.data }); // Store the fetched data
+            console.log("Heyyyyyyyyy");
+          } catch (error) {
+            console.error("Error fetching data:", error);
+          }
+        },
+      }),
+      { name: "node-store" }
+    )
+  )
+);
 
 export default useNodeStore;
