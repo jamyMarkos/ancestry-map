@@ -19,7 +19,7 @@ export const createNodesAndEdges = (data) => {
   data.forEach((person) => {
     if (person.parents) {
       person.parents.forEach((parent) => {
-        nodesWithChildren.add(parent.parent.id);
+        nodesWithChildren.add(parent?.parent?.id);
       });
     }
   });
@@ -73,7 +73,7 @@ export const createNodesAndEdges = (data) => {
     let spouseLabel = null;
     if (person.spouseId) {
       const spouse = data.find((p) => p.id === person.spouseId);
-      spouseLabel = `${spouse.firstName} ${spouse.lastName}`;
+      spouseLabel = `${spouse?.firstName} ${spouse?.lastName}`;
       // Mark the spouse as added so that we don't add them again
       addedSpousesIds.add(person.spouseId);
     }

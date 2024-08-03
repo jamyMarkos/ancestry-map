@@ -106,7 +106,7 @@ const AddParentModal: FC = () => {
 
       const res = await axios.post("http://localhost:5000/family", postData);
 
-      const result = await axios.patch("http://localhost:5000/family/a42f", {
+      const result = await axios.patch("http://localhost:5000/family/" + "", {
         parents: [...response.data.parents, { parent: { ...res.data } }],
       });
 
