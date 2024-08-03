@@ -1,3 +1,4 @@
+import { globalStore } from "@/stores/global-store";
 import React from "react";
 import { MdAdd } from "react-icons/md";
 
@@ -9,6 +10,7 @@ interface AddPeopleProps {
 const AddPeople = ({ title, childId, onClick }: AddPeopleProps) => {
   // This childId will be used in the future
   console.log("childId", childId);
+
   return (
     <div
       onClick={onClick}
