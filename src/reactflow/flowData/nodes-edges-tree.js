@@ -8,11 +8,11 @@ const edgeType = "smoothstep";
 export const createNodesAndEdges = (data) => {
   const nodes = [];
   const edges = [];
-  const verticalOffset = 100; // Vertical spacing between levels
-  const horizontalOffset = 150; // Horizontal spacing between nodes
-  let maxY = 0; // To track the maximum y position of the tree
+  const verticalOffset = 100;
+  const horizontalOffset = 150;
+  let maxY = 0;
 
-  let maxDepth = 0; // To track the maximum depth of the tree
+  let maxDepth = 0;
   const nodeLevels = {};
   data.forEach((person) => {
     nodeLevels[person.id] = calculateDepth(person.id, data);

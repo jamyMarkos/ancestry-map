@@ -79,7 +79,7 @@ const getLayoutedElements = (
 
 const ReactLayoutFlow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState<any>([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<any>([]);
   const { zoomIn, zoomOut, fitView } = useReactFlow();
   const [isFullScreen, setIsFullScreen] = useState(false);
   const fetchPeople = useNodeStore((state) => state.fetchPeople);
