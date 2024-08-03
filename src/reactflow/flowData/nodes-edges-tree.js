@@ -92,7 +92,6 @@ function calculateDepth(id, data, depth = 0) {
 }
 
 function addParentNode(id, type, label, x, y, nodes, nodeId) {
-  console.log("Chelsea ", label, x, y, nodes, nodeId);
   const nodeData = {
     id,
     type,
