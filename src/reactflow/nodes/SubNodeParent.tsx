@@ -43,9 +43,17 @@ const SubNodeParent = ({ data }: any) => {
       <div className="">
         <div className="block p-0.5 line">
           <div className="flex rounded bg-white w-44 h-12">
-            <DetailPeople name={data?.label + ` `} place="USA" />
+            <DetailPeople
+              name={data?.label + ` `}
+              place="USA"
+              countryCode="US"
+            />
             {data?.spouse ? (
-              <DetailPeople name={data?.spouse + ` `} place="ETH" />
+              <DetailPeople
+                name={data?.spouse + ` `}
+                place="ETHIOPIA"
+                countryCode="ET"
+              />
             ) : (
               <AddPeople title="Add spouse" />
             )}

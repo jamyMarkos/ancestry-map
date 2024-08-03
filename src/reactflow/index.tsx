@@ -30,7 +30,7 @@ import AddChildNode from "./nodes/AddChildNode";
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-const nodeWidth = 172;
+const nodeWidth = 180;
 const nodeHeight = 36;
 const nodeTypes = {
   addparent: AddParentNode,
