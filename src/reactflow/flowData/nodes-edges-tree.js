@@ -13,6 +13,16 @@ export const createNodesAndEdges = (data) => {
   let maxY = 0;
 
   const addedSpousesIds = new Set();
+  const nodesWithChildren = new Set();
+
+  // Step 1: Determine which nodes have children
+  data.forEach((person) => {
+    if (person.parents) {
+      person.parents.forEach((parent) => {
+        nodesWithChildren.add(parent.parent.id);
+      });
+    }
+  });
 
   let maxDepth = 0;
   const nodeLevels = {};
@@ -80,35 +90,26 @@ export const createNodesAndEdges = (data) => {
         nodes
       );
     }
-    // addNode(
-    //   nodeId,
-    //   "subparent",
-    //   `${person.firstName} ${person.lastName}`,
-    //   spouseLabel,
-    //   baseX,
-    //   baseY,
-    //   nodes
-    // );
-
-    // addedSpousesIds.add(person.id);
 
     // Edges to parents
     person.parents.forEach((parent) => {
       addEdge(parent.parent.id.toString(), nodeId, edges);
     });
-  });
 
-  // Add a single "Add Child" node at the very bottom of the tree
-  // if (data.length > 0) {
-  //   addNode(
-  //     "add-child",
-  //     "addChildNode",
-  //     "Add Child",
-  //     0,
-  //     (maxDepth + 1) * verticalOffset,
-  //     nodes
-  //   );
-  // }
+    // Add "+ Add Child" nodes for each node that has children
+    if (!nodesWithChildren.has(person.id)) {
+      addChildNode(
+        `add-child-${person.id}`,
+        "addChildNode",
+        "Add Child",
+        baseX,
+        baseY + verticalOffset,
+        nodes
+      );
+
+      addEdge(person.id.toString(), `add-child-${person.id}`, edges);
+    }
+  });
 
   return { nodes, edges };
 };
@@ -123,6 +124,17 @@ function calculateDepth(id, data, depth = 0) {
     calculateDepth(parent.parent.id, data, depth + 1)
   );
   return Math.max(...parentDepths);
+}
+
+// Add a child node
+function addChildNode(id, type, label, x, y, nodes) {
+  const nodeData = {
+    id,
+    type,
+    data: { title: label },
+    position: { x, y },
+  };
+  nodes.push(nodeData);
 }
 
 function addParentNode(id, type, label, x, y, nodes, nodeId) {
