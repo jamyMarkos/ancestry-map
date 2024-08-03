@@ -31,10 +31,11 @@ export const createNodesAndEdges = (data) => {
       addParentNode(
         `add-parent1-${nodeId}`,
         "addparent",
-        "Add Parent",
+        "Add parent",
         baseX - horizontalOffset,
         baseY - verticalOffset,
-        nodes
+        nodes,
+        nodeId
       );
 
       addEdge(`add-parent1-${nodeId}`, nodeId, edges);
@@ -90,11 +91,12 @@ function calculateDepth(id, data, depth = 0) {
   return Math.max(...parentDepths);
 }
 
-function addParentNode(id, type, label, x, y, nodes) {
+function addParentNode(id, type, label, x, y, nodes, nodeId) {
+  console.log("Chelsea ", label, x, y, nodes, nodeId);
   const nodeData = {
     id,
     type,
-    data: { label },
+    data: { title: label, childId: nodeId },
     position: { x, y },
   };
   nodes.push(nodeData);

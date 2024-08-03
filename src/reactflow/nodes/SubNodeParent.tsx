@@ -6,8 +6,6 @@ import { birthJsonData } from "@/components/jsonData";
 import axios from "axios";
 import type { Node, NodeProps } from "@xyflow/react";
 
-import { JSONDATA } from "../flowData/nodes-edges-tree";
-
 export type PersonNodeData = {
   id: number;
   firstName: string;
@@ -17,69 +15,6 @@ export type PersonNodeData = {
 };
 
 export type PersonNode = Node<PersonNodeData>;
-
-// const JSONDATA = [
-//   {
-//     id: 12,
-//     firstName: "You",
-//     lastName: "",
-//     parents: [
-//       {
-//         parent: {
-//           id: 14,
-//           firstName: "Jay",
-//           lastName: "Pritchett",
-//         },
-//       },
-//       {
-//         parent: {
-//           id: 1457,
-//           firstName: "Akilas",
-//           lastName: "Pritchett",
-//         },
-//       },
-//     ],
-//   },
-//   {
-//     id: 1457,
-//     firstName: "Akilas",
-//     lastName: "Pritchett",
-//     parents: [],
-//   },
-//   {
-//     id: 13,
-//     firstName: "Frank",
-//     lastName: "Pritchett",
-//     parents: [],
-//   },
-//   {
-//     id: 14,
-//     firstName: "Jay",
-//     lastName: "Pritchett",
-//     parents: [
-//       {
-//         parent: {
-//           id: 13,
-//           firstName: "Frank",
-//           lastName: "Pritchett",
-//         },
-//       },
-//       {
-//         parent: {
-//           id: 15,
-//           firstName: "Mary",
-//           lastName: "Pritchett",
-//         },
-//       },
-//     ],
-//   },
-//   {
-//     id: 15,
-//     firstName: "Mary",
-//     lastName: "Pritchett",
-//     parents: [],
-//   },
-// ];
 
 type Parent = {
   id: number;
@@ -100,11 +35,6 @@ type Person = {
 };
 
 const SubNodeParent = ({ data }: any) => {
-  // const person = JSONDATA.find((p) => p.id === data.id);
-  // const spouse = person ? JSONDATA.find((p) => p.id === person.spouseId) : null;
-
-  console.log("Data 1 2", data);
-
   return (
     <div className="nodrag">
       <Handle type="target" position={Position.Top} />
@@ -115,7 +45,7 @@ const SubNodeParent = ({ data }: any) => {
             {data?.spouse ? (
               <DetailPeople name={data?.spouse + ` `} place="ETH" />
             ) : (
-              <AddPeople title="Add Spouse" />
+              <AddPeople title="Add spouse" />
             )}
           </div>
         </div>
