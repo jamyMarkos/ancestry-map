@@ -37,7 +37,6 @@ const useNodeStore = create<NodeStore>()(
           try {
             const response = await axios.get("http://localhost:5000/family");
             set({ people: response.data }); // Store the fetched data
-            console.log("Heyyyyyyyyy");
           } catch (error) {
             console.error("Error fetching data:", error);
           }

@@ -21,6 +21,7 @@ export const createNodesAndEdges = (data) => {
 
   // Function to add nodes and edges
   data.forEach((person) => {
+    if (person.firstName === "Jane") console.log("want jane", person);
     const nodeId = person.id.toString();
     const depth = nodeLevels[person.id];
     const baseX = 0;
@@ -59,7 +60,7 @@ export const createNodesAndEdges = (data) => {
 
     // Edges to parents
     person.parents.forEach((parent) => {
-      addEdge(parent.parent.id.toString(), nodeId, edges);
+      addEdge(parent?.parent?.id?.toString(), nodeId, edges);
     });
   });
 
@@ -85,7 +86,7 @@ function calculateDepth(id, data, depth = 0) {
     return depth;
   }
   const parentDepths = person.parents.map((parent) =>
-    calculateDepth(parent.parent.id, data, depth + 1)
+    calculateDepth(parent?.parent?.id, data, depth + 1)
   );
   return Math.max(...parentDepths);
 }

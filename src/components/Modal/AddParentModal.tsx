@@ -76,8 +76,46 @@ const AddParentModal: FC = () => {
     setSelectedGender(newValue);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  // };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // Prepare the data to be sent
+    const postData = {
+      isUser: false,
+      firstName: values.firstName,
+      lastName: values.secondName,
+      birthPlace: values.birthPlace,
+      dob: startDate
+        ? startDate.toISOString().slice(0, 19).replace("T", " ")
+        : null, // Format the date
+      gender: selectedGender ? selectedGender.value : null, // Get the selected gender value
+      isAlive: true, // Assuming this is a static value
+      parents: [], // Example parent IDs; modify as needed
+    };
+
+    try {
+      // Send POST request to the JSON server
+      const response = await axios.post(
+        "http://localhost:5000/people",
+        postData
+      );
+
+      const res = await axios.post("http://localhost:5000/family", postData);
+
+      const result = await axios.patch("http://localhost:5000/family/a42f", {
+        parents: [...response.data.parents, { parent: { ...res.data } }],
+      });
+
+      console.log("Data saved successfully:", result);
+      setAddPeopleModal(false);
+    } catch (error) {
+      console.error("Error saving data:", error);
+      // Handle error (e.g., show a notification)
+    }
   };
 
   return (

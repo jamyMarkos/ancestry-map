@@ -16,7 +16,10 @@ import { peopleStore } from "@/stores/people-store";
 
 import { BASE_URL } from "../../../config";
 
-const optionsEvent = [{ label: "Marriage", value: "marriage" }];
+const optionsEvent = [
+  { label: "Marriage", value: "marriage" },
+  { label: "Death", value: "death" },
+];
 
 const optionsGender = [
   { label: "Male", value: "male" },
