@@ -55,7 +55,7 @@ export const createNodesAndEdges = (data) => {
         addEdge(`add-parent1-${nodeId}`, nodeId, edges);
       }
 
-      if (!addedSpousesIds.has(person.id)) {
+      if (!addedSpousesIds.has(person.id) && person.spouseId) {
         addParentNode(
           `add-parent2-${person.spouseId}`,
           "addparent",
