@@ -12,6 +12,8 @@ export const createNodesAndEdges = (data) => {
   const horizontalOffset = 150;
   let maxY = 0;
 
+  const addedSpousesIds = new Set();
+
   let maxDepth = 0;
   const nodeLevels = {};
   data.forEach((person) => {
@@ -28,47 +30,67 @@ export const createNodesAndEdges = (data) => {
 
     // Add the "Add Parent" nodes only if this person has no parents
     if (person.parents.length === 0) {
-      addParentNode(
-        `add-parent1-${nodeId}`,
-        "addparent",
-        "Add parent 1",
-        baseX - horizontalOffset,
-        baseY - verticalOffset,
-        nodes,
-        nodeId
-      );
+      if (!addedSpousesIds.has(person.id)) {
+        addParentNode(
+          `add-parent1-${nodeId}`,
+          "addparent",
+          "Add parent 1",
+          baseX - horizontalOffset,
+          baseY - verticalOffset,
+          nodes,
+          nodeId
+        );
 
-      addEdge(`add-parent1-${nodeId}`, nodeId, edges);
+        addEdge(`add-parent1-${nodeId}`, nodeId, edges);
+      }
 
-      addParentNode(
-        `add-parent2-${nodeId}`,
-        "addparent",
-        "Add parent 2",
-        baseX + horizontalOffset,
-        baseY - verticalOffset,
-        nodes,
-        nodeId
-      );
+      if (!addedSpousesIds.has(person.id)) {
+        addParentNode(
+          `add-parent2-${nodeId}`,
+          "addparent",
+          "Add parent 2",
+          baseX + horizontalOffset,
+          baseY - verticalOffset,
+          nodes,
+          nodeId
+        );
 
-      addEdge(`add-parent2-${nodeId}`, nodeId, edges);
+        addEdge(`add-parent2-${nodeId}`, nodeId, edges);
+      }
     }
 
     let spouseLabel = null;
     if (person.spouseId) {
       const spouse = data.find((p) => p.id === person.spouseId);
       spouseLabel = `${spouse.firstName} ${spouse.lastName}`;
+      // Mark the spouse as added so that we don't add them again
+      addedSpousesIds.add(person.spouseId);
     }
 
-    // Add the node with or without spouse information
-    addNode(
-      nodeId,
-      "subparent",
-      `${person.firstName} ${person.lastName}`,
-      spouseLabel,
-      baseX,
-      baseY,
-      nodes
-    );
+    console.log("what is going to be added", nodeId, person);
+
+    if (!addedSpousesIds.has(person.id)) {
+      addNode(
+        nodeId,
+        "subparent",
+        `${person.firstName} ${person.lastName}`,
+        spouseLabel,
+        baseX,
+        baseY,
+        nodes
+      );
+    }
+    // addNode(
+    //   nodeId,
+    //   "subparent",
+    //   `${person.firstName} ${person.lastName}`,
+    //   spouseLabel,
+    //   baseX,
+    //   baseY,
+    //   nodes
+    // );
+
+    // addedSpousesIds.add(person.id);
 
     // Edges to parents
     person.parents.forEach((parent) => {
