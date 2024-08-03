@@ -39,7 +39,7 @@ export default function AddPeople() {
 
       <div className="w-full h-[calc(100vh-72px)] p-5">
         <AddPeopleFlow />
-        {addPeopleModal && <AddParentModal />}
+        {addPeopleModal && <AddParentModal childId={childId} />}
       </div>
     </>
   );

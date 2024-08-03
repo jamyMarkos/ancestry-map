@@ -20,7 +20,11 @@ const genderOptions = [
   { label: "Transgender", value: "transgender" },
 ];
 
-const AddParentModal: FC = () => {
+type AddParentModalProps = {
+  childId: number | null;
+};
+
+const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
   const { addPeopleModal, setAddPeopleModal } = globalStore();
   const { peopleData, setPeopleData } = peopleStore();
   const router = useRouter();
@@ -106,9 +110,12 @@ const AddParentModal: FC = () => {
 
       const res = await axios.post("http://localhost:5000/family", postData);
 
-      const result = await axios.patch("http://localhost:5000/family/" + "", {
-        parents: [...response.data.parents, { parent: { ...res.data } }],
-      });
+      const result = await axios.patch(
+        "http://localhost:5000/family/" + `${childId}`,
+        {
+          parents: [...response.data.parents, { parent: { ...res.data } }],
+        }
+      );
 
       console.log("Data saved successfully:", result);
       setAddPeopleModal(false);

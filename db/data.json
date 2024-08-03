@@ -9,7 +9,10 @@
       "dob": "1999-01-01T00:00:00.000Z",
       "gender": "male",
       "isAlive": true,
-      "parents": [1, 2],
+      "parents": [
+        1,
+        2
+      ],
       "spouses": [
         {
           "id": 4,
@@ -30,13 +33,49 @@
       "dob": "2000-02-01T00:00:00.000Z",
       "gender": "female",
       "isAlive": true,
-      "parents": [3, 4],
+      "parents": [
+        3,
+        4
+      ],
       "spouses": [
         {
           "id": 41,
           "status": "married"
         }
       ]
+    },
+    {
+      "id": "e1b0",
+      "isUser": false,
+      "firstName": "Yirgu",
+      "lastName": "Doe",
+      "birthPlace": "New York, USA",
+      "dob": "1998-12-31 21:00:00",
+      "gender": "male",
+      "isAlive": true,
+      "parents": []
+    },
+    {
+      "id": "4ef4",
+      "isUser": false,
+      "firstName": "Chelsea",
+      "lastName": "Doe",
+      "birthPlace": "New York, USA",
+      "dob": "1998-12-31 21:00:00",
+      "gender": "male",
+      "isAlive": true,
+      "parents": []
+    },
+    {
+      "id": "09b4",
+      "isUser": false,
+      "firstName": "Man",
+      "lastName": "U",
+      "birthPlace": "New York, USA",
+      "dob": "1998-12-31 21:00:00",
+      "gender": "male",
+      "isAlive": true,
+      "parents": []
     }
   ],
   "events": [
@@ -290,6 +329,53 @@
           ]
         }
       ]
+    },
+    {
+      "id": "59ec",
+      "isUser": false,
+      "firstName": "Yirgu",
+      "lastName": "Doe",
+      "birthPlace": "New York, USA",
+      "dob": "1998-12-31 21:00:00",
+      "gender": "male",
+      "isAlive": true,
+      "parents": []
+    },
+    {
+      "id": "90c4",
+      "isUser": false,
+      "firstName": "Chelsea",
+      "lastName": "Doe",
+      "birthPlace": "New York, USA",
+      "dob": "1998-12-31 21:00:00",
+      "gender": "male",
+      "isAlive": true,
+      "parents": [
+        {
+          "parent": {
+            "id": "80ad",
+            "isUser": false,
+            "firstName": "Man",
+            "lastName": "U",
+            "birthPlace": "New York, USA",
+            "dob": "1998-12-31 21:00:00",
+            "gender": "male",
+            "isAlive": true,
+            "parents": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "80ad",
+      "isUser": false,
+      "firstName": "Man",
+      "lastName": "U",
+      "birthPlace": "New York, USA",
+      "dob": "1998-12-31 21:00:00",
+      "gender": "male",
+      "isAlive": true,
+      "parents": []
     }
   ]
 }
