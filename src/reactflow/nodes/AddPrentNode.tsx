@@ -3,7 +3,8 @@ import { Handle, Position } from "@xyflow/react";
 import { useRouter } from "next/navigation";
 import AddPeople from "@/components/People/AddPeople";
 
-function AddParentNode() {
+function AddParentNode(props: any) {
+  console.log("inside parent node");
   const router = useRouter();
   return (
     <Fragment>
@@ -12,11 +13,13 @@ function AddParentNode() {
           <div className="flex rounded bg-white w-44 h-12">
             <AddPeople
               onClick={() => router.push("/add-People")}
-              title="Add People"
+              title={props.data.title}
+              childId={props.data.childId}
             />
             <AddPeople
               onClick={() => router.push("/add-People")}
-              title="Add People"
+              title={props.data.title}
+              childId={props.data.childId}
             />
           </div>
         </div>

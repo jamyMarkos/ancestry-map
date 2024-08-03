@@ -19,9 +19,6 @@ import dagre from "dagre";
 import useNodeStore from "@/stores/node-store";
 import { createNodesAndEdges } from "@/reactflow/flowData/nodes-edges-tree";
 
-// Data fetched from the mock server :
-// import { initialNodes, initialEdges } from "./flowData/nodes-edges-tree";
-
 import "@xyflow/react/dist/style.css";
 import AddParentNode from "./nodes/AddPrentNode";
 import SubNodeParent from "./nodes/SubNodeParent";
@@ -29,12 +26,11 @@ import AddBirthNode from "./nodes/AddBirthNode";
 import BirthNode from "./nodes/BithNode";
 import AddTree from "./nodes/AddTree";
 import AddChildNode from "./nodes/AddChildNode";
-// import { AddChildNode } from "./nodes/AddChildNode";
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-const nodeWidth = 172;
+const nodeWidth = 180;
 const nodeHeight = 36;
 const nodeTypes = {
   addparent: AddParentNode,
@@ -81,14 +77,9 @@ const getLayoutedElements = (
   return { nodes: newNodes, edges };
 };
 
-// const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-//   initialNodes,
-//   initialEdges
-// );
-
 const ReactLayoutFlow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState<any>([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<any>([]);
   const { zoomIn, zoomOut, fitView } = useReactFlow();
   const [isFullScreen, setIsFullScreen] = useState(false);
   const fetchPeople = useNodeStore((state) => state.fetchPeople);
