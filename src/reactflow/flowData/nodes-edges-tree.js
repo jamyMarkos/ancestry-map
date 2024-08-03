@@ -57,16 +57,16 @@ export const createNodesAndEdges = (data) => {
 
       if (!addedSpousesIds.has(person.id)) {
         addParentNode(
-          `add-parent2-${nodeId}`,
+          `add-parent2-${person.spouseId}`,
           "addparent",
           "Add parent 2",
           baseX + horizontalOffset,
           baseY - verticalOffset,
           nodes,
-          nodeId
+          person.spouseId
         );
 
-        addEdge(`add-parent2-${nodeId}`, nodeId, edges);
+        addEdge(`add-parent2-${person.spouseId}`, nodeId, edges);
       }
     }
 
@@ -77,8 +77,6 @@ export const createNodesAndEdges = (data) => {
       // Mark the spouse as added so that we don't add them again
       addedSpousesIds.add(person.spouseId);
     }
-
-    console.log("what is going to be added", nodeId, person);
 
     if (!addedSpousesIds.has(person.id)) {
       addNode(

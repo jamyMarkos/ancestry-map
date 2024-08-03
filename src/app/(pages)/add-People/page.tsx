@@ -9,7 +9,10 @@ import { FaPlus } from "react-icons/fa";
 
 export default function AddPeople() {
   const { push } = useRouter();
-  const { addPeopleModal, setAddPeopleModal } = globalStore();
+  const { addPeopleModal, setAddPeopleModal, childId } = globalStore();
+
+  console.log("childId in addPeople page", childId);
+
   return (
     <>
       <PageHeader
