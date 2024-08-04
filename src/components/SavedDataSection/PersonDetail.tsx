@@ -1,48 +1,74 @@
 import { globalStore } from "@/stores/global-store";
-import { peopleStore } from "@/stores/people-store";
 import axios from "axios";
 import moment from "moment";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { BASE_URL } from "../../../config";
+import { peopleStore } from "@/stores/people-store";
+import useNodeStore from "@/stores/node-store";
+import { set } from "react-datepicker/dist/date_utils";
+import { formatEventDate } from "@/utils/formatDate";
+import { sortEventsByDate } from "@/utils/sortEvents";
+
+// Type & Interface
+export interface Event {
+  id: number;
+  userId: string;
+  type: string;
+  eventDate: string | null;
+  location: string | null;
+  details: string | null;
+  marriageId: number | null;
+  personId: number;
+  createdAt: string;
+  updatedAt: string;
+  marriage: {
+    id: number;
+    type: string;
+    people: Array<{ id: number }>;
+  } | null;
+}
 
 const PersonDetail = () => {
   const { peopleDetailModal, setPeopleDetailModal } = globalStore();
   const { selectedPersonId } = globalStore();
-  const { peopleData, setPeopleData, eventData, setEventeData } = peopleStore();
+  const { people } = useNodeStore();
+  const [error, setError] = useState(false);
+  const [peopleName, setPeopleName] = useState("");
+  const [selectedPersonData, setSelectedPersonData] = useState(null);
+  const [eventsData, setEventsData] = useState<Event[] | null>(null);
+
+  // Fetch the event data
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchEventData = async () => {
       try {
-        const response = await axios.get("/people/addEvent-data.json");
-        setEventeData(response?.data);
+        const response = await axios.get(
+          `${BASE_URL}/events?personId=${selectedPersonId}`
+        );
+        const sortedEvents = sortEventsByDate(response.data);
+        setEventsData(sortedEvents);
       } catch (err) {
         console.log("Error:", err);
       }
     };
-    fetchData();
-  }, []);
+    fetchEventData();
+  }, [selectedPersonId]);
 
+  // Update peopleName whenever peopleData changes
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/people/people-data.json");
-        setPeopleData(response?.data);
-      } catch (err) {
-        console.log("Error:", err);
-      }
-    };
-    fetchData();
-  }, []);
+    // Find the person by selectedPersonId
+    const selectedPerson = people.find(
+      (person) => String(person.id) === String(selectedPersonId)
+    );
+    // setSelectedPersonData(selectedPerson);
+    setPeopleName(`${selectedPerson?.firstName} ${selectedPerson?.lastName}`);
+  }, [selectedPersonId]);
 
-  const peopleName = `${peopleData?.firstName || ""} ${
-    peopleData?.lastName || ""
-  }`;
-  console.log("i only am the honored one", selectedPersonId);
   return (
     <div className="bg-[#F1F5F9] rounded-lg border border-[#CBD5E1] w-[400px]">
       <div className="p-5 border-b border-[#E2E8F0] flex items-center justify-between gap-2">
         <h2 className="text-lg text-black text-opacity-80 font-semibold">
           {peopleName}
-          {selectedPersonId}
         </h2>
         <div
           onClick={() => setPeopleDetailModal(!peopleDetailModal)}
@@ -52,49 +78,31 @@ const PersonDetail = () => {
         </div>
       </div>
       <div className="p-5">
-        <div className="-mt-[2px]">
-          <div className="flex items-center gap-3">
-            <div className="size-3 rounded-full bg-black"></div>
-            <div className="text-base font-semibold text-black text-opacity-75">
-              Born
-            </div>
-          </div>
-          <div className="flex items-start gap-3 pl-1 -mt-[2px]">
-            <div className="border-l-2 border-black h-20"></div>
-            <div className="pl-[6px] pt-2">
-              <p className="text-sm font-normal text-gray-500">
-                {" "}
-                {moment(peopleData?.dob).format("DD/MM/YYYY")}
-              </p>
-              <p className="text-sm font-normal text-gray-500">
-                {peopleData?.birthPlace}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="-mt-[2px]">
-          <div className="flex items-center gap-3">
-            <div className="size-3 rounded-full bg-black"></div>
-            <div className="text-base font-semibold text-black text-opacity-75">
-              Married {eventData?.marriage?.spouse?.firstName}{" "}
-              {eventData?.marriage?.spouse?.lastName}
-            </div>
-          </div>
-          <div className="flex items-start gap-3 pl-1 -mt-[2px]">
-            <div className=" h-20"></div>
-            <div className="pl-[6px] pt-2">
-              <p className="text-sm font-normal text-gray-500">
-                {" "}
-                {moment(eventData?.marriage?.marriageDate).format("DD/MM/YYYY")}
-              </p>
-              <p className="text-sm font-normal text-gray-500">
-                {eventData?.marriage?.marriagePlace}
-              </p>
-            </div>
-          </div>
+        <div>
+          {eventsData && eventsData.length > 0 ? (
+            eventsData.map((event, index) => (
+              <div key={event.id} className="flex items-start mb-6 relative">
+                <div className="w-2 h-2 rounded-full bg-gray-600 mt-1.5 relative z-10"></div>
+                {index !== eventsData.length - 1 && (
+                  <div
+                    className="absolute left-[3px] top-2 w-[1px] h-full bg-gray-400 z-0"
+                    style={{
+                      height: `calc(100% + 1.5rem)`,
+                    }}
+                  ></div>
+                )}
+                <div className="ml-4 w-full">
+                  <h4 className="text-sm font-bold capitalize">{event.type}</h4>
+                  <p className="text-sm">{formatEventDate(event.eventDate)}</p>
+                  <p className="text-sm">{event.location}</p>
+                </div>
+              </div>
+            ))
+          ) : (
+            <p>Loading...</p>
+          )}
         </div>
       </div>
-
       <div className="border-t border-[#E2E8F0] p-4">
         <div className="w-full bg-[#1E293B] rounded-3xl h-12 flex items-center justify-center text-white cursor-pointer hover:bg-opacity-95">
           Add or edit information

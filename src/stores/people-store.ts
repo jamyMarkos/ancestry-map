@@ -2,19 +2,19 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
 export interface PeopleData {
-  isUser: boolean
-  firstName: string
-  lastName: string
-  birthPlace: string
-  dob: string
-  gender: string
-  isAlive: boolean
-  parents: number[]
-  children: number[]
+  isUser: boolean;
+  firstName: string;
+  lastName: string;
+  birthPlace: string;
+  dob: string;
+  gender: string;
+  isAlive: boolean;
+  parents: number[];
+  children: number[];
   spouses: {
-    id: number
-    status: string
-  }[]
+    id: number;
+    status: string;
+  }[];
 }
 
 interface States {
@@ -24,7 +24,7 @@ interface States {
 
 interface Actions {
   setPeopleData: (data: PeopleData) => void;
-  setEventeData: (data: any) => void;
+  setEventData: (data: any) => void;
 }
 
 export const peopleStore = create<States & Actions>()(
@@ -34,7 +34,7 @@ export const peopleStore = create<States & Actions>()(
         peopleData: null,
         eventData: null,
         setPeopleData: (data) => set(() => ({ peopleData: data })),
-        setEventeData: (data) => set(() => ({ eventData: data })),
+        setEventData: (data) => set(() => ({ eventData: data })),
       }),
       { name: "people-details" }
     )

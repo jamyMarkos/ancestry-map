@@ -38,9 +38,8 @@ export const createNodesAndEdges = (data) => {
     const depth = nodeLevels[person.id];
     const baseX = 0;
     const baseY = depth * verticalOffset;
-
     // Add the "Add Parent" nodes only if this person has no parents
-    if (person.parents.length === 0) {
+    if (person?.parents.length === 0) {
       if (!addedSpousesIds.has(person.id)) {
         addParentNode(
           `add-parent1-${nodeId}`,
@@ -84,6 +83,7 @@ export const createNodesAndEdges = (data) => {
         "subparent",
         `${person.firstName} ${person.lastName}`,
         spouseLabel,
+        person?.spouseId,
         baseX,
         baseY,
         nodes
@@ -146,11 +146,11 @@ function addParentNode(id, type, label, x, y, nodes, nodeId) {
   nodes.push(nodeData);
 }
 
-function addNode(id, type, personLabel, spouseLabel, x, y, nodes) {
+function addNode(id, type, personLabel, spouseLabel, spouseId, x, y, nodes) {
   const nodeData = {
     id,
     type,
-    data: { label: personLabel, spouse: spouseLabel, personId: id },
+    data: { label: personLabel, spouse: spouseLabel, spouseId, personId: id },
     position: { x, y },
   };
   nodes.push(nodeData);

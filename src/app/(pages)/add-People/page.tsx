@@ -11,8 +11,6 @@ export default function AddPeople() {
   const { push } = useRouter();
   const { addPeopleModal, setAddPeopleModal, childId } = globalStore();
 
-  console.log("childId in addPeople page", childId);
-
   return (
     <>
       <PageHeader

@@ -46,8 +46,7 @@ const DetailPeople = ({
   const handleNodeClick = () => {
     setPeopleDetailModal(!peopleDetailModal);
     setSelectedPersonId(personId);
-    console.log("clicked....", selectedPersonId);
-    console.log("clicked2....", personId);
+    console.log("Person Clicked", personId);
   };
 
   return (

@@ -5,6 +5,7 @@ import AddPeople from "@/components/People/AddPeople";
 import { birthJsonData } from "@/components/jsonData";
 import axios from "axios";
 import type { Node, NodeProps } from "@xyflow/react";
+import useNodeStore from "@/stores/node-store";
 
 export type PersonNodeData = {
   id: number;
@@ -34,9 +35,26 @@ type Person = {
   parents: ParentWrapper[];
 };
 
+interface SubNodeParentData {
+  label: string;
+  personId: number;
+  spouse: string;
+  spouseId: number;
+}
+
 const SubNodeParent = ({ data }: any) => {
-  console.log("id in subnodeparent", data.personId);
-  console.log("data in subnodeparent", data);
+  const { people } = useNodeStore();
+  const personId = data.personId;
+
+  const findCountryCodeById = (people: any, personId: number) => {
+    const person = people.find((p: any) => String(p.id) === String(personId));
+    return person ? person.countryCode : "Unknown";
+  };
+
+  // Get the country codes
+  const personCountryCode = findCountryCodeById(people, personId);
+  const spouseCountryCode = findCountryCodeById(people, data.spouseId);
+
   return (
     <div className="nodrag">
       <Handle type="target" position={Position.Top} />
@@ -47,14 +65,14 @@ const SubNodeParent = ({ data }: any) => {
               name={data?.label + ` `}
               place="USA"
               personId={data?.personId}
-              countryCode="US"
+              countryCode={personCountryCode}
             />
             {data?.spouse ? (
               <DetailPeople
                 name={data?.spouse + ` `}
                 place="ETHIOPIA"
-                personId={data?.personId}
-                countryCode="ET"
+                personId={data?.spouseId}
+                countryCode={spouseCountryCode}
               />
             ) : (
               <AddPeople title="Add spouse" />
