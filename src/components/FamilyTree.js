@@ -41,8 +41,6 @@ const FamilyTree = () => {
     return tree;
   };
 
-  console.log("heyyyyyyyyyyyy", tree);
-
   // Render Tree Structure
   const renderTree = (tree) => {
     const renderPerson = (person) => {

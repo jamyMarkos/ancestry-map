@@ -1,8 +1,7 @@
-import { LinkProps } from "@/ts/interface/UIKitInterface";
 import Link from "next/link";
 import React from "react";
 
-const LinkTag: React.FC<LinkProps> = (props) => {
+const LinkTag = (props: any) => {
   const { children, text, path, target, resStyle, onClick, id } = props;
 
   return (

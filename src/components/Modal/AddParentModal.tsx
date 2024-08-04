@@ -117,7 +117,6 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
         }
       );
 
-      console.log("Data saved successfully:", result);
       setAddPeopleModal(false);
     } catch (error) {
       console.error("Error saving data:", error);

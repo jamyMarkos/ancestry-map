@@ -33,7 +33,6 @@ export const createNodesAndEdges = (data) => {
 
   // Function to add nodes and edges
   data.forEach((person) => {
-    if (person.firstName === "Jane") console.log("want jane", person);
     const nodeId = person.id.toString();
     const depth = nodeLevels[person.id];
     const baseX = 0;

@@ -1,23 +1,24 @@
 "use client";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import {
   ReactFlow,
   addEdge,
   ConnectionLineType,
   Panel,
+  useReactFlow,
   useNodesState,
   useEdgesState,
+  type Node,
+  type Edge,
 } from "@xyflow/react";
 import dagre from "dagre";
+import { createNodesAndEdges } from "@/reactflow/flowData/nodes-edges-tree";
 import "@xyflow/react/dist/style.css";
-import {
-  initialEdges,
-  initialNodes,
-} from "@/reactflow/flowData/nodes-edges-tree";
 import AddParentNode from "@/reactflow/nodes/AddPrentNode";
 import SubNodeParent from "@/reactflow/nodes/SubNodeParent";
 import AddBirthNode from "@/reactflow/nodes/AddBirthNode";
 import BirthNode from "@/reactflow/nodes/BithNode";
+import useNodeStore from "@/stores/node-store";
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -31,28 +32,30 @@ const nodeTypes = {
   firstBirthNode: BirthNode,
 };
 
-const getLayoutedElements = (nodes: any, edges: any, direction = "TB") => {
+const getLayoutedElements = (
+  nodes: Node[],
+  edges: Edge[],
+  direction = "TB"
+) => {
   const isHorizontal = direction === "LR";
   dagreGraph.setGraph({ rankdir: direction });
 
-  nodes.forEach((node: any) => {
+  nodes.forEach((node: Node) => {
     dagreGraph.setNode(node.id, { width: nodeWidth, height: nodeHeight });
   });
 
-  edges.forEach((edge: any) => {
+  edges.forEach((edge) => {
     dagreGraph.setEdge(edge.source, edge.target);
   });
 
   dagre.layout(dagreGraph);
 
-  const newNodes = nodes.map((node: any) => {
+  const newNodes = nodes.map((node: Node) => {
     const nodeWithPosition = dagreGraph.node(node.id);
     const newNode = {
       ...node,
       targetPosition: isHorizontal ? "left" : "top",
       sourcePosition: isHorizontal ? "right" : "bottom",
-      // We are shifting the dagre node position (anchor=center center) to the top left
-      // so it matches the React Flow node anchor point (top left).
       position: {
         x: nodeWithPosition.x - nodeWidth / 2,
         y: nodeWithPosition.y - nodeHeight / 2,
@@ -65,14 +68,23 @@ const getLayoutedElements = (nodes: any, edges: any, direction = "TB") => {
   return { nodes: newNodes, edges };
 };
 
-const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-  initialNodes,
-  initialEdges
-);
-
 const LayoutFlow = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState<any>([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<any>([]);
+  const people = useNodeStore((state) => state.people);
+
+  useEffect(() => {
+    if (people.length > 0) {
+      const { nodes: initialNodes, edges: initialEdges } =
+        createNodesAndEdges(people);
+
+      const { nodes: layoutedNodes, edges: layoutedEdges } =
+        getLayoutedElements(initialNodes, initialEdges);
+
+      setNodes(layoutedNodes);
+      setEdges(layoutedEdges);
+    }
+  }, [people, setNodes, setEdges]);
 
   const onConnect = useCallback(
     (params: any) =>

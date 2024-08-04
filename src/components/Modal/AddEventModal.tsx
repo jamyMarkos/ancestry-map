@@ -40,13 +40,13 @@ const AddEventModal: FC = () => {
   });
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [selectedGender, setSelectedGender] = useState<any>(null);
-  const { eventData, setEventeData } = peopleStore();
+  const { eventData, setEventData } = peopleStore();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("/people/addEvent-data.json");
-        setEventeData(response?.data);
+        setEventData(response?.data);
       } catch (err) {
         console.log("Error:", err);
       }
@@ -96,7 +96,6 @@ const AddEventModal: FC = () => {
 
     try {
       await axios.post("");
-      console.log("Event added successfully");
     } catch (error) {
       console.log("Error adding event:", error);
     }
