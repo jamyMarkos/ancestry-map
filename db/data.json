@@ -9,9 +9,7 @@
       "dob": null,
       "gender": null,
       "isAlive": true,
-      "parents": [
-        14
-      ],
+      "parents": [14],
       "spouses": []
     },
     {
@@ -40,10 +38,7 @@
       "dob": "1995-05-23T00:00:00.000Z",
       "gender": "male",
       "isAlive": true,
-      "parents": [
-        13,
-        15
-      ],
+      "parents": [13, 15],
       "spouses": []
     },
     {
@@ -237,7 +232,7 @@
       "dob": null,
       "deathDate": null,
       "birthPlace": null,
-      "countryCode": null,
+      "countryCode": "ET",
       "isUser": true,
       "isAlive": null,
       "isAdopted": false,
@@ -255,7 +250,7 @@
             "gender": "male",
             "dob": "1995-05-23T00:00:00.000Z",
             "deathDate": null,
-            "birthPlace": "New York, New York, United States of America",
+            "birthPlace": "New York,United States of America",
             "countryCode": "US",
             "isUser": false,
             "isAlive": null,
@@ -278,7 +273,7 @@
       "dob": "1965-05-23T00:00:00.000Z",
       "deathDate": null,
       "birthPlace": "Milan, Italy",
-      "countryCode": "IT",
+      "countryCode": "US",
       "isUser": false,
       "isAlive": null,
       "isAdopted": false,
@@ -320,8 +315,8 @@
       "gender": "male",
       "dob": "1995-05-23T00:00:00.000Z",
       "deathDate": null,
-      "birthPlace": "New York, New York, United States of America",
-      "countryCode": "US",
+      "birthPlace": "New York, United States of America",
+      "countryCode": "AF",
       "isUser": false,
       "isAlive": null,
       "isAdopted": false,
@@ -392,7 +387,7 @@
       "dob": null,
       "deathDate": null,
       "birthPlace": null,
-      "countryCode": null,
+      "countryCode": "TN",
       "isUser": false,
       "isAlive": null,
       "isAdopted": false,

@@ -18,8 +18,6 @@ export default function AddPeople() {
     setAddChildModal,
   } = globalStore();
 
-  console.log("childId in addPeople page", childId);
-
   return (
     <>
       <PageHeader
