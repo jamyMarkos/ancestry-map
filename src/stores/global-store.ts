@@ -24,10 +24,10 @@ interface Actions {
 export const globalStore = create<States & Actions>()(
   devtools(
     (set) => ({
-      addPeopleModal: true,
+      addPeopleModal: false,
       addEventModal: false,
       peopleDetailModal: false,
-      addChildModal: true,
+      addChildModal: false,
       childId: null,
       parentId: null,
       selectedPersonId: null,

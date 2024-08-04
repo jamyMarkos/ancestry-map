@@ -6,11 +6,12 @@ import { globalStore } from "@/stores/global-store";
 
 function AddParentNode(props: any) {
   const router = useRouter();
-  const { setChildId } = globalStore();
+  const { setChildId, addPeopleModal, setAddPeopleModal } = globalStore();
 
   const handleAddPeopleClick = () => {
     setChildId(props.data.childId);
     router.push("/add-People");
+    setAddPeopleModal(!addPeopleModal);
   };
 
   return (

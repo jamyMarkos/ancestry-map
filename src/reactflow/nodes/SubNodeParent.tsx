@@ -35,8 +35,6 @@ type Person = {
 };
 
 const SubNodeParent = ({ data }: any) => {
-  console.log("id in subnodeparent", data.personId);
-  console.log("data in subnodeparent", data);
   return (
     <div className="nodrag">
       <Handle type="target" position={Position.Top} />

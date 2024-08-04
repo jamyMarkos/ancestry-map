@@ -6,14 +6,14 @@ import { MdAdd } from "react-icons/md";
 import { globalStore } from "@/stores/global-store";
 function AddChildNode(props: any) {
   const router = useRouter();
-  const { setParentId } = globalStore();
+  const { setParentId, addChildModal, setAddChildModal } = globalStore();
 
   const handleClick = () => {
     setParentId(props.data.parentId);
     router.push("/add-People");
+    setAddChildModal(!addChildModal);
   };
 
-  // console.log("add chilld node", props.data);
   return (
     <Fragment>
       <Handle type="target" position={Position.Top} />
