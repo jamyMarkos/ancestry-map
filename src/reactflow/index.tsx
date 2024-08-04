@@ -17,6 +17,7 @@ import {
 } from "@xyflow/react";
 import dagre from "dagre";
 import useNodeStore from "@/stores/node-store";
+import useEventStore from "@/stores/event-store";
 import { createNodesAndEdges } from "@/reactflow/flowData/nodes-edges-tree";
 
 import "@xyflow/react/dist/style.css";
@@ -84,9 +85,11 @@ const ReactLayoutFlow = () => {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const fetchPeople = useNodeStore((state) => state.fetchPeople);
   const people = useNodeStore((state) => state.people);
+  const fetchEvent = useEventStore((state) => state.fetchEvent);
 
   useEffect(() => {
     fetchPeople();
+    fetchEvent();
   }, [fetchPeople]);
 
   useEffect(() => {

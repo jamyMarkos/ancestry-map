@@ -103,7 +103,8 @@ export const createNodesAndEdges = (data) => {
         "Add Child",
         baseX,
         baseY + verticalOffset,
-        nodes
+        nodes,
+        person.id
       );
 
       addEdge(person.id.toString(), `add-child-${person.id}`, edges);
@@ -126,11 +127,11 @@ function calculateDepth(id, data, depth = 0) {
 }
 
 // Add a child node
-function addChildNode(id, type, label, x, y, nodes) {
+function addChildNode(id, type, label, x, y, nodes, parentId) {
   const nodeData = {
     id,
     type,
-    data: { title: label },
+    data: { title: label, parentId: parentId },
     position: { x, y },
   };
   nodes.push(nodeData);

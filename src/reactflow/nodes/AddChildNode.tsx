@@ -1,11 +1,23 @@
+import AddPeople from "@/components/People/AddPeople";
 import { Handle, Position } from "@xyflow/react";
+import { useRouter } from "next/navigation";
 import React, { Fragment } from "react";
 import { MdAdd } from "react-icons/md";
-function AddChildNode() {
+import { globalStore } from "@/stores/global-store";
+function AddChildNode(props: any) {
+  const router = useRouter();
+  const { setParentId } = globalStore();
+
+  const handleClick = () => {
+    setParentId(props.data.parentId);
+    router.push("/add-People");
+  };
+
+  // console.log("add chilld node", props.data);
   return (
     <Fragment>
       <Handle type="target" position={Position.Top} />
-      <div className="">
+      <div className="" onClick={handleClick}>
         <div className="inline-block rounded-lg p-0.5">
           <div className="flex rounded bg-white  w-24 h-12">
             <div className="flex items-center px-3 py-3">
@@ -20,4 +32,5 @@ function AddChildNode() {
     </Fragment>
   );
 }
+
 export default AddChildNode;

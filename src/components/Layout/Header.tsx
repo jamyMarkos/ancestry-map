@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
+import Link from "next/link";
 
 interface HeaderProps {
   isMobileOpen?: boolean;
@@ -19,9 +20,11 @@ const Header: React.FC<HeaderProps> = ({ isMobileOpen, setIsMobileOpen }) => {
         >
           <RxHamburgerMenu className="text-gray-400 w-6 h-6" />
         </div>
-        <h1 className="text-xl sm:text-3xl text-black font-semibold">
-          AncestryPass
-        </h1>
+        <Link href="/">
+          <h1 className="text-xl sm:text-3xl text-black font-semibold">
+            AncestryPass
+          </h1>
+        </Link>
       </div>
 
       <div className="flex items-center md:gap-5 gap-3">
