@@ -6,7 +6,7 @@
       "firstName": "You",
       "lastName": "",
       "birthPlace": null,
-      "dob": null,
+      "dob": "1965-05-23T00:00:00.000Z",
       "gender": null,
       "isAlive": true,
       "parents": [14],
@@ -57,105 +57,6 @@
           "status": "married"
         }
       ]
-    },
-    {
-      "id": "fc18",
-      "isUser": false,
-      "firstName": "child",
-      "lastName": "one",
-      "birthPlace": "New York, USA",
-      "dob": "2024-07-27 21:00:00",
-      "gender": "female",
-      "isAlive": true,
-      "parents": []
-    },
-    {
-      "id": "eee9",
-      "isUser": false,
-      "firstName": "child",
-      "lastName": "two",
-      "birthPlace": "New York, USA",
-      "dob": "2024-07-30 21:00:00",
-      "gender": "female",
-      "isAlive": true,
-      "parents": []
-    },
-    {
-      "id": "0ef4",
-      "isUser": false,
-      "firstName": "child",
-      "lastName": "three",
-      "birthPlace": "New York, USA",
-      "dob": "2024-07-28 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": []
-    },
-    {
-      "id": "dff6",
-      "isUser": false,
-      "firstName": "child",
-      "lastName": "four",
-      "birthPlace": "New York, USA",
-      "dob": "2024-07-28 21:00:00",
-      "gender": "female",
-      "isAlive": true,
-      "parents": []
-    },
-    {
-      "id": "d3a4",
-      "isUser": false,
-      "firstName": "child",
-      "lastName": "five",
-      "birthPlace": "New York, USA",
-      "dob": "2024-07-27 21:00:00",
-      "gender": "female",
-      "isAlive": true,
-      "parents": []
-    },
-    {
-      "id": "ffcf",
-      "isUser": false,
-      "firstName": "Parent",
-      "lastName": "One",
-      "birthPlace": "New York, USA",
-      "dob": "1998-12-31 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": []
-    },
-    {
-      "id": "1e01",
-      "isUser": false,
-      "firstName": "Parent",
-      "lastName": "Two",
-      "birthPlace": "New York, USA",
-      "dob": "1998-12-31 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": []
-    },
-    {
-      "id": "43f2",
-      "isUser": false,
-      "firstName": "Parent",
-      "lastName": "Three",
-      "birthPlace": "New York, USA",
-      "dob": "1998-12-31 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": []
-    },
-    {
-      "id": "a1bf",
-      "isUser": false,
-      "firstName": "child",
-      "lastName": "six",
-      "birthPlace": "New York, USA",
-      "dob": "2024-07-28 21:00:00",
-      "gender": "female",
-      "isAlive": true,
-      "parents": []
     }
   ],
   "events": [
@@ -168,6 +69,19 @@
       "details": null,
       "marriageId": null,
       "personId": 13,
+      "createdAt": "2024-07-30T13:41:53.352Z",
+      "updatedAt": "2024-07-30T13:41:53.352Z",
+      "marriage": null
+    },
+    {
+      "id": 15,
+      "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+      "type": "birth",
+      "eventDate": "1965-05-23T00:00:00.000Z",
+      "location": "Addis Ababa, Ethiopia",
+      "details": null,
+      "marriageId": null,
+      "personId": 12,
       "createdAt": "2024-07-30T13:41:53.352Z",
       "updatedAt": "2024-07-30T13:41:53.352Z",
       "marriage": null
@@ -250,7 +164,7 @@
             "gender": "male",
             "dob": "1995-05-23T00:00:00.000Z",
             "deathDate": null,
-            "birthPlace": "New York,United States of America",
+            "birthPlace": "New York, New York, United States of America",
             "countryCode": "US",
             "isUser": false,
             "isAlive": null,
@@ -263,6 +177,7 @@
           }
         }
       ],
+
       "relatedEvents": []
     },
     {
@@ -315,7 +230,7 @@
       "gender": "male",
       "dob": "1995-05-23T00:00:00.000Z",
       "deathDate": null,
-      "birthPlace": "New York, United States of America",
+      "birthPlace": "New York, New York, United States of America",
       "countryCode": "AF",
       "isUser": false,
       "isAlive": null,
@@ -419,245 +334,6 @@
               "id": 15
             }
           ]
-        }
-      ]
-    },
-    {
-      "id": "8697",
-      "isUser": false,
-      "firstName": "child",
-      "lastName": "one",
-      "birthPlace": "New York, USA",
-      "dob": "2024-07-27 21:00:00",
-      "gender": "female",
-      "isAlive": true,
-      "parents": [
-        {
-          "parent": {
-            "id": "7aff",
-            "isUser": false,
-            "firstName": "Parent",
-            "lastName": "Two",
-            "birthPlace": "New York, USA",
-            "dob": "1998-12-31 21:00:00",
-            "gender": "male",
-            "isAlive": true,
-            "parents": []
-          }
-        }
-      ]
-    },
-    {
-      "id": "4045",
-      "isUser": false,
-      "firstName": "child",
-      "lastName": "two",
-      "birthPlace": "New York, USA",
-      "dob": "2024-07-30 21:00:00",
-      "gender": "female",
-      "isAlive": true,
-      "parents": [
-        {
-          "parent": {
-            "id": "8697",
-            "isUser": false,
-            "firstName": "child",
-            "lastName": "one",
-            "birthPlace": "New York, USA",
-            "dob": "2024-07-27 21:00:00",
-            "gender": "female",
-            "isAlive": true,
-            "parents": []
-          }
-        }
-      ]
-    },
-    {
-      "id": "4298",
-      "isUser": false,
-      "firstName": "child",
-      "lastName": "three",
-      "birthPlace": "New York, USA",
-      "dob": "2024-07-28 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": [
-        {
-          "parent": {
-            "id": "8260",
-            "isUser": false,
-            "firstName": "Parent",
-            "lastName": "One",
-            "birthPlace": "New York, USA",
-            "dob": "1998-12-31 21:00:00",
-            "gender": "male",
-            "isAlive": true,
-            "parents": []
-          }
-        }
-      ]
-    },
-    {
-      "id": "5931",
-      "isUser": false,
-      "firstName": "child",
-      "lastName": "four",
-      "birthPlace": "New York, USA",
-      "dob": "2024-07-28 21:00:00",
-      "gender": "female",
-      "isAlive": true,
-      "parents": [
-        {
-          "parent": {
-            "id": "4298",
-            "isUser": false,
-            "firstName": "child",
-            "lastName": "three",
-            "birthPlace": "New York, USA",
-            "dob": "2024-07-28 21:00:00",
-            "gender": "male",
-            "isAlive": true,
-            "parents": []
-          }
-        }
-      ]
-    },
-    {
-      "id": "c822",
-      "isUser": false,
-      "firstName": "child",
-      "lastName": "five",
-      "birthPlace": "New York, USA",
-      "dob": "2024-07-27 21:00:00",
-      "gender": "female",
-      "isAlive": true,
-      "parents": [
-        {
-          "parent": {
-            "id": "5931",
-            "isUser": false,
-            "firstName": "child",
-            "lastName": "four",
-            "birthPlace": "New York, USA",
-            "dob": "2024-07-28 21:00:00",
-            "gender": "female",
-            "isAlive": true,
-            "parents": [
-              {
-                "parent": {
-                  "id": "4298",
-                  "isUser": false,
-                  "firstName": "child",
-                  "lastName": "three",
-                  "birthPlace": "New York, USA",
-                  "dob": "2024-07-28 21:00:00",
-                  "gender": "male",
-                  "isAlive": true,
-                  "parents": []
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "id": "8260",
-      "isUser": false,
-      "firstName": "Parent",
-      "lastName": "One",
-      "birthPlace": "New York, USA",
-      "dob": "1998-12-31 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": []
-    },
-    {
-      "id": "7aff",
-      "isUser": false,
-      "firstName": "Parent",
-      "lastName": "Two",
-      "birthPlace": "New York, USA",
-      "dob": "1998-12-31 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": [
-        {
-          "parent": {
-            "id": "a5cc",
-            "isUser": false,
-            "firstName": "Parent",
-            "lastName": "Three",
-            "birthPlace": "New York, USA",
-            "dob": "1998-12-31 21:00:00",
-            "gender": "male",
-            "isAlive": true,
-            "parents": []
-          }
-        }
-      ]
-    },
-    {
-      "id": "a5cc",
-      "isUser": false,
-      "firstName": "Parent",
-      "lastName": "Three",
-      "birthPlace": "New York, USA",
-      "dob": "1998-12-31 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": []
-    },
-    {
-      "id": "54d9",
-      "isUser": false,
-      "firstName": "child",
-      "lastName": "six",
-      "birthPlace": "New York, USA",
-      "dob": "2024-07-28 21:00:00",
-      "gender": "female",
-      "isAlive": true,
-      "parents": [
-        {
-          "parent": {
-            "id": "c822",
-            "isUser": false,
-            "firstName": "child",
-            "lastName": "five",
-            "birthPlace": "New York, USA",
-            "dob": "2024-07-27 21:00:00",
-            "gender": "female",
-            "isAlive": true,
-            "parents": [
-              {
-                "parent": {
-                  "id": "5931",
-                  "isUser": false,
-                  "firstName": "child",
-                  "lastName": "four",
-                  "birthPlace": "New York, USA",
-                  "dob": "2024-07-28 21:00:00",
-                  "gender": "female",
-                  "isAlive": true,
-                  "parents": [
-                    {
-                      "parent": {
-                        "id": "4298",
-                        "isUser": false,
-                        "firstName": "child",
-                        "lastName": "three",
-                        "birthPlace": "New York, USA",
-                        "dob": "2024-07-28 21:00:00",
-                        "gender": "male",
-                        "isAlive": true,
-                        "parents": []
-                      }
-                    }
-                  ]
-                }
-              }
-            ]
-          }
         }
       ]
     }
