@@ -18,7 +18,6 @@ import AddParentNode from "@/reactflow/nodes/AddPrentNode";
 import SubNodeParent from "@/reactflow/nodes/SubNodeParent";
 import AddBirthNode from "@/reactflow/nodes/AddBirthNode";
 import BirthNode from "@/reactflow/nodes/BithNode";
-import AddChildNode from "@/reactflow/nodes/AddChildNode";
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -30,7 +29,6 @@ const nodeTypes = {
   subparent: SubNodeParent,
   addBirthNode: AddBirthNode,
   firstBirthNode: BirthNode,
-  addchild: AddChildNode,
 };
 
 const getLayoutedElements = (nodes: any, edges: any, direction = "TB") => {
