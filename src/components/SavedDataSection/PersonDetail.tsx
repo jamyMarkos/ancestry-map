@@ -7,6 +7,7 @@ import { RxCross2 } from "react-icons/rx";
 
 const PersonDetail = () => {
   const { peopleDetailModal, setPeopleDetailModal } = globalStore();
+  const { selectedPersonId } = globalStore();
   const { peopleData, setPeopleData, eventData, setEventeData } = peopleStore();
   useEffect(() => {
     const fetchData = async () => {
@@ -32,15 +33,16 @@ const PersonDetail = () => {
     fetchData();
   }, []);
 
-  console.log("peopleData", eventData);
   const peopleName = `${peopleData?.firstName || ""} ${
     peopleData?.lastName || ""
   }`;
+  console.log("i only am the honored one", selectedPersonId);
   return (
     <div className="bg-[#F1F5F9] rounded-lg border border-[#CBD5E1] w-[400px]">
       <div className="p-5 border-b border-[#E2E8F0] flex items-center justify-between gap-2">
         <h2 className="text-lg text-black text-opacity-80 font-semibold">
           {peopleName}
+          {selectedPersonId}
         </h2>
         <div
           onClick={() => setPeopleDetailModal(!peopleDetailModal)}

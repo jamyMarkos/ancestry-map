@@ -35,8 +35,8 @@ type Person = {
 };
 
 const SubNodeParent = ({ data }: any) => {
-  console.log("SubNodeParent data", data);
-
+  console.log("id in subnodeparent", data.personId);
+  console.log("data in subnodeparent", data);
   return (
     <div className="nodrag">
       <Handle type="target" position={Position.Top} />
@@ -46,12 +46,14 @@ const SubNodeParent = ({ data }: any) => {
             <DetailPeople
               name={data?.label + ` `}
               place="USA"
+              personId={data?.personId}
               countryCode="US"
             />
             {data?.spouse ? (
               <DetailPeople
                 name={data?.spouse + ` `}
                 place="ETHIOPIA"
+                personId={data?.personId}
                 countryCode="ET"
               />
             ) : (

@@ -150,7 +150,7 @@ function addNode(id, type, personLabel, spouseLabel, x, y, nodes) {
   const nodeData = {
     id,
     type,
-    data: { label: personLabel, spouse: spouseLabel },
+    data: { label: personLabel, spouse: spouseLabel, personId: id },
     position: { x, y },
   };
   nodes.push(nodeData);

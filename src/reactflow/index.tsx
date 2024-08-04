@@ -86,7 +86,6 @@ const ReactLayoutFlow = () => {
   const people = useNodeStore((state) => state.people);
 
   useEffect(() => {
-    console.log("Fetching people");
     fetchPeople();
   }, [fetchPeople]);
 
@@ -100,9 +99,6 @@ const ReactLayoutFlow = () => {
 
       setNodes(layoutedNodes);
       setEdges(layoutedEdges);
-
-      console.log("Nodes:", nodes);
-      console.log("Edges:", edges);
     }
   }, [people, setNodes, setEdges]);
 

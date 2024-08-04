@@ -6,6 +6,7 @@ interface States {
   peopleDetailModal: boolean;
   addEventModal: boolean;
   childId: number | null;
+  selectedPersonId: string | number | null;
 }
 
 interface Actions {
@@ -13,6 +14,7 @@ interface Actions {
   setAddEventeModal: (data: boolean) => void;
   setPeopleDetailModal: (data: boolean) => void;
   setChildId: (id: number) => void;
+  setSelectedPersonId: (id: string | number | null) => void;
 }
 
 export const globalStore = create<States & Actions>()(
@@ -22,11 +24,13 @@ export const globalStore = create<States & Actions>()(
       addEventModal: false,
       peopleDetailModal: false,
       childId: null,
+      selectedPersonId: null,
       setChildId: (id: number) => set({ childId: id }),
       setAddPeopleModal: (data) => set((state) => ({ addPeopleModal: data })),
       setAddEventeModal: (data) => set((state) => ({ addEventModal: data })),
       setPeopleDetailModal: (data) =>
         set((state) => ({ peopleDetailModal: data })),
+      setSelectedPersonId: (id) => set({ selectedPersonId: id }),
     }),
     { name: "AddPeople" }
   )

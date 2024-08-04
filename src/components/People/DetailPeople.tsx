@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { MdAdd } from "react-icons/md";
 
 interface DetailPeopleProps {
+  personId: number | string | null;
   name: string;
   place: string;
   countryCode?: string;
@@ -12,17 +13,18 @@ interface DetailPeopleProps {
 }
 const DetailPeople = ({
   name,
+  personId,
   onClick,
   place,
   countryCode,
 }: DetailPeopleProps) => {
   const { peopleDetailModal, setPeopleDetailModal } = globalStore();
+  const { selectedPersonId, setSelectedPersonId } = globalStore();
 
   useEffect(() => {
     const fetchFlag = async () => {
       try {
         const response = await axios.get("https://flagcdn.com/en/codes.json");
-        console.log("Flags data", response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -31,7 +33,7 @@ const DetailPeople = ({
     fetchFlag();
 
     return () => {
-      console.log("This will be logged on unmount");
+      // console.log("This will be logged on unmount");
     };
   }, []);
 
@@ -41,9 +43,16 @@ const DetailPeople = ({
   }
   const flagUrl = `https://flagpedia.net/data/flags/icon/16x12/${countryCode.toLowerCase()}.png`;
 
+  const handleNodeClick = () => {
+    setPeopleDetailModal(!peopleDetailModal);
+    setSelectedPersonId(personId);
+    console.log("clicked....", selectedPersonId);
+    console.log("clicked2....", personId);
+  };
+
   return (
     <div
-      onClick={() => setPeopleDetailModal(!peopleDetailModal)}
+      onClick={handleNodeClick}
       className={`grid items-center text-center px-3 py-1.5 border-nodeborder border-r w-6/12 ${
         peopleDetailModal ? "border border-gray-800 rounded-l-lg" : ""
       }`}

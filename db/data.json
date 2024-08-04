@@ -9,10 +9,7 @@
       "dob": "1999-01-01T00:00:00.000Z",
       "gender": "male",
       "isAlive": true,
-      "parents": [
-        1,
-        2
-      ],
+      "parents": [1, 2],
       "spouses": [
         {
           "id": 4,
@@ -33,49 +30,13 @@
       "dob": "2000-02-01T00:00:00.000Z",
       "gender": "female",
       "isAlive": true,
-      "parents": [
-        3,
-        4
-      ],
+      "parents": [3, 4],
       "spouses": [
         {
           "id": 41,
           "status": "married"
         }
       ]
-    },
-    {
-      "id": "949f",
-      "isUser": false,
-      "firstName": "Johnnn",
-      "lastName": "Doe",
-      "birthPlace": "New York, USA",
-      "dob": "1998-12-31 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": []
-    },
-    {
-      "id": "1be7",
-      "isUser": false,
-      "firstName": "Depp",
-      "lastName": "Doe",
-      "birthPlace": "New York, USA",
-      "dob": "1998-12-31 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": []
-    },
-    {
-      "id": "0f8c",
-      "isUser": false,
-      "firstName": "Maggy",
-      "lastName": "Doe",
-      "birthPlace": "New York, USA",
-      "dob": "1998-12-31 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": []
     }
   ],
   "events": [
@@ -329,67 +290,6 @@
           ]
         }
       ]
-    },
-    {
-      "id": "a39c",
-      "isUser": false,
-      "firstName": "Johnnn",
-      "lastName": "Doe",
-      "birthPlace": "New York, USA",
-      "dob": "1998-12-31 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": [
-        {
-          "parent": {
-            "id": "0b1d",
-            "isUser": false,
-            "firstName": "Depp",
-            "lastName": "Doe",
-            "birthPlace": "New York, USA",
-            "dob": "1998-12-31 21:00:00",
-            "gender": "male",
-            "isAlive": true,
-            "parents": []
-          }
-        }
-      ]
-    },
-    {
-      "id": "0b1d",
-      "isUser": false,
-      "firstName": "Depp",
-      "lastName": "Doe",
-      "birthPlace": "New York, USA",
-      "dob": "1998-12-31 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": [
-        {
-          "parent": {
-            "id": "1320",
-            "isUser": false,
-            "firstName": "Maggy",
-            "lastName": "Doe",
-            "birthPlace": "New York, USA",
-            "dob": "1998-12-31 21:00:00",
-            "gender": "male",
-            "isAlive": true,
-            "parents": []
-          }
-        }
-      ]
-    },
-    {
-      "id": "1320",
-      "isUser": false,
-      "firstName": "Maggy",
-      "lastName": "Doe",
-      "birthPlace": "New York, USA",
-      "dob": "1998-12-31 21:00:00",
-      "gender": "male",
-      "isAlive": true,
-      "parents": []
     }
   ]
 }
