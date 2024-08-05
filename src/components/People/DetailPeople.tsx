@@ -45,7 +45,7 @@ const DetailPeople = ({
 
   const handleNodeClick = () => {
     setPeopleDetailModal(!peopleDetailModal);
-    setSelectedPersonId(personId);
+    setSelectedPersonId(personId as number);
   };
 
   return (

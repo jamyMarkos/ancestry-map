@@ -2,6 +2,7 @@ import { globalStore } from "@/stores/global-store";
 import axios from "axios";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { RxCross2 } from "react-icons/rx";
 import { BASE_URL } from "../../../config";
 import { peopleStore } from "@/stores/people-store";
@@ -30,8 +31,15 @@ export interface Event {
 }
 
 const PersonDetail = () => {
+  const router = useRouter();
   const { peopleDetailModal, setPeopleDetailModal } = globalStore();
-  const { selectedPersonId } = globalStore();
+  const {
+    selectedPersonId,
+    newPersonId,
+    setNewPersonId,
+    setAddEventeModal,
+    addEventModal,
+  } = globalStore();
   const { people } = useNodeStore();
   const [error, setError] = useState(false);
   const [peopleName, setPeopleName] = useState("");
@@ -42,10 +50,8 @@ const PersonDetail = () => {
   useEffect(() => {
     const fetchEventData = async () => {
       try {
-        const response = await axios.get(
-          `${BASE_URL}/events?personId=${selectedPersonId}`
-        );
-        const sortedEvents = sortEventsByDate(response.data);
+        const response = await axios.get(`/api/events/${selectedPersonId}`);
+        const sortedEvents = sortEventsByDate(response.data.events);
         setEventsData(sortedEvents);
       } catch (err) {
         console.log("Error:", err);
@@ -63,6 +69,16 @@ const PersonDetail = () => {
     // setSelectedPersonData(selectedPerson);
     setPeopleName(`${selectedPerson?.firstName} ${selectedPerson?.lastName}`);
   }, [selectedPersonId]);
+
+  const addEventHandler = () => {
+    setNewPersonId(selectedPersonId as number);
+
+    setPeopleDetailModal(!peopleDetailModal);
+    // setAddEventeModal(!addEventModal);
+    router.push(`/people-detail`);
+
+    console.log("newPersonId", newPersonId, addEventModal);
+  };
 
   return (
     <div className="bg-[#F1F5F9] rounded-lg border border-[#CBD5E1] w-[400px]">
@@ -99,12 +115,15 @@ const PersonDetail = () => {
               </div>
             ))
           ) : (
-            <p>Loading...</p>
+            <p>No events set!</p>
           )}
         </div>
       </div>
       <div className="border-t border-[#E2E8F0] p-4">
-        <div className="w-full bg-[#1E293B] rounded-3xl h-12 flex items-center justify-center text-white cursor-pointer hover:bg-opacity-95">
+        <div
+          className="w-full bg-[#1E293B] rounded-3xl h-12 flex items-center justify-center text-white cursor-pointer hover:bg-opacity-95"
+          onClick={addEventHandler}
+        >
           Add or edit information
         </div>
       </div>
