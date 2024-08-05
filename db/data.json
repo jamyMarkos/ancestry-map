@@ -1,142 +1,4 @@
 {
-  "people": [
-    {
-      "id": 12,
-      "isUser": true,
-      "firstName": "You",
-      "lastName": "",
-      "birthPlace": null,
-      "dob": "1965-05-23T00:00:00.000Z",
-      "gender": null,
-      "isAlive": true,
-      "parents": [14],
-      "spouses": []
-    },
-    {
-      "id": 13,
-      "isUser": false,
-      "firstName": "Frank",
-      "lastName": "Pritchett",
-      "birthPlace": "Milan, Italy",
-      "dob": "1965-05-23T00:00:00.000Z",
-      "gender": "male",
-      "isAlive": true,
-      "parents": [],
-      "spouses": [
-        {
-          "id": 15,
-          "status": "married"
-        }
-      ]
-    },
-    {
-      "id": 14,
-      "isUser": false,
-      "firstName": "Jay",
-      "lastName": "Pritchett",
-      "birthPlace": "New York, New York, United States of America",
-      "dob": "1995-05-23T00:00:00.000Z",
-      "gender": "male",
-      "isAlive": true,
-      "parents": [13, 15],
-      "spouses": []
-    },
-    {
-      "id": 15,
-      "isUser": false,
-      "firstName": "Mary",
-      "lastName": "Pritchett",
-      "birthPlace": null,
-      "dob": null,
-      "gender": null,
-      "isAlive": true,
-      "parents": [],
-      "spouses": [
-        {
-          "id": 13,
-          "status": "married"
-        }
-      ]
-    }
-  ],
-  "events": [
-    {
-      "id": 15,
-      "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-      "type": "birth",
-      "eventDate": "1965-05-23T00:00:00.000Z",
-      "location": "Milan, Italy",
-      "details": null,
-      "marriageId": null,
-      "personId": 13,
-      "createdAt": "2024-07-30T13:41:53.352Z",
-      "updatedAt": "2024-07-30T13:41:53.352Z",
-      "marriage": null
-    },
-    {
-      "id": 15,
-      "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-      "type": "birth",
-      "eventDate": "1965-05-23T00:00:00.000Z",
-      "location": "Addis Ababa, Ethiopia",
-      "details": null,
-      "marriageId": null,
-      "personId": 12,
-      "createdAt": "2024-07-30T13:41:53.352Z",
-      "updatedAt": "2024-07-30T13:41:53.352Z",
-      "marriage": null
-    },
-    {
-      "id": 17,
-      "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-      "type": "marriage",
-      "eventDate": null,
-      "location": null,
-      "details": null,
-      "marriageId": 17,
-      "personId": 13,
-      "createdAt": "2024-07-30T13:41:53.352Z",
-      "updatedAt": "2024-07-30T13:41:53.352Z",
-      "marriage": {
-        "id": 17,
-        "type": "marriage",
-        "people": [
-          {
-            "id": 13
-          },
-          {
-            "id": 15
-          }
-        ]
-      }
-    },
-    {
-      "id": 16,
-      "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-      "type": "birth",
-      "eventDate": "1995-05-23T00:00:00.000Z",
-      "location": "New York, New York, United States of America",
-      "details": null,
-      "marriageId": null,
-      "personId": 14,
-      "createdAt": "2024-07-30T13:41:53.849Z",
-      "updatedAt": "2024-07-30T13:41:53.849Z",
-      "marriage": null
-    },
-    {
-      "id": 18,
-      "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-      "type": "birth",
-      "eventDate": null,
-      "location": null,
-      "details": null,
-      "marriageId": null,
-      "personId": 15,
-      "createdAt": "2024-07-30T13:41:54.434Z",
-      "updatedAt": "2024-07-30T13:41:54.434Z",
-      "marriage": null
-    }
-  ],
   "family": [
     {
       "id": 12,
@@ -146,7 +8,7 @@
       "dob": null,
       "deathDate": null,
       "birthPlace": null,
-      "countryCode": "ET",
+      "countryCode": null,
       "isUser": true,
       "isAlive": null,
       "isAdopted": false,
@@ -177,7 +39,6 @@
           }
         }
       ],
-
       "relatedEvents": []
     },
     {
@@ -188,7 +49,7 @@
       "dob": "1965-05-23T00:00:00.000Z",
       "deathDate": null,
       "birthPlace": "Milan, Italy",
-      "countryCode": "US",
+      "countryCode": "IT",
       "isUser": false,
       "isAlive": null,
       "isAdopted": false,
@@ -231,7 +92,7 @@
       "dob": "1995-05-23T00:00:00.000Z",
       "deathDate": null,
       "birthPlace": "New York, New York, United States of America",
-      "countryCode": "AF",
+      "countryCode": "US",
       "isUser": false,
       "isAlive": null,
       "isAdopted": false,
@@ -302,7 +163,7 @@
       "dob": null,
       "deathDate": null,
       "birthPlace": null,
-      "countryCode": "TN",
+      "countryCode": null,
       "isUser": false,
       "isAlive": null,
       "isAdopted": false,
@@ -336,6 +197,54 @@
           ]
         }
       ]
+    },
+    {
+      "id": 7423903,
+      "isUser": false,
+      "firstName": "Father",
+      "lastName": "One",
+      "birthPlace": "New York, USA",
+      "countryCode": "US",
+      "dob": "1998-12-31 21:00:00",
+      "gender": "male",
+      "isAlive": true,
+      "parents": []
+    },
+    {
+      "id": 7423903,
+      "isUser": false,
+      "firstName": "Father",
+      "lastName": "One",
+      "birthPlace": "New York, USA",
+      "countryCode": "US",
+      "dob": "1998-12-31 21:00:00",
+      "gender": "male",
+      "isAlive": true,
+      "parents": []
+    },
+    {
+      "id": 43945102,
+      "isUser": false,
+      "firstName": "Father",
+      "lastName": "Two",
+      "birthPlace": "New York, USA",
+      "countryCode": "US",
+      "dob": "1998-12-31 21:00:00",
+      "gender": "male",
+      "isAlive": true,
+      "parents": []
+    },
+    {
+      "id": 43945102,
+      "isUser": false,
+      "firstName": "Father",
+      "lastName": "Two",
+      "birthPlace": "New York, USA",
+      "countryCode": "US",
+      "dob": "1998-12-31 21:00:00",
+      "gender": "male",
+      "isAlive": true,
+      "parents": []
     }
   ]
 }

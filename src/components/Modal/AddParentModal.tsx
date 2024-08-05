@@ -25,7 +25,8 @@ type AddParentModalProps = {
 };
 
 const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
-  const { addPeopleModal, setAddPeopleModal } = globalStore();
+  const { addPeopleModal, setAddPeopleModal, newPersonId, setNewPersonId } =
+    globalStore();
   const { peopleData, setPeopleData } = peopleStore();
   const router = useRouter();
 
@@ -86,13 +87,18 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const tempId = Math.floor(Math.random() * (100000000 - 999999) + 999999);
+    setNewPersonId(tempId);
+    console.log("new peerrrrrsonnnn id", newPersonId);
 
     // Prepare the data to be sent
     const postData = {
+      id: tempId,
       isUser: false,
       firstName: values.firstName,
       lastName: values.secondName,
       birthPlace: values.birthPlace,
+      countryCode: "US",
       dob: startDate
         ? startDate.toISOString().slice(0, 19).replace("T", " ")
         : null, // Format the date
@@ -103,19 +109,18 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
 
     try {
       // Send POST request to the JSON server
-      const response = await axios.post(
-        "http://localhost:5000/people",
-        postData
-      );
+      const response = await axios.post("/api/people", postData);
 
-      const res = await axios.post("http://localhost:5000/family", postData);
+      const res = await axios.post("/api/family", postData);
+      console.log("post request answer", res.data);
+      const result = await axios.patch(`/api/family/${childId}`, {
+        parents: [
+          ...res.data?.result?.parents,
+          { parent: { ...res?.data?.result } },
+        ],
+      });
 
-      const result = await axios.patch(
-        "http://localhost:5000/family/" + `${childId}`,
-        {
-          parents: [...response.data.parents, { parent: { ...res.data } }],
-        }
-      );
+      console.log("patch request answer", result);
 
       setAddPeopleModal(false);
     } catch (error) {
@@ -140,6 +145,7 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
             <RxCross2 className="w-5 h-5" />
           </div>
         </div>
+        {/* <pre>{newPersonId}</pre> */}
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4 p-5">
             <Input

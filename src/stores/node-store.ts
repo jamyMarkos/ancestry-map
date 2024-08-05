@@ -35,8 +35,8 @@ const useNodeStore = create<NodeStore>()(
         people: [],
         fetchPeople: async () => {
           try {
-            const response = await axios.get("http://localhost:5000/family");
-            set({ people: response.data });
+            const response = await axios.get("/api/family");
+            set({ people: response.data?.family });
           } catch (error) {
             console.error("Error fetching nodes:", error);
           }

@@ -1,0 +1,67 @@
+{
+  "events": [
+    {
+      "id": 15,
+      "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+      "type": "birth",
+      "eventDate": "1965-05-23T00:00:00.000Z",
+      "location": "Milan, Italy",
+      "details": null,
+      "marriageId": null,
+      "personId": 13,
+      "createdAt": "2024-07-30T13:41:53.352Z",
+      "updatedAt": "2024-07-30T13:41:53.352Z",
+      "marriage": null
+    },
+    {
+      "id": 17,
+      "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+      "type": "marriage",
+      "eventDate": null,
+      "location": null,
+      "details": null,
+      "marriageId": 17,
+      "personId": 13,
+      "createdAt": "2024-07-30T13:41:53.352Z",
+      "updatedAt": "2024-07-30T13:41:53.352Z",
+      "marriage": {
+        "id": 17,
+        "type": "marriage",
+        "people": [
+          {
+            "id": 13
+          },
+          {
+            "id": 15
+          }
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+      "type": "birth",
+      "eventDate": "1995-05-23T00:00:00.000Z",
+      "location": "New York, New York, United States of America",
+      "details": null,
+      "marriageId": null,
+      "personId": 14,
+      "createdAt": "2024-07-30T13:41:53.849Z",
+      "updatedAt": "2024-07-30T13:41:53.849Z",
+      "marriage": null
+    },
+    {
+      "id": 18,
+      "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+      "type": "birth",
+      "eventDate": null,
+      "location": null,
+      "details": null,
+      "marriageId": null,
+      "personId": 15,
+      "createdAt": "2024-07-30T13:41:54.434Z",
+      "updatedAt": "2024-07-30T13:41:54.434Z",
+      "marriage": null
+    }
+  ]
+}

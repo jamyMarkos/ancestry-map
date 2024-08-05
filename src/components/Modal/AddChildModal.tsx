@@ -21,7 +21,13 @@ const genderOptions = [
 ];
 
 const AddChildModal: FC = () => {
-  const { addChildModal, setAddChildModal, parentId } = globalStore();
+  const {
+    addChildModal,
+    setAddChildModal,
+    parentId,
+    newPersonId,
+    setNewPersonId,
+  } = globalStore();
   const { peopleData, setPeopleData } = peopleStore();
   const router = useRouter();
 
@@ -51,12 +57,18 @@ const AddChildModal: FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const tempId = Math.floor(Math.random() * (100000000 - 999999) + 999999);
+    setNewPersonId(tempId);
+    console.log(newPersonId);
+
     // Prepare the data to be sent
     const postData = {
+      id: tempId,
       isUser: false,
       firstName: values.firstName,
       lastName: values.secondName,
       birthPlace: values.birthPlace,
+      countryCode: "US",
       dob: startDate
         ? startDate.toISOString().slice(0, 19).replace("T", " ")
         : null, // Format the date
@@ -67,23 +79,18 @@ const AddChildModal: FC = () => {
 
     try {
       // add the child to the people registry
-      const response = await axios.post(
-        "http://localhost:5000/people",
-        postData
-      );
+      const response = await axios.post("/api/people", postData);
 
       // add the child to the family registry
-      const res = await axios.post("http://localhost:5000/family", postData);
+      const res = await axios.post("/api/family", postData);
 
       // fetch the parent of the child
-      const ress = await axios.get(
-        "http://localhost:5000/family/" + `${parentId}`
-      );
+      const ress = await axios.get(`/api/family/${parentId}`);
 
       const result = await axios.patch(
-        "http://localhost:5000/family/" + `${res.data.id}`,
+        "/api/family/" + `${res.data?.result?.id}`,
         {
-          parents: [...response.data.parents, { parent: { ...ress.data } }],
+          parents: [{ parent: { ...ress?.data?.result } }],
         }
       );
 
