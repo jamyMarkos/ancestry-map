@@ -8,7 +8,6 @@ import { LuPencil } from "react-icons/lu";
 function AddBirthNode() {
   const { addEventModal, setAddEventeModal } = globalStore();
   const { peopleData } = peopleStore();
-  console.log("peopleData", peopleData);
 
   return (
     <Fragment>

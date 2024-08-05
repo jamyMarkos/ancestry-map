@@ -15,8 +15,12 @@ import axios from "axios";
 import { peopleStore } from "@/stores/people-store";
 
 import { BASE_URL } from "../../../config";
+import { Router } from "next/router";
 
-const optionsEvent = [{ label: "Marriage", value: "marriage" }];
+const optionsEvent = [
+  { label: "Marriage", value: "marriage" },
+  { label: "Death", value: "death" },
+];
 
 const optionsGender = [
   { label: "Male", value: "male" },
@@ -37,63 +41,82 @@ const AddEventModal: FC = () => {
   });
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [selectedGender, setSelectedGender] = useState<any>(null);
-  const { eventData, setEventeData } = peopleStore();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/people/addEvent-data.json");
-        setEventeData(response?.data);
-      } catch (err) {
-        console.log("Error:", err);
-      }
-    };
-    fetchData();
-  }, []);
+  const { newPersonId, setNewPersonId, selectedPersonId } = globalStore();
+  // const { eventsData, setEventsData } = peopleStore();
 
-  useEffect(() => {
-    if (eventData && eventData.marriage) {
-      setValues({
-        firstNameSpouse: eventData.marriage.spouse?.firstName || "",
-        secondNameSpouse: eventData.marriage.spouse?.lastName || "",
-        marriagePlace: eventData.marriage.marriagePlace || "",
-        gender: eventData.marriage.spouse?.gender || "",
-      });
-      setStartDate(
-        eventData.marriage.marriageDate
-          ? new Date(eventData.marriage.marriageDate)
-          : new Date()
-      );
-      setSelectedEvent({ label: "Marriage", value: "marriage" });
-      setSelectedGender(
-        optionsGender.find(
-          (option) => option.value === eventData.marriage.spouse?.gender
-        ) || null
-      );
-    }
-  }, [eventData]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get("/people/addEvent-data.json");
+  //       setEventeData(response?.data);
+  //     } catch (err) {
+  //       console.log("Error:", err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+  // useEffect(() => {
+  //   if (eventData && eventData.marriage) {
+  //     setValues({
+  //       firstNameSpouse: eventData.marriage.spouse?.firstName || "",
+  //       secondNameSpouse: eventData.marriage.spouse?.lastName || "",
+  //       marriagePlace: eventData.marriage.marriagePlace || "",
+  //       gender: eventData.marriage.spouse?.gender || "",
+  //     });
+  //     setStartDate(
+  //       eventData.marriage.marriageDate
+  //         ? new Date(eventData.marriage.marriageDate)
+  //         : new Date()
+  //     );
+  //     setSelectedEvent({ label: "Marriage", value: "marriage" });
+  //     setSelectedGender(
+  //       optionsGender.find(
+  //         (option) => option.value === eventData.marriage.spouse?.gender
+  //       ) || null
+  //     );
+  //   }
+  // }, [eventData]);
+
+  const eventData = {
+    id: Math.floor(Math.random() * (100000000 - 999999) + 999999),
+    type: selectedEvent?.value,
+    eventDate: startDate.toISOString(),
+    location: values.marriagePlace,
+    personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
+    marriage:
+      selectedEvent?.value === "marriage"
+        ? {
+            firstName: values.firstNameSpouse,
+            lastName: values.secondNameSpouse,
+            gender: selectedGender?.value,
+          }
+        : null,
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const eventData = {
-      type: selectedEvent?.value,
-      eventDate: startDate.toISOString(),
-      location: values.marriagePlace,
-      personId: 41,
-      marriage:
-        selectedEvent?.value === "marriage"
-          ? {
-              firstName: values.firstNameSpouse,
-              lastName: values.secondNameSpouse,
-              gender: selectedGender?.value,
-            }
-          : null,
-    };
+    // const eventData = {
+    //   type: selectedEvent?.value,
+    //   eventDate: startDate.toISOString(),
+    //   location: values.marriagePlace,
+    //   personId: newPersonId,
+    //   marriage:
+    //     selectedEvent?.value === "marriage"
+    //       ? {
+    //           firstName: values.firstNameSpouse,
+    //           lastName: values.secondNameSpouse,
+    //           gender: selectedGender?.value,
+    //         }
+    //       : null,
+    // };
 
     try {
-      await axios.post("");
-      console.log("Event added successfully");
+      const response = await axios.post("/api/events", eventData);
+      console.log("Event added successfully:", response.data);
+      setAddEventeModal(false);
     } catch (error) {
       console.log("Error adding event:", error);
     }
@@ -106,10 +129,10 @@ const AddEventModal: FC = () => {
       [name]: value,
     }));
   };
-  const onSubmit = () => {
-    push("/detail-page");
-    setAddEventeModal(false);
-  };
+  // const onSubmit = () => {
+  //   push("/people-detail");
+  //   setAddEventeModal(false);
+  // };
   return (
     <Fragment>
       <ReactModal
@@ -217,7 +240,7 @@ const AddEventModal: FC = () => {
             <button
               type="submit"
               className="bg-black border border-[#E2E8F0] text-sm font-medium text-white py-2 w-20 rounded-md"
-              onClick={onSubmit}
+              onClick={() => push("/people-detail")}
             >
               Save
             </button>

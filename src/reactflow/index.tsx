@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { AiOutlineFullscreen, AiOutlineFullscreenExit } from "react-icons/ai";
 import { GrZoomIn } from "react-icons/gr";
 import { GrZoomOut } from "react-icons/gr";
@@ -16,23 +16,22 @@ import {
   Connection,
 } from "@xyflow/react";
 import dagre from "dagre";
-
-// Data fetched from the mock server :
-import { initialNodes, initialEdges } from "./flowData/nodes-edges-tree";
+import useNodeStore from "@/stores/node-store";
+import useEventStore from "@/stores/event-store";
+import { createNodesAndEdges } from "@/reactflow/flowData/nodes-edges-tree";
 
 import "@xyflow/react/dist/style.css";
 import AddParentNode from "./nodes/AddPrentNode";
-import { SubNodeParent } from "./nodes/SubNodeParent";
+import SubNodeParent from "./nodes/SubNodeParent";
 import AddBirthNode from "./nodes/AddBirthNode";
 import BirthNode from "./nodes/BithNode";
 import AddTree from "./nodes/AddTree";
 import AddChildNode from "./nodes/AddChildNode";
-// import { AddChildNode } from "./nodes/AddChildNode";
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-const nodeWidth = 172;
+const nodeWidth = 180;
 const nodeHeight = 36;
 const nodeTypes = {
   addparent: AddParentNode,
@@ -79,16 +78,32 @@ const getLayoutedElements = (
   return { nodes: newNodes, edges };
 };
 
-const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-  initialNodes,
-  initialEdges
-);
-
 const ReactLayoutFlow = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState<any>(layoutedNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState<any>([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<any>([]);
   const { zoomIn, zoomOut, fitView } = useReactFlow();
   const [isFullScreen, setIsFullScreen] = useState(false);
+  const fetchPeople = useNodeStore((state) => state.fetchPeople);
+  const people = useNodeStore((state) => state.people);
+  const fetchEvent = useEventStore((state) => state.fetchEvent);
+
+  useEffect(() => {
+    fetchPeople();
+    fetchEvent();
+  }, [fetchPeople]);
+
+  useEffect(() => {
+    if (people.length > 0) {
+      const { nodes: initialNodes, edges: initialEdges } =
+        createNodesAndEdges(people);
+
+      const { nodes: layoutedNodes, edges: layoutedEdges } =
+        getLayoutedElements(initialNodes, initialEdges);
+
+      setNodes(layoutedNodes);
+      setEdges(layoutedEdges);
+    }
+  }, [people, setNodes, setEdges]);
 
   const toggleFullScreen = () => {
     setIsFullScreen(!isFullScreen);

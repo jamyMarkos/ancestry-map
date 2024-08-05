@@ -29,8 +29,8 @@ const FamilyTree = () => {
     people.forEach((person) => {
       if (person.parents.length > 0) {
         person.parents.forEach((parent) => {
-          const parentId = parent.parent.id;
-          lookup[parentId].children.push(lookup[person.id]);
+          const parentId = parent?.parent?.id;
+          lookup[parentId]?.children?.push(lookup[person.id]);
         });
       } else {
         // If person has no parents listed, they might be the root
@@ -40,8 +40,6 @@ const FamilyTree = () => {
 
     return tree;
   };
-
-  console.log("heyyyyyyyyyyyy", tree);
 
   // Render Tree Structure
   const renderTree = (tree) => {

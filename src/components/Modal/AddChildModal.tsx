@@ -20,45 +20,16 @@ const genderOptions = [
   { label: "Transgender", value: "transgender" },
 ];
 
-type AddParentModalProps = {
-  childId: number | null;
-};
-
-const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
-  const { addPeopleModal, setAddPeopleModal, newPersonId, setNewPersonId } =
-    globalStore();
+const AddChildModal: FC = () => {
+  const {
+    addChildModal,
+    setAddChildModal,
+    parentId,
+    newPersonId,
+    setNewPersonId,
+  } = globalStore();
   const { peopleData, setPeopleData } = peopleStore();
   const router = useRouter();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/people/people-data.json");
-        setPeopleData(response?.data);
-      } catch (err) {
-        console.log("Error:", err);
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (peopleData) {
-      setValues({
-        firstName: peopleData?.firstName || "",
-        secondName: peopleData?.lastName || "",
-        nickName: "",
-        birthPlace: peopleData?.birthPlace || "",
-      });
-      setStartDate(new Date(peopleData?.dob));
-      setSelectedGender(
-        genderOptions.find((option) => option.value === peopleData?.gender) ||
-          null
-      );
-    }
-  }, [peopleData]);
-
-  const [startDate, setStartDate] = useState<Date | null>(null);
 
   const [values, setValues] = useState({
     firstName: "",
@@ -66,6 +37,8 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
     nickName: "",
     birthPlace: "",
   });
+  console.log("paaaaaaaaaarrrrreeeeeeeennnnnnnt", parentId);
+  const [startDate, setStartDate] = useState<Date | null>(null);
 
   const [selectedGender, setSelectedGender] = useState<any>(null);
 
@@ -81,15 +54,12 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
     setSelectedGender(newValue);
   };
 
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  // };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const tempId = Math.floor(Math.random() * (100000000 - 999999) + 999999);
     setNewPersonId(tempId);
-    console.log("new peerrrrrsonnnn id", newPersonId);
+    console.log(newPersonId);
 
     // Prepare the data to be sent
     const postData = {
@@ -108,24 +78,25 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
     };
 
     try {
-      // Send POST request to the JSON server
+      // add the child to the people registry
       const response = await axios.post("/api/people", postData);
 
+      // add the child to the family registry
       const res = await axios.post("/api/family", postData);
-      console.log("post request answer", res.data);
-      const result = await axios.patch(`/api/family/${childId}`, {
-        parents: [
-          ...res.data?.result?.parents,
-          { parent: { ...res?.data?.result } },
-        ],
-      });
 
-      console.log("patch request answer", result);
+      // fetch the parent of the child
+      const ress = await axios.get(`/api/family/${parentId}`);
 
-      setAddPeopleModal(false);
+      const result = await axios.patch(
+        "/api/family/" + `${res.data?.result?.id}`,
+        {
+          parents: [{ parent: { ...ress?.data?.result } }],
+        }
+      );
+
+      setAddChildModal(false);
     } catch (error) {
       console.error("Error saving data:", error);
-      // Handle error (e.g., show a notification)
     }
   };
 
@@ -133,19 +104,18 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
     <Fragment>
       <ReactModal
         className="font-pathway mobile:w-[380px] w-72 m-auto md:h-[calc(100vh-237px)] h-[calc(100vh-64px)] overflow-auto z-50 absolute md:top-[237px] top-16 border-l border-[#E2E8F0] right-[0%] bg-white p-0 opacity-100 focus:outline-none overflow-y-auto"
-        isOpen={addPeopleModal}
+        isOpen={addChildModal}
         onAfterOpen={() => (document.body.style.overflow = "hidden")}
         onAfterClose={() => (document.body.style.overflow = "unset")}
       >
         <div className="p-5 border-b border-[#E2E8F0] flex items-center justify-between gap-2">
           <h2 className="text-lg text-black text-opacity-80 font-semibold">
-            Birth
+            Birth - Add Child Modal
           </h2>
           <div className="cursor-pointer" onClick={() => router.push("/")}>
             <RxCross2 className="w-5 h-5" />
           </div>
         </div>
-        {/* <pre>{newPersonId}</pre> */}
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4 p-5">
             <Input
@@ -210,7 +180,7 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
           <div className="border-b border-[#E2E8F0]" />
           <div className="flex items-center gap-3 justify-end my-3 px-5">
             <button
-              onClick={() => setAddPeopleModal(false)}
+              onClick={() => setAddChildModal(false)}
               type="button"
               className="border border-[#E2E8F0] text-sm font-medium text-black text-opacity-75 py-2 w-20 rounded-md"
             >
@@ -230,4 +200,4 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
   );
 };
 
-export default AddParentModal;
+export default AddChildModal;

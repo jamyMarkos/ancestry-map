@@ -1,0 +1,22 @@
+[
+  {
+    "isUser": false,
+    "firstName": "John",
+    "lastName": "Doe",
+    "birthPlace": "New York, USA",
+    "dob": "1999-01-01 00:00:00",
+    "gender": "male",
+    "isAlive": true,
+    "parents": [1, 2],
+    "spouses": [
+      {
+        "id": 4,
+        "status": "married"
+      },
+      {
+        "id": 5,
+        "status": "divorced"
+      }
+    ]
+  }
+]

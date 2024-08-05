@@ -1,6 +1,7 @@
 "use client";
 import PageHeader from "@/components/Header/DynamicHeader";
 import AddParentModal from "@/components/Modal/AddParentModal";
+import AddChildModal from "@/components/Modal/AddChildModal";
 import AddPeopleFlow from "@/reactflow/addPeople";
 import { globalStore } from "@/stores/global-store";
 import "@xyflow/react/dist/style.css";
@@ -9,7 +10,14 @@ import { FaPlus } from "react-icons/fa";
 
 export default function AddPeople() {
   const { push } = useRouter();
-  const { addPeopleModal, setAddPeopleModal } = globalStore();
+  const {
+    addPeopleModal,
+    setAddPeopleModal,
+    childId,
+    addChildModal,
+    setAddChildModal,
+  } = globalStore();
+
   return (
     <>
       <PageHeader
@@ -36,7 +44,8 @@ export default function AddPeople() {
 
       <div className="w-full h-[calc(100vh-72px)] p-5">
         <AddPeopleFlow />
-        {addPeopleModal && <AddParentModal />}
+        {addPeopleModal && <AddParentModal childId={childId} />}
+        {addChildModal && <AddChildModal />}
       </div>
     </>
   );

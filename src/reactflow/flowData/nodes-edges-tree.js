@@ -1,29 +1,169 @@
 import { type } from "os";
 import axios from "axios";
+import useNodeStore from "@/stores/node-store";
+
 const position = { x: 0, y: 0 };
 const edgeType = "smoothstep";
 
-// export const initialNodes = [
-//   {
-//     id: "1",
-//     type: "addparent",
-//     data: { label: "Add Parent" },
-//     position,
-//   },
+export const createNodesAndEdges = (data) => {
+  const nodes = [];
+  const edges = [];
+  const verticalOffset = 100;
+  const horizontalOffset = 150;
+  let maxY = 0;
 
-//   {
-//     id: "2",
-//     type: "subparent",
-//     data: { label: "add tree" },
-//     position,
-//   },
-//   {
-//     id: "2c",
-//     type: "addChildNode",
-//     data: { label: "Child" },
-//     position,
-//   },
-// ];
+  const addedSpousesIds = new Set();
+  const nodesWithChildren = new Set();
+
+  // Step 1: Determine which nodes have children
+  data.forEach((person) => {
+    if (person.parents) {
+      person.parents.forEach((parent) => {
+        nodesWithChildren.add(parent?.parent?.id);
+      });
+    }
+  });
+
+  let maxDepth = 0;
+  const nodeLevels = {};
+  data.forEach((person) => {
+    nodeLevels[person.id] = calculateDepth(person.id, data);
+    maxDepth = Math.max(maxDepth, nodeLevels[person.id]);
+  });
+
+  // Function to add nodes and edges
+  data.forEach((person) => {
+    const nodeId = person.id.toString();
+    const depth = nodeLevels[person.id];
+    const baseX = 0;
+    const baseY = depth * verticalOffset;
+    // Add the "Add Parent" nodes only if this person has no parents
+    if (person?.parents.length === 0) {
+      if (!addedSpousesIds.has(person.id)) {
+        addParentNode(
+          `add-parent1-${nodeId}`,
+          "addparent",
+          "Add parent 1",
+          baseX - horizontalOffset,
+          baseY - verticalOffset,
+          nodes,
+          nodeId
+        );
+
+        addEdge(`add-parent1-${nodeId}`, nodeId, edges);
+      }
+
+      if (!addedSpousesIds.has(person.id) && person.spouseId) {
+        addParentNode(
+          `add-parent2-${person.spouseId}`,
+          "addparent",
+          "Add parent 2",
+          baseX + horizontalOffset,
+          baseY - verticalOffset,
+          nodes,
+          person.spouseId
+        );
+
+        addEdge(`add-parent2-${person.spouseId}`, nodeId, edges);
+      }
+    }
+
+    let spouseLabel = null;
+    if (person.spouseId) {
+      const spouse = data.find((p) => p.id === person.spouseId);
+      spouseLabel = `${spouse?.firstName} ${spouse?.lastName}`;
+      // Mark the spouse as added so that we don't add them again
+      addedSpousesIds.add(person.spouseId);
+    }
+
+    if (!addedSpousesIds.has(person.id)) {
+      addNode(
+        nodeId,
+        "subparent",
+        `${person.firstName} ${person.lastName}`,
+        spouseLabel,
+        person?.spouseId,
+        baseX,
+        baseY,
+        nodes
+      );
+    }
+
+    // Edges to parents
+    person.parents.forEach((parent) => {
+      addEdge(parent?.parent?.id?.toString(), nodeId, edges);
+    });
+
+    // Add "+ Add Child" nodes for each node that has children
+    if (!nodesWithChildren.has(person.id)) {
+      addChildNode(
+        `add-child-${person.id}`,
+        "addChildNode",
+        "Add Child",
+        baseX,
+        baseY + verticalOffset,
+        nodes,
+        person.id
+      );
+
+      addEdge(person.id.toString(), `add-child-${person.id}`, edges);
+    }
+  });
+
+  return { nodes, edges };
+};
+
+// Helper functions
+function calculateDepth(id, data, depth = 0) {
+  const person = data.find((p) => p.id === id);
+  if (!person || !person.parents || person.parents.length === 0) {
+    return depth;
+  }
+  const parentDepths = person.parents.map((parent) =>
+    calculateDepth(parent?.parent?.id, data, depth + 1)
+  );
+  return Math.max(...parentDepths);
+}
+
+// Add a child node
+function addChildNode(id, type, label, x, y, nodes, parentId) {
+  const nodeData = {
+    id,
+    type,
+    data: { title: label, parentId: parentId },
+    position: { x, y },
+  };
+  nodes.push(nodeData);
+}
+
+function addParentNode(id, type, label, x, y, nodes, nodeId) {
+  const nodeData = {
+    id,
+    type,
+    data: { title: label, childId: nodeId },
+    position: { x, y },
+  };
+  nodes.push(nodeData);
+}
+
+function addNode(id, type, personLabel, spouseLabel, spouseId, x, y, nodes) {
+  const nodeData = {
+    id,
+    type,
+    data: { label: personLabel, spouse: spouseLabel, spouseId, personId: id },
+    position: { x, y },
+  };
+  nodes.push(nodeData);
+}
+
+function addEdge(source, target, edges, type = "smoothstep") {
+  edges.push({
+    id: `e-${source}-${target}`,
+    source,
+    target,
+    type,
+  });
+}
 
 export const initialBirthNode = [
   {
@@ -63,131 +203,3 @@ export const PeopleDetailEdge = [
 export const initialBirthEdges = [
   { id: "e12", source: "3", target: "3", type: edgeType },
 ];
-
-// export const initialEdges = [
-//   { id: "e12", source: "1", target: "2", type: edgeType, animated: true },
-//   { id: "e22a", source: "2", target: "2c", type: edgeType, animated: true },
-// ];
-
-// { id: "e22a", source: "2a", target: "2c", type: edgeType, animated: true },
-
-const fetchData = async () => {
-  try {
-    const response = await axios.get("http://localhost:5000/family");
-
-    // console.log("inside fetch........", response.data);
-    return response;
-  } catch (err) {
-    console.log("Error:", err);
-  }
-};
-// const res = await fetchData();
-
-// const result = res.data;
-const result = [];
-
-// const transformedData = result.map((item) => {
-//   return {
-//     id: item.id,
-//     firstName: item.firstName,
-//     lastName: item.lastName,
-//     parents: item.parents.map((p) => p.parent), // Extracting parent objects directly
-//   };
-// });
-
-const jsonData = [
-  {
-    id: 12,
-    firstName: "You",
-    lastName: "",
-    parents: [
-      {
-        parent: {
-          id: 14,
-          firstName: "Jay",
-          lastName: "Pritchett",
-        },
-      },
-      {
-        parent: {
-          id: 1457,
-          firstName: "Akilas",
-          lastName: "Pritchett",
-        },
-      },
-    ],
-  },
-  {
-    id: 1457,
-    firstName: "Akilas",
-    lastName: "Pritchett",
-    parents: [],
-  },
-  {
-    id: 13,
-    firstName: "Frank",
-    lastName: "Pritchett",
-    spouse: { id: 15, firstName: "Mary", lastName: "Pritchett" },
-    parents: [],
-  },
-  {
-    id: 14,
-    firstName: "Jay",
-    lastName: "Pritchett",
-    parents: [
-      {
-        parent: {
-          id: 13,
-          firstName: "Frank",
-          lastName: "Pritchett",
-        },
-      },
-      {
-        parent: {
-          id: 15,
-          firstName: "Mary",
-          lastName: "Pritchett",
-        },
-      },
-    ],
-  },
-  {
-    id: 15,
-    firstName: "Mary",
-    lastName: "Pritchett",
-    parents: [],
-  },
-];
-
-const createNodesAndEdges = (data) => {
-  const nodes = [];
-  const edges = [];
-  const positionOffset = 100;
-
-  data.forEach((person, index) => {
-    const nodeId = person.id.toString();
-    nodes.push({
-      id: nodeId,
-      type: "subparent",
-      data: { label: `${person.firstName} ${person.lastName}` },
-      position: { x: 0, y: index * positionOffset },
-    });
-
-    if (person.parents && person.parents.length > 0) {
-      person.parents.forEach((parent) => {
-        const parentId = parent.parent.id.toString();
-        edges.push({
-          id: `e${parentId}-${nodeId}`,
-          source: parentId,
-          target: nodeId,
-          type: edgeType,
-        });
-      });
-    }
-  });
-
-  return { nodes, edges };
-};
-
-export const { nodes: initialNodes, edges: initialEdges } =
-  createNodesAndEdges(jsonData);
