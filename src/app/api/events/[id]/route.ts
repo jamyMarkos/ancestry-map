@@ -40,5 +40,3 @@ export async function GET(request: NextRequest, context: any) {
     );
   }
 }
-
-export default GET;

@@ -156,5 +156,13 @@
       "lastName": "Greene",
       "gender": "female"
     }
+  },
+  {
+    "id": 6047323,
+    "type": "death",
+    "eventDate": "2024-08-05T08:41:13.996Z",
+    "location": "Wolayta",
+    "personId": 75861169,
+    "marriage": null
   }
 ]
