@@ -74,12 +74,34 @@ const AddChildModal: FC = () => {
         : null, // Format the date
       gender: selectedGender ? selectedGender.value : null, // Get the selected gender value
       isAlive: true, // Assuming this is a static value
+      hasChangedName: false, // Assuming this is a static value
+      hasChangedGender: false, // Assuming this is a static value
       parents: [], // Example parent IDs; modify as needed
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    const postDataToCreteBirthEvent = {
+      id: Math.floor(Math.random() * (100000000 - 999999) + 999999),
+      userId: "user_3gTTZQ6YXa",
+      type: "birth",
+      eventDate: startDate ? startDate.toISOString() : null,
+      location: values.birthPlace,
+      personId: tempId,
+      marriage: null,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
 
     try {
       // add the child to the people registry
       const response = await axios.post("/api/people", postData);
+
+      // Send POST request to the create Birth event automatically
+      const responseBirthEvent = await axios.post(
+        "/api/events",
+        postDataToCreteBirthEvent
+      );
 
       // add the child to the family registry
       const res = await axios.post("/api/family", postData);

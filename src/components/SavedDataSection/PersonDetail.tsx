@@ -45,16 +45,20 @@ const PersonDetail = () => {
   const [peopleName, setPeopleName] = useState("");
   const [selectedPersonData, setSelectedPersonData] = useState(null);
   const [eventsData, setEventsData] = useState<Event[] | null>(null);
+  const [isFetching, setIsFetching] = useState(false);
 
   // Fetch the event data
   useEffect(() => {
     const fetchEventData = async () => {
+      setIsFetching(true);
       try {
         const response = await axios.get(`/api/events/${selectedPersonId}`);
         const sortedEvents = sortEventsByDate(response.data.events);
         setEventsData(sortedEvents);
       } catch (err) {
         console.log("Error:", err);
+      } finally {
+        setIsFetching(false);
       }
     };
     fetchEventData();
@@ -115,7 +119,9 @@ const PersonDetail = () => {
               </div>
             ))
           ) : (
-            <p>No events set!</p>
+            <p>
+              {isFetching ? "Loading events..." : "No events set for a person!"}
+            </p>
           )}
         </div>
       </div>

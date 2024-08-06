@@ -43,46 +43,14 @@ const AddEventModal: FC = () => {
   const [selectedGender, setSelectedGender] = useState<any>(null);
 
   const { newPersonId, setNewPersonId, selectedPersonId } = globalStore();
-  // const { eventsData, setEventsData } = peopleStore();
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get("/people/addEvent-data.json");
-  //       setEventeData(response?.data);
-  //     } catch (err) {
-  //       console.log("Error:", err);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
-  // useEffect(() => {
-  //   if (eventData && eventData.marriage) {
-  //     setValues({
-  //       firstNameSpouse: eventData.marriage.spouse?.firstName || "",
-  //       secondNameSpouse: eventData.marriage.spouse?.lastName || "",
-  //       marriagePlace: eventData.marriage.marriagePlace || "",
-  //       gender: eventData.marriage.spouse?.gender || "",
-  //     });
-  //     setStartDate(
-  //       eventData.marriage.marriageDate
-  //         ? new Date(eventData.marriage.marriageDate)
-  //         : new Date()
-  //     );
-  //     setSelectedEvent({ label: "Marriage", value: "marriage" });
-  //     setSelectedGender(
-  //       optionsGender.find(
-  //         (option) => option.value === eventData.marriage.spouse?.gender
-  //       ) || null
-  //     );
-  //   }
-  // }, [eventData]);
 
   const eventData = {
     id: Math.floor(Math.random() * (100000000 - 999999) + 999999),
+    userId: "user_3gTTZQ6YXa",
     type: selectedEvent?.value,
     eventDate: startDate.toISOString(),
+    details: null,
+    marriageId: null,
     location: values.marriagePlace,
     personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
     marriage:
@@ -93,6 +61,8 @@ const AddEventModal: FC = () => {
             gender: selectedGender?.value,
           }
         : null,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

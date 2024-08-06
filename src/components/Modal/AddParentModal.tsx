@@ -81,15 +81,10 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
     setSelectedGender(newValue);
   };
 
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  // };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const tempId = Math.floor(Math.random() * (100000000 - 999999) + 999999);
     setNewPersonId(tempId);
-    console.log("new peerrrrrsonnnn id", newPersonId);
 
     // Prepare the data to be sent
     const postData = {
@@ -103,16 +98,43 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
         ? startDate.toISOString().slice(0, 19).replace("T", " ")
         : null, // Format the date
       gender: selectedGender ? selectedGender.value : null, // Get the selected gender value
+
       isAlive: true, // Assuming this is a static value
+      hasChangedName: false, // Assuming this is a static value
+      hasChangedGender: false, // Assuming this is a static value
       parents: [], // Example parent IDs; modify as needed
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    const postDataToCreteBirthEvent = {
+      id: Math.floor(Math.random() * (100000000 - 999999) + 999999),
+      userId: null,
+      personId: tempId,
+      type: "birth",
+      eventDate: startDate
+        ? startDate.toISOString().slice(0, 19).replace("T", " ")
+        : null,
+      location: values.birthPlace,
+      details: null,
+      marriageId: null,
+      eventPlace: values.birthPlace,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
 
     try {
       // Send POST request to the JSON server
       const response = await axios.post("/api/people", postData);
 
+      // Send POST request to the create Birth event automatically
+      const responseBirthEvent = await axios.post(
+        "/api/events",
+        postDataToCreteBirthEvent
+      );
+
       const res = await axios.post("/api/family", postData);
-      console.log("post request answer", res.data);
+      console.log("post request answer:", res.data, postData);
       const result = await axios.patch(`/api/family/${childId}`, {
         parents: [
           ...res.data?.result?.parents,
