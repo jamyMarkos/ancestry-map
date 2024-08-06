@@ -40,10 +40,23 @@ const AddTree = () => {
     fetchSingleEvent();
   }, [nodeSelectedId]);
 
+  // useEffect(() => {
+  //   eventData.map((data) => {
+  //     if (data.type === "marriage") {
+  //       setSpouseId(data.marriage?.people[0]?.id || undefined);
+  //     }
+  //   });
+  // }, [eventData]);
+
   useEffect(() => {
-    eventData.map((data) => {
-      if (data.type === "marriage") {
-        setSpouseId(data.marriage?.people[1].id || undefined);
+    eventData.forEach((data) => {
+      if (
+        data.type === "marriage" &&
+        data.marriage &&
+        data.marriage.people &&
+        data.marriage.people.length > 0
+      ) {
+        setSpouseId(data.marriage.people[0].id);
       }
     });
   }, [eventData]);

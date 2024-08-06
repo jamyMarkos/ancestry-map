@@ -32,9 +32,14 @@ const FamilyDetails = ({ event }: { event: EventType[] }) => {
   const [spouseData, setSpouseData] = useState<PeopleData | null>(null);
 
   useEffect(() => {
-    event.map((data) => {
-      if (data.type === "marriage") {
-        setSpouseId(data.marriage?.people[1].id || undefined);
+    event.forEach((data) => {
+      if (
+        data.type === "marriage" &&
+        data.marriage &&
+        data.marriage.people &&
+        data.marriage.people.length > 0
+      ) {
+        setSpouseId(data.marriage.people[0].id);
       }
     });
   }, [event]);

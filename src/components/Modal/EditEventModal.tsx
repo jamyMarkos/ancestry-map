@@ -42,13 +42,14 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
   const { push } = useRouter();
   const [startDate, setStartDate] = useState<Date>(new Date());
   const { newPersonId, setNewPersonId, selectedPersonId } = globalStore();
+  const [event, setNewEvent] = useState<any>(null);
 
   useEffect(() => {
     const fetchEventData = async () => {
       try {
         const response = await axios.get(`/api/events/edit/${eventId}`);
-        const eventData = response.data;
-
+        const eventData = response.data?.events[0];
+        setNewEvent(response?.data?.events[0]);
         setFirstNameSpouse(eventData.marriage?.people[0]?.firstName || "");
         setSecondNameSpouse(eventData.marriage?.people[0]?.lastName || "");
         setMarriagePlace(eventData?.location || "");
@@ -73,21 +74,59 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
     fetchEventData();
   }, [eventId]);
 
+  console.log(event);
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // const updatedEventData = {
+    //   id: eventId,
+    //   type: selectedEvent?.value,
+    //   eventDate: startDate.toISOString(),
+    //   location: marriagePlace,
+    //   personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
+    //   marriage:
+    //     selectedEvent?.value === "marriage"
+    //       ? {
+    //           id: Math.floor(Math.random() * (100000000 - 999999) + 999999),
+    //           personId: selectedPersonId
+    //             ? Number(selectedPersonId)
+    //             : newPersonId,
+
+    //           firstName: firstNameSpouse,
+    //           lastName: secondNameSpouse,
+    //           gender: selectedGender?.value,
+    //         }
+    //       : null,
+    // };
+
     const updatedEventData = {
       id: eventId,
+      userId: "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx", // Assuming you have the userId available
       type: selectedEvent?.value,
-      eventDate: startDate.toISOString(),
-      location: marriagePlace,
+      eventDate: startDate.toISOString() || null, // Ensure this is null if not set
+      location: marriagePlace || null, // Ensure this is null if not set
+      details: null, // Set this if you have details to include
+      marriageId: Math.floor(Math.random() * (100000000 - 999999) + 999999), // Random ID for marriage
       personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
+      createdAt: new Date().toISOString(), // Set the current timestamp
+      updatedAt: new Date().toISOString(), // Set the current timestamp
       marriage:
         selectedEvent?.value === "marriage"
           ? {
-              firstName: firstNameSpouse,
-              lastName: secondNameSpouse,
-              gender: selectedGender?.value,
+              id: Math.floor(Math.random() * (100000000 - 999999) + 999999), // Random ID for marriage
+              personId: selectedPersonId
+                ? Number(selectedPersonId)
+                : newPersonId,
+              spouseId: null, // You can set this if you have a spouse ID
+              status: "married", // Assuming the status is always "married" for marriage events
+              people: [
+                {
+                  id: selectedPersonId ? Number(selectedPersonId) : newPersonId, // Assuming this is the ID of the spouse
+                  firstName: firstNameSpouse,
+                  lastName: secondNameSpouse,
+                },
+              ],
             }
           : null,
     };
