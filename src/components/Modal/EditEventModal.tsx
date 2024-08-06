@@ -32,12 +32,10 @@ type EditEventModalProps = {
 };
 
 const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
-  const [values, setValues] = useState({
-    firstNameSpouse: "",
-    secondNameSpouse: "",
-    marriagePlace: "",
-    gender: "",
-  });
+  const [firstNameSpouse, setFirstNameSpouse] = useState<any>(null);
+  const [secondNameSpouse, setSecondNameSpouse] = useState<any>(null);
+  const [marriagePlace, setMarriagePlace] = useState<any>(null);
+  const [gender, setGender] = useState<any>(null);
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [selectedGender, setSelectedGender] = useState<any>(null);
   const { editEventModal, setEditEventModal } = globalStore();
@@ -50,12 +48,11 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
       try {
         const response = await axios.get(`/api/events/edit/${eventId}`);
         const eventData = response.data;
-        setValues({
-          firstNameSpouse: eventData.marriage?.firstName || "",
-          secondNameSpouse: eventData.marriage?.lastName || "",
-          marriagePlace: eventData.location || "",
-          gender: eventData.marriage?.gender || "",
-        });
+
+        setFirstNameSpouse(eventData.marriage?.people[0]?.firstName || "");
+        setSecondNameSpouse(eventData.marriage?.people[0]?.lastName || "");
+        setMarriagePlace(eventData?.location || "");
+        setGender(eventData.marriage?.gender || "");
         setSelectedEvent({ label: eventData.type, value: eventData.type });
         setSelectedGender({
           label: eventData.marriage?.gender,
@@ -68,7 +65,6 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
           console.error("Invalid date fetched:", eventData.eventDate);
           setStartDate(new Date()); // Fallback to current date or handle as needed
         }
-        // setStartDate(new Date(eventData.eventDate));
       } catch (error) {
         console.log("Error fetching event data:", error);
       }
@@ -84,13 +80,13 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
       id: eventId,
       type: selectedEvent?.value,
       eventDate: startDate.toISOString(),
-      location: values.marriagePlace,
+      location: marriagePlace,
       personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
       marriage:
         selectedEvent?.value === "marriage"
           ? {
-              firstName: values.firstNameSpouse,
-              lastName: values.secondNameSpouse,
+              firstName: firstNameSpouse,
+              lastName: secondNameSpouse,
               gender: selectedGender?.value,
             }
           : null,
@@ -98,7 +94,7 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
 
     try {
       const response = await axios.patch(
-        `/api/events/${eventId}`,
+        `/api/events/edit/${eventId}`,
         updatedEventData
       );
       console.log("Event updated successfully:", response.data);
@@ -112,28 +108,40 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
     id: eventId,
     type: selectedEvent?.value,
     eventDate: startDate.toISOString(),
-    location: values.marriagePlace,
+    location: marriagePlace,
     personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
     marriage:
       selectedEvent?.value === "marriage"
         ? {
-            firstName: values.firstNameSpouse,
-            lastName: values.secondNameSpouse,
+            firstName: firstNameSpouse,
+            lastName: secondNameSpouse,
             gender: selectedGender?.value,
           }
         : null,
   };
 
-  console.log(values?.firstNameSpouse);
-  console.log(values?.secondNameSpouse);
+  console.log("in the event detail modal", firstNameSpouse);
+  console.log("in the event detail modal", secondNameSpouse);
   // console.log(values?.secondNameSpouse);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
+    switch (name) {
+      case "firstNameSpouse":
+        setFirstNameSpouse(value);
+        break;
+      case "secondNameSpouse":
+        setSecondNameSpouse(value);
+        break;
+      case "marriagePlace":
+        setMarriagePlace(value);
+        break;
+      case "gender":
+        setGender(value);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -175,7 +183,7 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
                 labelText="First name of spouse"
                 resStyle="h-11"
                 onChange={handleInputChange}
-                value={values.firstNameSpouse}
+                value={firstNameSpouse}
               />
               <p className="text-[#C0C2D4] text-xs font-medium pt-2">
                 As it appears on birth certificate.
@@ -188,7 +196,7 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
                 id="secondNameSpouse"
                 labelText="Second name of spouse"
                 onChange={handleInputChange}
-                value={values.secondNameSpouse}
+                value={secondNameSpouse}
               />
               <p className="text-[#C0C2D4] text-xs font-medium pt-2">
                 As it appears on birth certificate.
@@ -227,7 +235,7 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
                 labelText="Place of marriage"
                 resStyle="!pl-10"
                 onChange={handleInputChange}
-                value={values.marriagePlace}
+                value={marriagePlace}
               />
             </div>
           </div>
