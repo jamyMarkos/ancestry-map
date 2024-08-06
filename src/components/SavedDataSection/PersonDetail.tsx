@@ -39,6 +39,8 @@ const PersonDetail = () => {
     setNewPersonId,
     setAddEventeModal,
     addEventModal,
+    nodeSelectedId,
+    setNodeSelectedId,
   } = globalStore();
   const { people } = useNodeStore();
   const [error, setError] = useState(false);
@@ -66,18 +68,18 @@ const PersonDetail = () => {
     const selectedPerson = people.find(
       (person) => String(person.id) === String(selectedPersonId)
     );
-    // setSelectedPersonData(selectedPerson);
     setPeopleName(`${selectedPerson?.firstName} ${selectedPerson?.lastName}`);
   }, [selectedPersonId]);
 
   const addEventHandler = () => {
     setNewPersonId(selectedPersonId as number);
-
     setPeopleDetailModal(!peopleDetailModal);
     // setAddEventeModal(!addEventModal);
     router.push(`/people-detail`);
+  };
 
-    console.log("newPersonId", newPersonId, addEventModal);
+  const handleCloseModal = () => {
+    setPeopleDetailModal(!peopleDetailModal);
   };
 
   return (
@@ -86,10 +88,7 @@ const PersonDetail = () => {
         <h2 className="text-lg text-black text-opacity-80 font-semibold">
           {peopleName}
         </h2>
-        <div
-          onClick={() => setPeopleDetailModal(!peopleDetailModal)}
-          className="cursor-pointer"
-        >
+        <div onClick={handleCloseModal} className="cursor-pointer">
           <RxCross2 className="w-5 h-5" />
         </div>
       </div>

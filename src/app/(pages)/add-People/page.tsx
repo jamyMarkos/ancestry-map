@@ -16,8 +16,10 @@ export default function AddPeople() {
     childId,
     addChildModal,
     setAddChildModal,
+    nodeSelectedId,
   } = globalStore();
 
+  console.log("some where in the middle of nowhere", nodeSelectedId);
   return (
     <>
       <PageHeader

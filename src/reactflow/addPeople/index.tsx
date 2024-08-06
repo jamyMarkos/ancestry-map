@@ -9,7 +9,7 @@ import {
 import dagre from "dagre";
 
 import "@xyflow/react/dist/style.css";
-import BirthNode from "../nodes/BithNode";
+import BirthNode from "../nodes/BirthNode";
 import {
   initialBirthEdges,
   initialBirthNode,

@@ -37,7 +37,7 @@ const AddChildModal: FC = () => {
     nickName: "",
     birthPlace: "",
   });
-  console.log("paaaaaaaaaarrrrreeeeeeeennnnnnnt", parentId);
+  // console.log("paaaaaaaaaarrrrreeeeeeeennnnnnnt", parentId);
   const [startDate, setStartDate] = useState<Date | null>(null);
 
   const [selectedGender, setSelectedGender] = useState<any>(null);

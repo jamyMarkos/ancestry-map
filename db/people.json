@@ -325,5 +325,17 @@
     "gender": "male",
     "isAlive": true,
     "parents": []
+  },
+  {
+    "id": 18043021,
+    "isUser": false,
+    "firstName": "Yoni",
+    "lastName": "Sodo",
+    "birthPlace": "New York, USA",
+    "countryCode": "US",
+    "dob": "1998-12-31 21:00:00",
+    "gender": "male",
+    "isAlive": true,
+    "parents": []
   }
 ]

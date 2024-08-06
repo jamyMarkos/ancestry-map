@@ -174,15 +174,6 @@ export const initialBirthNode = [
   },
 ];
 
-export const PeopleDetailNode = [
-  {
-    id: "4",
-    type: "addBirthNode",
-    position: { x: 0, y: 0 },
-    data: { label: "Add Parent Node" },
-  },
-];
-
 export const EventTreeNode = [
   {
     id: "5",
@@ -196,10 +187,21 @@ export const EventTreeDetailEdge = [
   { id: "e12", source: "4", target: "4", type: edgeType },
 ];
 
-export const PeopleDetailEdge = [
-  { id: "e12", source: "5", target: "5", type: edgeType },
-];
-
 export const initialBirthEdges = [
   { id: "e12", source: "3", target: "3", type: edgeType },
+];
+
+///////////////////////////////////////////////////////////
+
+export const PeopleDetailNode = [
+  {
+    id: "4",
+    type: "addBirthNode",
+    position: { x: 0, y: 0 },
+    data: { label: "Add Parent Sukuna" },
+  },
+];
+
+export const PeopleDetailEdge = [
+  { id: "e12", source: "5", target: "5", type: edgeType },
 ];
