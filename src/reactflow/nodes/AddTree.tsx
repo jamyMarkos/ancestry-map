@@ -4,6 +4,7 @@ import { LuPencil } from "react-icons/lu";
 import moment from "moment";
 import { IoMdAdd } from "react-icons/io";
 import AddEventModal from "@/components/Modal/AddEventModal";
+import EditEventModal from "@/components/Modal/EditEventModal";
 import { globalStore } from "@/stores/global-store";
 import axios from "axios";
 import { EventType } from "@/components/SavedDataSection/FamilyDetails";
@@ -11,11 +12,17 @@ import { PeopleData } from "@/stores/people-store";
 import { sortEventsByDate } from "@/utils/sortEvents";
 
 const AddTree = () => {
-  const { addEventModal, setAddEventeModal } = globalStore();
+  const {
+    addEventModal,
+    setAddEventeModal,
+    editEventModal,
+    setEditEventModal,
+  } = globalStore();
   const [eventData, setEventData] = useState<EventType[]>([]);
   const { nodeSelectedId } = globalStore();
   const [spouseId, setSpouseId] = useState<number | undefined>(undefined);
   const [spouseData, setSpouseData] = useState<PeopleData | null>(null);
+  const [selectedEventId, setSelectedEventId] = useState<number>(0);
 
   // Fetch the event data
   useEffect(() => {
@@ -56,6 +63,11 @@ const AddTree = () => {
     fetchSpouse();
   }, [spouseId]);
 
+  const handleEditClick = (eventId: number) => {
+    setEditEventModal(true);
+    setSelectedEventId(eventId);
+  };
+
   return (
     <Fragment>
       <div className="birth-container">
@@ -84,17 +96,23 @@ const AddTree = () => {
               )} */}
               {/* i wrote the below line of code */}
               {event?.type === "marriage" && (
-                <span className="block text-birthtext text-6">{`To ${spouseData?.firstName} ${spouseData?.lastName}`}</span>
+                <span className="block text-birthtext text-6">
+                  {`To ${spouseData?.firstName} ${spouseData?.lastName}`}{" "}
+                  {`${event?.id}`}
+                </span>
               )}
             </div>
             <div></div>
-            <div className="text-7 pt-1">
+            <div
+              className="text-7 pt-1"
+              onClick={() => handleEditClick(event?.id)}
+            >
               <LuPencil />
             </div>
           </div>
         ))}
       </div>
-      <div className="inline-block pb-2">
+      <div className="inline-block pb-2 bg-red-300">
         <button
           onClick={() => setAddEventeModal(true)}
           className="flex items-center border border-birthborder rounded-sm bg-white text-7 py-1 px-1 font-medium w-full"
@@ -105,6 +123,9 @@ const AddTree = () => {
           Add life event
         </button>
       </div>
+      {editEventModal && selectedEventId !== 0 && (
+        <EditEventModal eventId={selectedEventId} />
+      )}
       {addEventModal && <AddEventModal />}
     </Fragment>
   );

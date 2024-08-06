@@ -13,7 +13,6 @@ import { lifeEventData } from "../jsonData";
 import { globalStore } from "@/stores/global-store";
 import axios from "axios";
 import { peopleStore } from "@/stores/people-store";
-
 import { BASE_URL } from "../../../config";
 import { Router } from "next/router";
 
@@ -28,7 +27,11 @@ const optionsGender = [
   { label: "Transgender", value: "transgender" },
 ];
 
-const AddEventModal: FC = () => {
+type EditEventModalProps = {
+  eventId: number;
+};
+
+const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
   const [values, setValues] = useState({
     firstNameSpouse: "",
     secondNameSpouse: "",
@@ -37,13 +40,76 @@ const AddEventModal: FC = () => {
   });
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [selectedGender, setSelectedGender] = useState<any>(null);
-  const { addEventModal, setAddEventeModal } = globalStore();
+  const { editEventModal, setEditEventModal } = globalStore();
   const { push } = useRouter();
   const [startDate, setStartDate] = useState<Date>(new Date());
   const { newPersonId, setNewPersonId, selectedPersonId } = globalStore();
 
+  useEffect(() => {
+    const fetchEventData = async () => {
+      try {
+        const response = await axios.get(`/api/events/edit/${eventId}`);
+        const eventData = response.data;
+        setValues({
+          firstNameSpouse: eventData.marriage?.firstName || "",
+          secondNameSpouse: eventData.marriage?.lastName || "",
+          marriagePlace: eventData.location || "",
+          gender: eventData.marriage?.gender || "",
+        });
+        setSelectedEvent({ label: eventData.type, value: eventData.type });
+        setSelectedGender({
+          label: eventData.marriage?.gender,
+          value: eventData.marriage?.gender,
+        });
+        const fetchedDate = new Date(eventData.eventDate);
+        if (!isNaN(fetchedDate.getTime())) {
+          setStartDate(fetchedDate);
+        } else {
+          console.error("Invalid date fetched:", eventData.eventDate);
+          setStartDate(new Date()); // Fallback to current date or handle as needed
+        }
+        // setStartDate(new Date(eventData.eventDate));
+      } catch (error) {
+        console.log("Error fetching event data:", error);
+      }
+    };
+
+    fetchEventData();
+  }, [eventId]);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const updatedEventData = {
+      id: eventId,
+      type: selectedEvent?.value,
+      eventDate: startDate.toISOString(),
+      location: values.marriagePlace,
+      personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
+      marriage:
+        selectedEvent?.value === "marriage"
+          ? {
+              firstName: values.firstNameSpouse,
+              lastName: values.secondNameSpouse,
+              gender: selectedGender?.value,
+            }
+          : null,
+    };
+
+    try {
+      const response = await axios.patch(
+        `/api/events/${eventId}`,
+        updatedEventData
+      );
+      console.log("Event updated successfully:", response.data);
+      setEditEventModal(false);
+    } catch (error) {
+      console.log("Error updating event:", error);
+    }
+  };
+
   const eventData = {
-    id: Math.floor(Math.random() * (100000000 - 999999) + 999999),
+    id: eventId,
     type: selectedEvent?.value,
     eventDate: startDate.toISOString(),
     location: values.marriagePlace,
@@ -58,17 +124,9 @@ const AddEventModal: FC = () => {
         : null,
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      const response = await axios.post("/api/events", eventData);
-      console.log("Event added successfully:", response.data);
-      setAddEventeModal(false);
-    } catch (error) {
-      console.log("Error adding event:", error);
-    }
-  };
+  console.log(values?.firstNameSpouse);
+  console.log(values?.secondNameSpouse);
+  // console.log(values?.secondNameSpouse);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -82,17 +140,17 @@ const AddEventModal: FC = () => {
     <Fragment>
       <ReactModal
         className="font-pathway mobile:w-[380px] w-72 m-auto md:h-[calc(100vh-237px)] h-[calc(100vh-64px)] overflow-auto z-50 absolute md:top-[237px] top-16 border-l border-[#E2E8F0] right-[0%] bg-white p-0 opacity-100 focus:outline-none overflow-y-auto"
-        isOpen={addEventModal}
+        isOpen={editEventModal}
         onAfterOpen={() => (document.body.style.overflow = "hidden")}
         onAfterClose={() => (document.body.style.overflow = "unset")}
       >
         <div className="p-5 border-b border-[#E2E8F0] flex items-center justify-between gap-2">
           <h2 className="text-lg text-black text-opacity-80 font-semibold">
-            Edit life event
+            Edit life event {eventId}
           </h2>
           <div
             className="cursor-pointer"
-            onClick={() => setAddEventeModal(false)}
+            onClick={() => setEditEventModal(false)}
           >
             <RxCross2 className="w-5 h-5" />
           </div>
@@ -178,14 +236,13 @@ const AddEventModal: FC = () => {
             <button
               type="button"
               className="border border-[#E2E8F0] text-sm font-medium text-black text-opacity-75 py-2 w-20 rounded-md"
-              onClick={() => setAddEventeModal(false)}
+              onClick={() => setEditEventModal(false)}
             >
               Cancel
             </button>
             <button
               type="submit"
               className="bg-black border border-[#E2E8F0] text-sm font-medium text-white py-2 w-20 rounded-md"
-              onClick={() => push("/people-detail")}
             >
               Save
             </button>
