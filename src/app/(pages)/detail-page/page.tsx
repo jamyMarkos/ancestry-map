@@ -9,6 +9,7 @@ import "@xyflow/react/dist/style.css";
 import { FaPlus } from "react-icons/fa";
 import { sortEventsByDate } from "@/utils/sortEvents";
 import { EventType } from "@/components/SavedDataSection/FamilyDetails";
+
 export default function EventDetail() {
   const { nodeSelectedId } = globalStore();
   const [eventsData, setEventsData] = useState<EventType[]>([]);

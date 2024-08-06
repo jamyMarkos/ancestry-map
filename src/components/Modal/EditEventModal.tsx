@@ -88,7 +88,7 @@ const AddEventModal: FC = () => {
       >
         <div className="p-5 border-b border-[#E2E8F0] flex items-center justify-between gap-2">
           <h2 className="text-lg text-black text-opacity-80 font-semibold">
-            Add life event
+            Edit life event
           </h2>
           <div
             className="cursor-pointer"

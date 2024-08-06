@@ -337,5 +337,17 @@
     "gender": "male",
     "isAlive": true,
     "parents": []
+  },
+  {
+    "id": 9008621,
+    "isUser": false,
+    "firstName": "Sami",
+    "lastName": "Doe",
+    "birthPlace": "New York, USA",
+    "countryCode": "US",
+    "dob": "1998-12-31 21:00:00",
+    "gender": "male",
+    "isAlive": true,
+    "parents": []
   }
 ]

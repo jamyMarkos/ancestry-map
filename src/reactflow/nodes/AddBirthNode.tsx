@@ -11,9 +11,6 @@ function AddBirthNode() {
   const { selectedPersonId, setSelectedPersonId, nodeSelectedId } =
     globalStore();
 
-  console.log("i'm in the add birth node", nodeSelectedId);
-  console.log("i'm in the add birth node", selectedPersonId);
-
   return (
     <Fragment>
       <div className="flex justify-between border border-birthborder rounded bg-white w-32 birth-line px-2 py-1.5">
