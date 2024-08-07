@@ -19,7 +19,12 @@ const DetailPeople = ({
   countryCode,
 }: DetailPeopleProps) => {
   const { peopleDetailModal, setPeopleDetailModal } = globalStore();
-  const { selectedPersonId, setSelectedPersonId } = globalStore();
+  const {
+    selectedPersonId,
+    setSelectedPersonId,
+    nodeSelectedId,
+    setNodeSelectedId,
+  } = globalStore();
 
   useEffect(() => {
     const fetchFlag = async () => {
@@ -46,6 +51,7 @@ const DetailPeople = ({
   const handleNodeClick = () => {
     setPeopleDetailModal(!peopleDetailModal);
     setSelectedPersonId(personId as number);
+    setNodeSelectedId(personId as number);
   };
 
   return (

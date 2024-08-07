@@ -39,22 +39,28 @@ const PersonDetail = () => {
     setNewPersonId,
     setAddEventeModal,
     addEventModal,
+    nodeSelectedId,
+    setNodeSelectedId,
   } = globalStore();
   const { people } = useNodeStore();
   const [error, setError] = useState(false);
   const [peopleName, setPeopleName] = useState("");
   const [selectedPersonData, setSelectedPersonData] = useState(null);
   const [eventsData, setEventsData] = useState<Event[] | null>(null);
+  const [isFetching, setIsFetching] = useState(false);
 
   // Fetch the event data
   useEffect(() => {
     const fetchEventData = async () => {
+      setIsFetching(true);
       try {
         const response = await axios.get(`/api/events/${selectedPersonId}`);
         const sortedEvents = sortEventsByDate(response.data.events);
         setEventsData(sortedEvents);
       } catch (err) {
         console.log("Error:", err);
+      } finally {
+        setIsFetching(false);
       }
     };
     fetchEventData();
@@ -66,18 +72,18 @@ const PersonDetail = () => {
     const selectedPerson = people.find(
       (person) => String(person.id) === String(selectedPersonId)
     );
-    // setSelectedPersonData(selectedPerson);
     setPeopleName(`${selectedPerson?.firstName} ${selectedPerson?.lastName}`);
   }, [selectedPersonId]);
 
   const addEventHandler = () => {
     setNewPersonId(selectedPersonId as number);
-
     setPeopleDetailModal(!peopleDetailModal);
     // setAddEventeModal(!addEventModal);
     router.push(`/people-detail`);
+  };
 
-    console.log("newPersonId", newPersonId, addEventModal);
+  const handleCloseModal = () => {
+    setPeopleDetailModal(!peopleDetailModal);
   };
 
   return (
@@ -86,10 +92,7 @@ const PersonDetail = () => {
         <h2 className="text-lg text-black text-opacity-80 font-semibold">
           {peopleName}
         </h2>
-        <div
-          onClick={() => setPeopleDetailModal(!peopleDetailModal)}
-          className="cursor-pointer"
-        >
+        <div onClick={handleCloseModal} className="cursor-pointer">
           <RxCross2 className="w-5 h-5" />
         </div>
       </div>
@@ -115,7 +118,15 @@ const PersonDetail = () => {
               </div>
             ))
           ) : (
-            <p>No events set!</p>
+            <p>
+              {isFetching ? (
+                <div className="w-full flex items-center justify-center">
+                  <img src="/images/loadingAnimation.svg" alt="Loading..." />
+                </div>
+              ) : (
+                "No events set for a person!"
+              )}
+            </p>
           )}
         </div>
       </div>

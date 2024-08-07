@@ -10,6 +10,7 @@ function AddParentNode(props: any) {
 
   const handleAddPeopleClick = () => {
     setChildId(props.data.childId);
+    console.log("data", props.data, props.data.childId);
     router.push("/add-People");
     setAddPeopleModal(!addPeopleModal);
   };
@@ -23,11 +24,13 @@ function AddParentNode(props: any) {
               onClick={handleAddPeopleClick}
               title={props.data.title}
               childId={props.data.childId}
+              leftOrRight={0}
             />
             <AddPeople
-              onClick={() => router.push("/add-People")}
+              onClick={handleAddPeopleClick}
               title={props.data.title}
               childId={props.data.childId}
+              leftOrRight={1}
             />
           </div>
         </div>

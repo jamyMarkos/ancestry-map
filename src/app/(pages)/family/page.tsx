@@ -14,10 +14,10 @@ import {
 import dagre from "dagre";
 import { createNodesAndEdges } from "@/reactflow/flowData/nodes-edges-tree";
 import "@xyflow/react/dist/style.css";
-import AddParentNode from "@/reactflow/nodes/AddPrentNode";
+import AddParentNode from "@/reactflow/nodes/AddParentNode";
 import SubNodeParent from "@/reactflow/nodes/SubNodeParent";
 import AddBirthNode from "@/reactflow/nodes/AddBirthNode";
-import BirthNode from "@/reactflow/nodes/BithNode";
+import BirthNode from "@/reactflow/nodes/BirthNode";
 import useNodeStore from "@/stores/node-store";
 
 const dagreGraph = new dagre.graphlib.Graph();

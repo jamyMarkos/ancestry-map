@@ -13,7 +13,6 @@ import { lifeEventData } from "../jsonData";
 import { globalStore } from "@/stores/global-store";
 import axios from "axios";
 import { peopleStore } from "@/stores/people-store";
-
 import { BASE_URL } from "../../../config";
 import { Router } from "next/router";
 
@@ -28,76 +27,177 @@ const optionsGender = [
   { label: "Transgender", value: "transgender" },
 ];
 
-const AddEventModal: FC = () => {
-  const [values, setValues] = useState({
-    firstNameSpouse: "",
-    secondNameSpouse: "",
-    marriagePlace: "",
-    gender: "",
-  });
+type EditEventModalProps = {
+  eventId: number;
+};
+
+const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
+  const [firstNameSpouse, setFirstNameSpouse] = useState<any>(null);
+  const [secondNameSpouse, setSecondNameSpouse] = useState<any>(null);
+  const [marriagePlace, setMarriagePlace] = useState<any>(null);
+  const [gender, setGender] = useState<any>(null);
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [selectedGender, setSelectedGender] = useState<any>(null);
-  const { addEventModal, setAddEventeModal } = globalStore();
+  const { editEventModal, setEditEventModal } = globalStore();
   const { push } = useRouter();
   const [startDate, setStartDate] = useState<Date>(new Date());
   const { newPersonId, setNewPersonId, selectedPersonId } = globalStore();
+  const [event, setNewEvent] = useState<any>(null);
 
-  const eventData = {
-    id: Math.floor(Math.random() * (100000000 - 999999) + 999999),
-    userId: "user_3gTTZQ6YXa",
-    type: selectedEvent?.value,
-    eventDate: startDate.toISOString(),
-    details: null,
-    marriageId: null,
-    location: values.marriagePlace,
-    personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
-    marriage:
-      selectedEvent?.value === "marriage"
-        ? {
-            firstName: values.firstNameSpouse,
-            lastName: values.secondNameSpouse,
-            gender: selectedGender?.value,
-          }
-        : null,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  };
+  useEffect(() => {
+    const fetchEventData = async () => {
+      try {
+        const response = await axios.get(`/api/events/edit/${eventId}`);
+        const eventData = response.data?.events[0];
+        setNewEvent(response?.data?.events[0]);
+        setFirstNameSpouse(eventData.marriage?.people[0]?.firstName || "");
+        setSecondNameSpouse(eventData.marriage?.people[0]?.lastName || "");
+        setMarriagePlace(eventData?.location || "");
+        setGender(eventData.marriage?.gender || "");
+        setSelectedEvent({ label: eventData.type, value: eventData.type });
+        setSelectedGender({
+          label: eventData.marriage?.gender,
+          value: eventData.marriage?.gender,
+        });
+        const fetchedDate = new Date(eventData.eventDate);
+        if (!isNaN(fetchedDate.getTime())) {
+          setStartDate(fetchedDate);
+        } else {
+          console.error("Invalid date fetched:", eventData.eventDate);
+          setStartDate(new Date()); // Fallback to current date or handle as needed
+        }
+      } catch (error) {
+        console.log("Error fetching event data:", error);
+      }
+    };
+
+    fetchEventData();
+  }, [eventId]);
+
+  console.log(event);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // const updatedEventData = {
+    //   id: eventId,
+    //   type: selectedEvent?.value,
+    //   eventDate: startDate.toISOString(),
+    //   location: marriagePlace,
+    //   personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
+    //   marriage:
+    //     selectedEvent?.value === "marriage"
+    //       ? {
+    //           id: Math.floor(Math.random() * (100000000 - 999999) + 999999),
+    //           personId: selectedPersonId
+    //             ? Number(selectedPersonId)
+    //             : newPersonId,
+
+    //           firstName: firstNameSpouse,
+    //           lastName: secondNameSpouse,
+    //           gender: selectedGender?.value,
+    //         }
+    //       : null,
+    // };
+
+    const updatedEventData = {
+      id: eventId,
+      userId: "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx", // Assuming you have the userId available
+      type: selectedEvent?.value,
+      eventDate: startDate.toISOString() || null, // Ensure this is null if not set
+      location: marriagePlace || null, // Ensure this is null if not set
+      details: null, // Set this if you have details to include
+      marriageId: Math.floor(Math.random() * (100000000 - 999999) + 999999), // Random ID for marriage
+      personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
+      createdAt: new Date().toISOString(), // Set the current timestamp
+      updatedAt: new Date().toISOString(), // Set the current timestamp
+      marriage:
+        selectedEvent?.value === "marriage"
+          ? {
+              id: Math.floor(Math.random() * (100000000 - 999999) + 999999), // Random ID for marriage
+              personId: selectedPersonId
+                ? Number(selectedPersonId)
+                : newPersonId,
+              spouseId: null, // You can set this if you have a spouse ID
+              status: "married", // Assuming the status is always "married" for marriage events
+              people: [
+                {
+                  id: selectedPersonId ? Number(selectedPersonId) : newPersonId, // Assuming this is the ID of the spouse
+                  firstName: firstNameSpouse,
+                  lastName: secondNameSpouse,
+                },
+              ],
+            }
+          : null,
+    };
+
     try {
-      const response = await axios.post("/api/events", eventData);
-      console.log("Event added successfully:", response.data);
-      setAddEventeModal(false);
+      const response = await axios.patch(
+        `/api/events/edit/${eventId}`,
+        updatedEventData
+      );
+      console.log("Event updated successfully:", response.data);
+      setEditEventModal(false);
     } catch (error) {
-      console.log("Error adding event:", error);
+      console.log("Error updating event:", error);
     }
   };
 
+  const eventData = {
+    id: eventId,
+    type: selectedEvent?.value,
+    eventDate: startDate.toISOString(),
+    location: marriagePlace,
+    personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
+    marriage:
+      selectedEvent?.value === "marriage"
+        ? {
+            firstName: firstNameSpouse,
+            lastName: secondNameSpouse,
+            gender: selectedGender?.value,
+          }
+        : null,
+  };
+
+  console.log("in the event detail modal", firstNameSpouse);
+  console.log("in the event detail modal", secondNameSpouse);
+  // console.log(values?.secondNameSpouse);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
+    switch (name) {
+      case "firstNameSpouse":
+        setFirstNameSpouse(value);
+        break;
+      case "secondNameSpouse":
+        setSecondNameSpouse(value);
+        break;
+      case "marriagePlace":
+        setMarriagePlace(value);
+        break;
+      case "gender":
+        setGender(value);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
     <Fragment>
       <ReactModal
         className="font-pathway mobile:w-[380px] w-72 m-auto md:h-[calc(100vh-237px)] h-[calc(100vh-64px)] overflow-auto z-50 absolute md:top-[237px] top-16 border-l border-[#E2E8F0] right-[0%] bg-white p-0 opacity-100 focus:outline-none overflow-y-auto"
-        isOpen={addEventModal}
+        isOpen={editEventModal}
         onAfterOpen={() => (document.body.style.overflow = "hidden")}
         onAfterClose={() => (document.body.style.overflow = "unset")}
       >
         <div className="p-5 border-b border-[#E2E8F0] flex items-center justify-between gap-2">
           <h2 className="text-lg text-black text-opacity-80 font-semibold">
-            Add life event
+            Edit life event {eventId}
           </h2>
           <div
             className="cursor-pointer"
-            onClick={() => setAddEventeModal(false)}
+            onClick={() => setEditEventModal(false)}
           >
             <RxCross2 className="w-5 h-5" />
           </div>
@@ -122,7 +222,7 @@ const AddEventModal: FC = () => {
                 labelText="First name of spouse"
                 resStyle="h-11"
                 onChange={handleInputChange}
-                value={values.firstNameSpouse}
+                value={firstNameSpouse}
               />
               <p className="text-[#C0C2D4] text-xs font-medium pt-2">
                 As it appears on birth certificate.
@@ -135,7 +235,7 @@ const AddEventModal: FC = () => {
                 id="secondNameSpouse"
                 labelText="Second name of spouse"
                 onChange={handleInputChange}
-                value={values.secondNameSpouse}
+                value={secondNameSpouse}
               />
               <p className="text-[#C0C2D4] text-xs font-medium pt-2">
                 As it appears on birth certificate.
@@ -174,7 +274,7 @@ const AddEventModal: FC = () => {
                 labelText="Place of marriage"
                 resStyle="!pl-10"
                 onChange={handleInputChange}
-                value={values.marriagePlace}
+                value={marriagePlace}
               />
             </div>
           </div>
@@ -183,14 +283,13 @@ const AddEventModal: FC = () => {
             <button
               type="button"
               className="border border-[#E2E8F0] text-sm font-medium text-black text-opacity-75 py-2 w-20 rounded-md"
-              onClick={() => setAddEventeModal(false)}
+              onClick={() => setEditEventModal(false)}
             >
               Cancel
             </button>
             <button
               type="submit"
               className="bg-black border border-[#E2E8F0] text-sm font-medium text-white py-2 w-20 rounded-md"
-              onClick={() => push("/people-detail")}
             >
               Save
             </button>

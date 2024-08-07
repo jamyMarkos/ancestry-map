@@ -33,19 +33,19 @@
     "location": null,
     "details": null,
     "marriageId": 11,
-    "personId": null,
+    "personId": 13,
     "createdAt": "2024-07-17T12:29:27.371Z",
     "updatedAt": "2024-07-17T12:29:27.371Z",
     "marriage": {
       "id": 11,
-      "personId": 41,
-      "spouseId": 43,
+      "personId": 13,
+      "spouseId": 15,
       "status": "married",
       "people": [
         {
-          "id": 43,
-          "firstName": "Jane",
-          "lastName": "Doe"
+          "id": 15,
+          "firstName": "Mary",
+          "lastName": "Pritchett"
         }
       ]
     }

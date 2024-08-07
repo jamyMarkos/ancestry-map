@@ -7,7 +7,7 @@
     "dob": null,
     "deathDate": null,
     "birthPlace": null,
-    "countryCode": "IT",
+    "countryCode": "ET",
     "isUser": true,
     "isAlive": null,
     "isAdopted": false,
@@ -38,6 +38,7 @@
         }
       }
     ],
+
     "relatedEvents": []
   },
   {
@@ -48,7 +49,7 @@
     "dob": "1965-05-23T00:00:00.000Z",
     "deathDate": null,
     "birthPlace": "Milan, Italy",
-    "countryCode": "IT",
+    "countryCode": "US",
     "isUser": false,
     "isAlive": null,
     "isAdopted": false,
@@ -58,22 +59,7 @@
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:41:53.352Z",
     "updatedAt": "2024-07-30T13:41:53.352Z",
-    "parents": [
-      {
-        "parent": {
-          "id": 76411213,
-          "isUser": false,
-          "firstName": "Chelsea",
-          "lastName": "Doe",
-          "birthPlace": "New York, USA",
-          "countryCode": "US",
-          "dob": "1998-12-31 21:00:00",
-          "gender": "male",
-          "isAlive": true,
-          "parents": []
-        }
-      }
-    ],
+    "parents": [],
     "relatedEvents": [
       {
         "id": 15,
@@ -106,7 +92,7 @@
     "dob": "1995-05-23T00:00:00.000Z",
     "deathDate": null,
     "birthPlace": "New York, New York, United States of America",
-    "countryCode": "US",
+    "countryCode": "AF",
     "isUser": false,
     "isAlive": null,
     "isAdopted": false,
@@ -177,7 +163,7 @@
     "dob": null,
     "deathDate": null,
     "birthPlace": null,
-    "countryCode": "IT",
+    "countryCode": "TN",
     "isUser": false,
     "isAlive": null,
     "isAdopted": false,
@@ -211,279 +197,5 @@
         ]
       }
     ]
-  },
-  {
-    "id": 76411213,
-    "isUser": false,
-    "firstName": "Chelsea",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "male",
-    "isAlive": true,
-    "parents": [
-      {
-        "parent": {
-          "id": 22055676,
-          "isUser": false,
-          "firstName": "John",
-          "lastName": "Doe",
-          "birthPlace": "New York, USA",
-          "countryCode": "US",
-          "dob": "1998-12-31 21:00:00",
-          "gender": "male",
-          "isAlive": true,
-          "parents": []
-        }
-      }
-    ]
-  },
-  {
-    "id": 22055676,
-    "isUser": false,
-    "firstName": "John",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "male",
-    "isAlive": true,
-    "parents": [
-      {
-        "parent": {
-          "id": 61128772,
-          "isUser": false,
-          "firstName": "Father4444",
-          "lastName": "Doe",
-          "birthPlace": "New York, USA",
-          "countryCode": "US",
-          "dob": "1998-12-31 21:00:00",
-          "gender": "male",
-          "isAlive": true,
-          "parents": []
-        }
-      }
-    ]
-  },
-  {
-    "id": 61128772,
-    "isUser": false,
-    "firstName": "Father4444",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "male",
-    "isAlive": true,
-    "parents": [
-      {
-        "parent": {
-          "id": 22769487,
-          "isUser": false,
-          "firstName": "ccc",
-          "lastName": "Doe",
-          "birthPlace": "New York, USA",
-          "countryCode": "US",
-          "dob": "1998-12-31 21:00:00",
-          "gender": "male",
-          "isAlive": true,
-          "parents": []
-        }
-      }
-    ]
-  },
-  {
-    "id": 22769487,
-    "isUser": false,
-    "firstName": "ccc",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "male",
-    "isAlive": true,
-    "parents": [
-      {
-        "parent": {
-          "id": 75861169,
-          "isUser": false,
-          "firstName": "Varl",
-          "lastName": "Doekjh",
-          "birthPlace": "New York, USA",
-          "countryCode": "US",
-          "dob": "1998-12-31 21:00:00",
-          "gender": "male",
-          "isAlive": true,
-          "parents": []
-        }
-      }
-    ]
-  },
-  {
-    "id": 33667335,
-    "isUser": false,
-    "firstName": "child",
-    "lastName": "oneasdfasd",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "2024-07-27 21:00:00",
-    "gender": "female",
-    "isAlive": true,
-    "parents": [
-      {
-        "parent": {
-          "id": 12,
-          "firstName": "You",
-          "lastName": "",
-          "gender": null,
-          "dob": null,
-          "deathDate": null,
-          "birthPlace": null,
-          "countryCode": "IT",
-          "isUser": true,
-          "isAlive": null,
-          "isAdopted": false,
-          "hasChangedName": false,
-          "hasChangedGender": false,
-          "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-          "createdAt": "2024-07-30T13:36:20.797Z",
-          "updatedAt": "2024-07-30T13:36:20.797Z",
-          "parents": [
-            {
-              "parent": {
-                "id": 14,
-                "firstName": "Jay",
-                "lastName": "Pritchett",
-                "gender": "male",
-                "dob": "1995-05-23T00:00:00.000Z",
-                "deathDate": null,
-                "birthPlace": "New York, New York, United States of America",
-                "countryCode": "US",
-                "isUser": false,
-                "isAlive": null,
-                "isAdopted": false,
-                "hasChangedName": false,
-                "hasChangedGender": false,
-                "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-                "createdAt": "2024-07-30T13:41:53.849Z",
-                "updatedAt": "2024-07-30T13:41:53.849Z"
-              }
-            }
-          ],
-          "relatedEvents": []
-        }
-      }
-    ]
-  },
-  {
-    "id": 75861169,
-    "isUser": false,
-    "firstName": "Varl",
-    "lastName": "Doekjh",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "male",
-    "isAlive": true,
-    "parents": [
-      {
-        "parent": {
-          "id": 83093154,
-          "isUser": false,
-          "firstName": "DAddy yanke",
-          "lastName": "Doe",
-          "birthPlace": "New York, USA",
-          "countryCode": "US",
-          "dob": "1998-12-31 21:00:00",
-          "gender": "male",
-          "isAlive": true,
-          "parents": []
-        }
-      }
-    ]
-  },
-  {
-    "id": 6338952,
-    "isUser": false,
-    "firstName": "new",
-    "lastName": "Depp",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "2024-07-28 21:00:00",
-    "gender": "female",
-    "isAlive": true,
-    "parents": [
-      {
-        "parent": {
-          "id": 33667335,
-          "isUser": false,
-          "firstName": "child",
-          "lastName": "oneasdfasd",
-          "birthPlace": "New York, USA",
-          "countryCode": "US",
-          "dob": "2024-07-27 21:00:00",
-          "gender": "female",
-          "isAlive": true,
-          "parents": [
-            {
-              "parent": {
-                "id": 12,
-                "firstName": "You",
-                "lastName": "",
-                "gender": null,
-                "dob": null,
-                "deathDate": null,
-                "birthPlace": null,
-                "countryCode": "IT",
-                "isUser": true,
-                "isAlive": null,
-                "isAdopted": false,
-                "hasChangedName": false,
-                "hasChangedGender": false,
-                "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-                "createdAt": "2024-07-30T13:36:20.797Z",
-                "updatedAt": "2024-07-30T13:36:20.797Z",
-                "parents": [
-                  {
-                    "parent": {
-                      "id": 14,
-                      "firstName": "Jay",
-                      "lastName": "Pritchett",
-                      "gender": "male",
-                      "dob": "1995-05-23T00:00:00.000Z",
-                      "deathDate": null,
-                      "birthPlace": "New York, New York, United States of America",
-                      "countryCode": "US",
-                      "isUser": false,
-                      "isAlive": null,
-                      "isAdopted": false,
-                      "hasChangedName": false,
-                      "hasChangedGender": false,
-                      "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-                      "createdAt": "2024-07-30T13:41:53.849Z",
-                      "updatedAt": "2024-07-30T13:41:53.849Z"
-                    }
-                  }
-                ],
-                "relatedEvents": []
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-  {
-    "id": 83093154,
-    "isUser": false,
-    "firstName": "DAddy yanke",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "male",
-    "isAlive": true,
-    "parents": []
   }
 ]
