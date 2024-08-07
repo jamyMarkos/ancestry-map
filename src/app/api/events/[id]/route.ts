@@ -19,7 +19,6 @@ export async function GET(request: NextRequest, context: any) {
     const filePath = path.resolve(process.cwd(), "db/events.json");
     const fileData = await fs.readFile(filePath, "utf8");
     const eventsData: Event[] = JSON.parse(fileData);
-
     const personEvents = eventsData.filter(
       (event) => event.personId === personId
     );

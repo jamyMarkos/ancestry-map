@@ -44,8 +44,11 @@ const AddEventModal: FC = () => {
 
   const eventData = {
     id: Math.floor(Math.random() * (100000000 - 999999) + 999999),
+    userId: "user_3gTTZQ6YXa",
     type: selectedEvent?.value,
     eventDate: startDate.toISOString(),
+    details: null,
+    marriageId: null,
     location: values.marriagePlace,
     personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
     marriage:
@@ -56,6 +59,8 @@ const AddEventModal: FC = () => {
             gender: selectedGender?.value,
           }
         : null,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

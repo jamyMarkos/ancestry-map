@@ -12,6 +12,7 @@ interface States {
   parentId: number | null;
   selectedPersonId: number | null;
   nodeSelectedId: number | null;
+  leftOrRight: number;
 }
 
 interface Actions {
@@ -25,6 +26,7 @@ interface Actions {
   setNewPersonId: (id: number) => void;
   setSelectedPersonId: (id: number) => void;
   setNodeSelectedId: (data: number) => void;
+  setLeftOrRight: (id: number) => void;
 }
 
 export const globalStore = create<States & Actions>()(
@@ -41,6 +43,8 @@ export const globalStore = create<States & Actions>()(
         parentId: null,
         newPersonId: null,
         selectedPersonId: null,
+        leftOrRight: 0,
+        setLeftOrRight: (id: number) => set({ leftOrRight: id }),
         setChildId: (id: number) => set({ childId: id }),
         setParentId: (id: number) => set({ parentId: id }),
         setNewPersonId: (id: number) => set({ newPersonId: id }),

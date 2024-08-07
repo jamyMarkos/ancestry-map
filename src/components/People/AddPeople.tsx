@@ -6,8 +6,21 @@ interface AddPeopleProps {
   title: string;
   childId?: number;
   onClick?: () => void;
+  leftOrRight?: number;
 }
-const AddPeople = ({ title, childId, onClick }: AddPeopleProps) => {
+const AddPeople = ({
+  title,
+  childId,
+  onClick,
+  leftOrRight,
+}: AddPeopleProps) => {
+  const { setLeftOrRight } = globalStore();
+  const handleAddPeopleClick = () => {
+    if (leftOrRight) {
+      setLeftOrRight(leftOrRight);
+    }
+  };
+
   return (
     <div
       onClick={onClick}
@@ -16,7 +29,7 @@ const AddPeople = ({ title, childId, onClick }: AddPeopleProps) => {
       <span className="text-nodetx text-10 px-0.5">
         <MdAdd />
       </span>
-      <span className="text-nodetx text-8 text-nowrap ">{title}</span>
+      <span className="text-nodetx text-8 text-nowrap">{title}</span>
     </div>
   );
 };
