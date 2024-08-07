@@ -14,6 +14,13 @@ const AddPeople = ({
   onClick,
   leftOrRight,
 }: AddPeopleProps) => {
+  const { setLeftOrRight } = globalStore();
+  const handleAddPeopleClick = () => {
+    if (leftOrRight) {
+      setLeftOrRight(leftOrRight);
+    }
+  };
+
   return (
     <div
       onClick={onClick}

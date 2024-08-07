@@ -120,7 +120,13 @@ const PersonDetail = () => {
             ))
           ) : (
             <p>
-              {isFetching ? "Loading events..." : "No events set for a person!"}
+              {isFetching ? (
+                <div className="w-full flex items-center justify-center">
+                  <img src="/images/loadingAnimation.svg" alt="Loading..." />
+                </div>
+              ) : (
+                "No events set for a person!"
+              )}
             </p>
           )}
         </div>

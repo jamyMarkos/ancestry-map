@@ -87,44 +87,5 @@
     "createdAt": "2024-07-30T13:41:53.352Z",
     "updatedAt": "2024-07-30T13:41:53.352Z",
     "marriage": null
-  },
-  {
-    "id": 9339463,
-    "userId": null,
-    "personId": 20746560,
-    "type": "birth",
-    "eventDate": "1998-12-31 21:00:00",
-    "location": "New York, USA",
-    "details": null,
-    "marriageId": null,
-    "eventPlace": "New York, USA",
-    "createdAt": "2024-08-06T17:04:11.840Z",
-    "updatedAt": "2024-08-06T17:04:11.840Z"
-  },
-  {
-    "id": 25731336,
-    "userId": null,
-    "personId": 71755824,
-    "type": "birth",
-    "eventDate": "1998-12-31 21:00:00",
-    "location": "New York, USA",
-    "details": null,
-    "marriageId": null,
-    "eventPlace": "New York, USA",
-    "createdAt": "2024-08-06T17:05:42.646Z",
-    "updatedAt": "2024-08-06T17:05:42.646Z"
-  },
-  {
-    "id": 37802415,
-    "userId": null,
-    "personId": 38127780,
-    "type": "birth",
-    "eventDate": "1998-12-31 21:00:00",
-    "location": "New York, USA",
-    "details": null,
-    "marriageId": null,
-    "eventPlace": "New York, USA",
-    "createdAt": "2024-08-06T18:09:06.001Z",
-    "updatedAt": "2024-08-06T18:09:06.001Z"
   }
 ]

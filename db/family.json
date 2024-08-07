@@ -38,6 +38,7 @@
         }
       }
     ],
+
     "relatedEvents": []
   },
   {
@@ -58,26 +59,7 @@
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:41:53.352Z",
     "updatedAt": "2024-07-30T13:41:53.352Z",
-    "parents": [
-      {
-        "parent": {
-          "id": 71755824,
-          "isUser": false,
-          "firstName": "Father2",
-          "lastName": "Doe",
-          "birthPlace": "New York, USA",
-          "countryCode": "US",
-          "dob": "1998-12-31 21:00:00",
-          "gender": "male",
-          "isAlive": true,
-          "hasChangedName": false,
-          "hasChangedGender": false,
-          "parents": [],
-          "createdAt": "2024-08-06T17:05:42.646Z",
-          "updatedAt": "2024-08-06T17:05:42.646Z"
-        }
-      }
-    ],
+    "parents": [],
     "relatedEvents": [
       {
         "id": 15,
@@ -191,26 +173,7 @@
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:41:54.434Z",
     "updatedAt": "2024-07-30T13:41:54.434Z",
-    "parents": [
-      {
-        "parent": {
-          "id": 20746560,
-          "isUser": false,
-          "firstName": "Yirguuu",
-          "lastName": "Doe",
-          "birthPlace": "New York, USA",
-          "countryCode": "US",
-          "dob": "1998-12-31 21:00:00",
-          "gender": "male",
-          "isAlive": true,
-          "hasChangedName": false,
-          "hasChangedGender": false,
-          "parents": [],
-          "createdAt": "2024-08-06T17:04:11.840Z",
-          "updatedAt": "2024-08-06T17:04:11.840Z"
-        }
-      }
-    ],
+    "parents": [],
     "relatedEvents": [
       {
         "id": 17,
@@ -234,72 +197,5 @@
         ]
       }
     ]
-  },
-  {
-    "id": 20746560,
-    "isUser": false,
-    "firstName": "Yirguuu",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "male",
-    "isAlive": true,
-    "hasChangedName": false,
-    "hasChangedGender": false,
-    "parents": [
-      {
-        "parent": {
-          "id": 38127780,
-          "isUser": false,
-          "firstName": "3rd genz",
-          "lastName": "Doe",
-          "birthPlace": "New York, USA",
-          "countryCode": "US",
-          "dob": "1998-12-31 21:00:00",
-          "gender": "male",
-          "isAlive": true,
-          "hasChangedName": false,
-          "hasChangedGender": false,
-          "parents": [],
-          "createdAt": "2024-08-06T18:09:06.001Z",
-          "updatedAt": "2024-08-06T18:09:06.001Z"
-        }
-      }
-    ],
-    "createdAt": "2024-08-06T17:04:11.840Z",
-    "updatedAt": "2024-08-06T17:04:11.840Z"
-  },
-  {
-    "id": 71755824,
-    "isUser": false,
-    "firstName": "Father2",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "male",
-    "isAlive": true,
-    "hasChangedName": false,
-    "hasChangedGender": false,
-    "parents": [],
-    "createdAt": "2024-08-06T17:05:42.646Z",
-    "updatedAt": "2024-08-06T17:05:42.646Z"
-  },
-  {
-    "id": 38127780,
-    "isUser": false,
-    "firstName": "3rd genz",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "male",
-    "isAlive": true,
-    "hasChangedName": false,
-    "hasChangedGender": false,
-    "parents": [],
-    "createdAt": "2024-08-06T18:09:06.001Z",
-    "updatedAt": "2024-08-06T18:09:06.001Z"
   }
 ]

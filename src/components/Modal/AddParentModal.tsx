@@ -25,8 +25,13 @@ type AddParentModalProps = {
 };
 
 const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
-  const { addPeopleModal, setAddPeopleModal, newPersonId, setNewPersonId } =
-    globalStore();
+  const {
+    addPeopleModal,
+    setAddPeopleModal,
+    newPersonId,
+    setNewPersonId,
+    leftOrRight,
+  } = globalStore();
   const { peopleData, setPeopleData } = peopleStore();
   const router = useRouter();
 
@@ -97,7 +102,9 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
       dob: startDate
         ? startDate.toISOString().slice(0, 19).replace("T", " ")
         : null, // Format the date
-      gender: selectedGender ? selectedGender.value : null, // Get the selected gender value
+      gender: leftOrRight === 0 ? "female" : "male", // Get the selected gender value
+
+      // gender:  selectedGender ? selectedGender.value : null, // Get the selected gender value
 
       isAlive: true, // Assuming this is a static value
       hasChangedName: false, // Assuming this is a static value
