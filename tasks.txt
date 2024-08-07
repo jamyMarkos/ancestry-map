@@ -22,3 +22,13 @@ Remaining Tasks
 August 3
 1. Make the node-store to persist the data to localstorage and access it from there
 2. use your trial task approach to add people to the family Tree
+
+
+
+Edit Event Feature
+        Main Components
+            - AddBirthNode, FamilyDetails(look a like)
+
+        Plan
+            -  
+

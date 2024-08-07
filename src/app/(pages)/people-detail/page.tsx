@@ -1,6 +1,7 @@
 "use client";
 import PageHeader from "@/components/Header/DynamicHeader";
 import PeopleDetailFlow from "@/reactflow/peopleDetail";
+import { globalStore } from "@/stores/global-store";
 import { peopleStore } from "@/stores/people-store";
 import "@xyflow/react/dist/style.css";
 import { useRouter } from "next/navigation";
@@ -8,9 +9,8 @@ import { FaPlus } from "react-icons/fa";
 
 export default function PeopleDetail() {
   const { push } = useRouter();
-
   const { peopleData } = peopleStore();
-  console.log("peopleData", peopleData);
+
   const handleAddEvent = () => {
     console.log("Back Event clicked");
   };

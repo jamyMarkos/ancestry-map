@@ -8,6 +8,8 @@ import { LuPencil } from "react-icons/lu";
 function AddBirthNode() {
   const { addEventModal, setAddEventeModal } = globalStore();
   const { peopleData } = peopleStore();
+  const { selectedPersonId, setSelectedPersonId, nodeSelectedId } =
+    globalStore();
 
   return (
     <Fragment>
@@ -22,7 +24,7 @@ function AddBirthNode() {
         </div>
         <div className="block">
           <span className="block text-birthtext font-semibold text-8">
-            Birth
+            Birth Sukuna
           </span>
           <span className="block text-birthtext text-6">{`${peopleData?.firstName} ${peopleData?.lastName} (${peopleData?.gender})`}</span>
         </div>

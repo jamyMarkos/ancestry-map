@@ -21,10 +21,10 @@ import useEventStore from "@/stores/event-store";
 import { createNodesAndEdges } from "@/reactflow/flowData/nodes-edges-tree";
 
 import "@xyflow/react/dist/style.css";
-import AddParentNode from "./nodes/AddPrentNode";
+import AddParentNode from "./nodes/AddParentNode";
 import SubNodeParent from "./nodes/SubNodeParent";
 import AddBirthNode from "./nodes/AddBirthNode";
-import BirthNode from "./nodes/BithNode";
+import BirthNode from "./nodes/BirthNode";
 import AddTree from "./nodes/AddTree";
 import AddChildNode from "./nodes/AddChildNode";
 

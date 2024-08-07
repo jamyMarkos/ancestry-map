@@ -8,9 +8,7 @@
     "dob": null,
     "gender": null,
     "isAlive": true,
-    "parents": [
-      14
-    ],
+    "parents": [14],
     "spouses": []
   },
   {
@@ -39,10 +37,7 @@
     "dob": "1995-05-23T00:00:00.000Z",
     "gender": "male",
     "isAlive": true,
-    "parents": [
-      13,
-      15
-    ],
+    "parents": [13, 15],
     "spouses": []
   },
   {
