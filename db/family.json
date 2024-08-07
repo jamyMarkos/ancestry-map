@@ -38,7 +38,6 @@
         }
       }
     ],
-
     "relatedEvents": []
   },
   {
@@ -197,5 +196,65 @@
         ]
       }
     ]
+  },
+  {
+    "id": 66523180,
+    "isUser": false,
+    "firstName": "child",
+    "lastName": "one",
+    "birthPlace": "New York, USA",
+    "countryCode": "US",
+    "dob": "2024-07-28 21:00:00",
+    "gender": "female",
+    "isAlive": true,
+    "hasChangedName": false,
+    "hasChangedGender": false,
+    "parents": [
+      {
+        "parent": {
+          "id": 12,
+          "firstName": "You",
+          "lastName": "",
+          "gender": null,
+          "dob": null,
+          "deathDate": null,
+          "birthPlace": null,
+          "countryCode": "ET",
+          "isUser": true,
+          "isAlive": null,
+          "isAdopted": false,
+          "hasChangedName": false,
+          "hasChangedGender": false,
+          "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+          "createdAt": "2024-07-30T13:36:20.797Z",
+          "updatedAt": "2024-07-30T13:36:20.797Z",
+          "parents": [
+            {
+              "parent": {
+                "id": 14,
+                "firstName": "Jay",
+                "lastName": "Pritchett",
+                "gender": "male",
+                "dob": "1995-05-23T00:00:00.000Z",
+                "deathDate": null,
+                "birthPlace": "New York, New York, United States of America",
+                "countryCode": "US",
+                "isUser": false,
+                "isAlive": null,
+                "isAdopted": false,
+                "hasChangedName": false,
+                "hasChangedGender": false,
+                "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+                "createdAt": "2024-07-30T13:41:53.849Z",
+                "updatedAt": "2024-07-30T13:41:53.849Z"
+              }
+            }
+          ],
+          "relatedEvents": []
+        }
+      }
+    ],
+    "createdAt": "2024-08-07T08:05:01.482Z",
+    "updatedAt": "2024-08-07T08:05:01.482Z"
   }
 ]

@@ -15,39 +15,40 @@
   {
     "id": 52,
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-    "type": "marriage",
-    "eventDate": "1995-05-23T00:00:00.000Z",
-    "location": "Stockholm, Sweden",
-    "details": null,
-    "marriageId": 17,
-    "personId": 13,
-    "createdAt": "2024-07-30T13:41:53.352Z",
-    "updatedAt": "2024-07-30T13:41:53.352Z",
-    "marriage": {
-      "id": 17,
-      "type": "marriage",
-      "people": [
-        {
-          "id": 13
-        },
-        {
-          "id": 15
-        }
-      ]
-    }
-  },
-  {
-    "id": 16,
-    "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-    "type": "birth",
-    "eventDate": "1995-05-23T00:00:00.000Z",
-    "location": "New York, United States of America",
+    "type": "death",
+    "eventDate": null,
+    "location": null,
     "details": null,
     "marriageId": null,
     "personId": 41,
     "createdAt": "2024-07-19T08:26:07.553Z",
     "updatedAt": "2024-07-19T08:26:07.553Z",
     "marriage": null
+  },
+  {
+    "id": 56,
+    "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+    "type": "marriage",
+    "eventDate": "2024-07-19T08:26:07.553Z",
+    "location": "London, United Kingdom",
+    "details": null,
+    "marriageId": 11,
+    "personId": 13,
+    "createdAt": "2024-07-17T12:29:27.371Z",
+    "updatedAt": "2024-07-17T12:29:27.371Z",
+    "marriage": {
+      "id": 11,
+      "personId": 13,
+      "spouseId": 15,
+      "status": "married",
+      "people": [
+        {
+          "id": 15,
+          "firstName": "Mary",
+          "lastName": "Pritchett"
+        }
+      ]
+    }
   },
   {
     "id": 56,
@@ -75,17 +76,42 @@
     "updatedAt": "2024-07-30T13:41:54.434Z",
     "marriage": null
   },
+
   {
-    "id": 19,
+    "id": 65866012,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "birth",
+    "eventDate": "2024-07-28T21:00:00.000Z",
+    "location": "New York, USA",
+    "personId": 66523180,
+    "marriage": null,
+    "createdAt": "2024-08-07T08:05:01.482Z",
+    "updatedAt": "2024-08-07T08:05:01.482Z"
+  },
+  {
+    "id": 13487,
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-    "type": "marriage",
-    "eventDate": "2095-07-30T13:41:53.352Z",
-    "location": "Stockholm, Sweden",
+    "type": "birth",
+    "eventDate": "2000-05-23T00:00:00.000Z",
+    "location": "Dublin, Ireland",
     "details": null,
     "marriageId": null,
-    "personId": 15,
-    "createdAt": "2024-07-30T13:41:53.352Z",
-    "updatedAt": "2024-07-30T13:41:53.352Z",
+    "personId": 14,
+    "createdAt": "2024-07-30T13:41:54.434Z",
+    "updatedAt": "2024-07-30T13:41:54.434Z",
+    "marriage": null
+  },
+  {
+    "id": 51,
+    "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+    "type": "birth",
+    "eventDate": "1998-12-31T21:00:00.000Z",
+    "location": "Dallas, United States of America",
+    "details": null,
+    "marriageId": null,
+    "personId": 13,
+    "createdAt": "2024-07-19T08:26:06.866Z",
+    "updatedAt": "2024-07-19T08:26:06.866Z",
     "marriage": null
   }
 ]

@@ -79,7 +79,7 @@ const PersonDetail = () => {
     setNewPersonId(selectedPersonId as number);
     setPeopleDetailModal(!peopleDetailModal);
     // setAddEventeModal(!addEventModal);
-    router.push(`/people-detail`);
+    router.push(`/detail-page`);
   };
 
   const handleCloseModal = () => {
