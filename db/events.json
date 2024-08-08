@@ -7,7 +7,7 @@
     "location": "New York, New York, United States of America",
     "details": null,
     "marriageId": null,
-    "personId": 41,
+    "personId": 12,
     "createdAt": "2024-07-19T08:26:06.866Z",
     "updatedAt": "2024-07-19T08:26:06.866Z",
     "marriage": null
@@ -29,29 +29,80 @@
     "id": 56,
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "type": "marriage",
-    "eventDate": "2024-07-19T08:26:07.553Z",
-    "location": "London, United Kingdom",
+    "eventDate": null,
+    "location": null,
     "details": null,
     "marriageId": 11,
-    "personId": 13,
+    "personId": null,
     "createdAt": "2024-07-17T12:29:27.371Z",
     "updatedAt": "2024-07-17T12:29:27.371Z",
     "marriage": {
       "id": 11,
-      "personId": 13,
-      "spouseId": 15,
+      "personId": 41,
+      "spouseId": 43,
       "status": "married",
       "people": [
         {
-          "id": 15,
-          "firstName": "Mary",
-          "lastName": "Pritchett"
+          "id": 43,
+          "firstName": "Jane",
+          "lastName": "Doe"
         }
       ]
     }
   },
   {
-    "id": 56,
+    "id": 57,
+    "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+    "type": "marriage",
+    "eventDate": "2024-06-30T08:26:07.000Z",
+    "location": "London, United Kingdom",
+    "details": null,
+    "marriageId": 48706041,
+    "personId": 13,
+    "createdAt": "2024-08-08T07:39:25.290Z",
+    "updatedAt": "2024-08-08T07:39:25.290Z",
+    "marriage": {
+      "id": 15295482,
+      "personId": 13,
+      "spouseId": null,
+      "status": "married",
+      "people": [
+        {
+          "id": 15,
+          "firstName": "Mary",
+          "lastName": "Pritchettee"
+        }
+      ]
+    }
+  },
+  {
+    "id": 1525830,
+    "userId": null,
+    "personId": 13,
+    "type": "birth",
+    "eventDate": "1998-12-31 21:00:00",
+    "location": "New York, USA",
+    "details": null,
+    "marriageId": null,
+    "eventPlace": "New York, USA",
+    "createdAt": "2024-08-07T08:37:22.359Z",
+    "updatedAt": "2024-08-07T08:37:22.359Z"
+  },
+  {
+    "id": 14285452,
+    "userId": null,
+    "personId": 14,
+    "type": "birth",
+    "eventDate": "1998-12-31 21:00:00",
+    "location": "New York, USA",
+    "details": null,
+    "marriageId": null,
+    "eventPlace": "New York, USA",
+    "createdAt": "2024-08-07T08:37:56.619Z",
+    "updatedAt": "2024-08-07T08:37:56.619Z"
+  },
+  {
+    "id": 1320795420,
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "type": "birth",
     "eventDate": "1971-05-23T00:00:00.000Z",
@@ -64,144 +115,67 @@
     "marriage": null
   },
   {
-    "id": 18,
-    "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-    "type": "birth",
-    "eventDate": "2000-05-23T00:00:00.000Z",
-    "location": "Dublin, Ireland",
-    "details": null,
-    "marriageId": null,
-    "personId": 12,
-    "createdAt": "2024-07-30T13:41:54.434Z",
-    "updatedAt": "2024-07-30T13:41:54.434Z",
-    "marriage": null
-  },
-  {
-    "id": 65866012,
+    "id": 44007655,
     "userId": "user_3gTTZQ6YXa",
-    "type": "birth",
-    "eventDate": "2024-07-28T21:00:00.000Z",
-    "location": "New York, USA",
-    "personId": 66523180,
-    "marriage": null,
-    "createdAt": "2024-08-07T08:05:01.482Z",
-    "updatedAt": "2024-08-07T08:05:01.482Z"
-  },
-  {
-    "id": 13487,
-    "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-    "type": "birth",
-    "eventDate": "2000-05-23T00:00:00.000Z",
-    "location": "Dublin, Ireland",
+    "type": "marriage",
+    "eventDate": "2024-08-08T04:03:13.239Z",
     "details": null,
     "marriageId": null,
-    "personId": 14,
-    "createdAt": "2024-07-30T13:41:54.434Z",
-    "updatedAt": "2024-07-30T13:41:54.434Z",
-    "marriage": null
-  },
-  {
-    "id": 51,
-    "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-    "type": "birth",
-    "eventDate": "1998-12-31T21:00:00.000Z",
-    "location": "Dallas, United States of America",
-    "details": null,
-    "marriageId": null,
+    "location": "London, United Kingdom",
     "personId": 13,
-    "createdAt": "2024-07-19T08:26:06.866Z",
-    "updatedAt": "2024-07-19T08:26:06.866Z",
-    "marriage": null
+    "marriage": {
+      "id": 27932226,
+      "personId": 13,
+      "spouseId": null,
+      "status": "married",
+      "people": [
+        {
+          "id": 51039475,
+          "firstName": "Rachel",
+          "lastName": "Greene",
+          "gender": "female"
+        }
+      ]
+    },
+    "createdAt": "2024-08-08T04:03:28.759Z",
+    "updatedAt": "2024-08-08T04:03:28.759Z"
   },
   {
-    "id": 79414599,
+    "id": 43434760,
     "userId": null,
-    "personId": 94186059,
+    "personId": 12242715,
     "type": "birth",
     "eventDate": "1998-12-31 21:00:00",
     "location": "New York, USA",
     "details": null,
     "marriageId": null,
     "eventPlace": "New York, USA",
-    "createdAt": "2024-08-07T18:58:14.349Z",
-    "updatedAt": "2024-08-07T18:58:14.349Z"
+    "createdAt": "2024-08-08T06:41:31.031Z",
+    "updatedAt": "2024-08-08T06:41:31.031Z"
   },
   {
-    "id": 16571697,
-    "userId": null,
-    "personId": 21751905,
-    "type": "birth",
-    "eventDate": "1998-12-31 21:00:00",
-    "location": "New York, USA",
+    "id": 2338179,
+    "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+    "type": "marriage",
+    "eventDate": "2024-08-04T06:48:38.000Z",
     "details": null,
-    "marriageId": null,
-    "eventPlace": "New York, USA",
-    "createdAt": "2024-08-07T19:54:58.797Z",
-    "updatedAt": "2024-08-07T19:54:58.797Z"
-  },
-  {
-    "id": 65884925,
-    "userId": null,
-    "personId": 76167357,
-    "type": "birth",
-    "eventDate": "1998-12-31 21:00:00",
+    "marriageId": 21727775,
     "location": "New York, USA",
-    "details": null,
-    "marriageId": null,
-    "eventPlace": "New York, USA",
-    "createdAt": "2024-08-07T19:55:27.248Z",
-    "updatedAt": "2024-08-07T19:55:27.248Z"
-  },
-  {
-    "id": 51311049,
-    "userId": null,
-    "personId": 12663611,
-    "type": "birth",
-    "eventDate": "1998-12-31 21:00:00",
-    "location": "New York, USA",
-    "details": null,
-    "marriageId": null,
-    "eventPlace": "New York, USA",
-    "createdAt": "2024-08-07T19:56:24.595Z",
-    "updatedAt": "2024-08-07T19:56:24.595Z"
-  },
-  {
-    "id": 5791946,
-    "userId": null,
-    "personId": 53905138,
-    "type": "birth",
-    "eventDate": "1998-12-31 21:00:00",
-    "location": "New York, USA",
-    "details": null,
-    "marriageId": null,
-    "eventPlace": "New York, USA",
-    "createdAt": "2024-08-07T20:17:49.212Z",
-    "updatedAt": "2024-08-07T20:17:49.212Z"
-  },
-  {
-    "id": 79258714,
-    "userId": null,
-    "personId": 38389725,
-    "type": "birth",
-    "eventDate": "1998-12-31 21:00:00",
-    "location": "New York, USA",
-    "details": null,
-    "marriageId": null,
-    "eventPlace": "New York, USA",
-    "createdAt": "2024-08-07T20:18:50.917Z",
-    "updatedAt": "2024-08-07T20:18:50.917Z"
-  },
-  {
-    "id": 60193593,
-    "userId": null,
-    "personId": 9035031,
-    "type": "birth",
-    "eventDate": "1998-12-31 21:00:00",
-    "location": "New York, USA",
-    "details": null,
-    "marriageId": null,
-    "eventPlace": "New York, USA",
-    "createdAt": "2024-08-08T06:03:39.917Z",
-    "updatedAt": "2024-08-08T06:03:39.917Z"
+    "personId": 12,
+    "marriage": {
+      "id": 92391374,
+      "personId": 12,
+      "spouseId": null,
+      "status": "married",
+      "people": [
+        {
+          "id": 54794534,
+          "firstName": "Rachel",
+          "lastName": "Greeneee"
+        }
+      ]
+    },
+    "createdAt": "2024-08-08T07:09:47.929Z",
+    "updatedAt": "2024-08-08T07:09:47.929Z"
   }
 ]

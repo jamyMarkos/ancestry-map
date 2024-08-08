@@ -9,13 +9,8 @@ import { RxCross2 } from "react-icons/rx";
 import { TiLocationOutline } from "react-icons/ti";
 import Dropdown from "@/ui-kits/Dropdown";
 import Input from "@/ui-kits/Input";
-import { lifeEventData } from "../jsonData";
 import { globalStore } from "@/stores/global-store";
 import axios from "axios";
-import { peopleStore } from "@/stores/people-store";
-
-import { BASE_URL } from "../../../config";
-import { Router } from "next/router";
 
 const optionsEvent = [
   { label: "Marriage", value: "marriage" },
@@ -54,9 +49,18 @@ const AddEventModal: FC = () => {
     marriage:
       selectedEvent?.value === "marriage"
         ? {
-            firstName: values.firstNameSpouse,
-            lastName: values.secondNameSpouse,
-            gender: selectedGender?.value,
+            id: Math.floor(Math.random() * (100000000 - 999999) + 999999),
+            personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
+            spouseId: null,
+            status: "married",
+            people: [
+              {
+                id: Math.floor(Math.random() * (100000000 - 999999) + 999999),
+                firstName: values.firstNameSpouse,
+                lastName: values.secondNameSpouse,
+                gender: selectedGender?.value,
+              },
+            ],
           }
         : null,
     createdAt: new Date().toISOString(),
@@ -68,7 +72,6 @@ const AddEventModal: FC = () => {
 
     try {
       const response = await axios.post("/api/events", eventData);
-      console.log("Event added successfully:", response.data);
       setAddEventeModal(false);
     } catch (error) {
       console.log("Error adding event:", error);
@@ -190,7 +193,7 @@ const AddEventModal: FC = () => {
             <button
               type="submit"
               className="bg-black border border-[#E2E8F0] text-sm font-medium text-white py-2 w-20 rounded-md"
-              onClick={() => push("/people-detail")}
+              onClick={() => push("/detail-page")}
             >
               Save
             </button>

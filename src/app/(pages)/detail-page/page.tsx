@@ -20,7 +20,6 @@ export default function EventDetail() {
       try {
         const response = await axios.get(`/api/events/${nodeSelectedId}`);
         const sortedEvents = sortEventsByDate(response.data.events);
-        console.log("sortation of events", sortedEvents);
         setEventsData(sortedEvents);
       } catch (err) {
         console.log("Error:", err);
