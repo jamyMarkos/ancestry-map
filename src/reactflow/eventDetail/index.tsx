@@ -8,7 +8,6 @@ import {
   useEdgesState,
 } from "@xyflow/react";
 import dagre from "dagre";
-
 import "@xyflow/react/dist/style.css";
 import {
   EventTreeDetailEdge,
