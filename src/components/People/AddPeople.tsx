@@ -7,23 +7,29 @@ interface AddPeopleProps {
   childId?: number;
   onClick?: () => void;
   leftOrRight?: number;
+  spouseId?: number;
 }
 const AddPeople = ({
   title,
   childId,
   onClick,
   leftOrRight,
+  spouseId,
 }: AddPeopleProps) => {
   const { setLeftOrRight } = globalStore();
   const handleAddPeopleClick = () => {
-    if (leftOrRight) {
+    if (leftOrRight !== undefined) {
       setLeftOrRight(leftOrRight);
     }
+    console.log("leftOrRight", leftOrRight);
   };
 
   return (
     <div
-      onClick={onClick}
+      onClick={() => {
+        if (onClick) onClick();
+        handleAddPeopleClick();
+      }}
       className="flex items-center font-medium px-3 py-4 border-nodeborder border-r w-6/12"
     >
       <span className="text-nodetx text-10 px-0.5">

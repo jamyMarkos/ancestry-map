@@ -42,6 +42,7 @@ export interface FamilyMember {
   updatedAt: string;
   parents: Array<{ parent: Parent }>;
   relatedEvents: any[];
+  spouseId?: number | null;
 }
 
 export async function GET(request: NextRequest, response: NextResponse) {
