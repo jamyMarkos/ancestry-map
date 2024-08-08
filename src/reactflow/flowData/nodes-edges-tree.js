@@ -105,7 +105,7 @@ export const createNodesAndEdges = (data) => {
         addParentNode(
           `add-parent2-${person.spouseId}`,
           "addparent",
-          "Add parent 222",
+          "Add parent 2",
           baseX + horizontalOffset,
           baseY - verticalOffset,
           nodes,

@@ -58,26 +58,7 @@
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:41:53.352Z",
     "updatedAt": "2024-07-30T13:41:53.352Z",
-    "parents": [
-      {
-        "parent": {
-          "id": 94186059,
-          "isUser": false,
-          "firstName": "Johnson",
-          "lastName": "Doe",
-          "birthPlace": "New York, USA",
-          "countryCode": "US",
-          "dob": "1998-12-31 21:00:00",
-          "gender": "female",
-          "isAlive": true,
-          "hasChangedName": false,
-          "hasChangedGender": false,
-          "parents": [],
-          "createdAt": "2024-08-07T18:58:14.349Z",
-          "updatedAt": "2024-08-07T18:58:14.349Z"
-        }
-      }
-    ],
+    "parents": [],
     "relatedEvents": [
       {
         "id": 15,
@@ -154,6 +135,7 @@
           "isAlive": null,
           "isAdopted": false,
           "hasChangedName": false,
+
           "hasChangedGender": false,
           "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
           "createdAt": "2024-07-30T13:41:54.434Z",
@@ -191,26 +173,7 @@
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:41:54.434Z",
     "updatedAt": "2024-07-30T13:41:54.434Z",
-    "parents": [
-      {
-        "parent": {
-          "id": 21751905,
-          "isUser": false,
-          "firstName": "Momz",
-          "lastName": "Doe",
-          "birthPlace": "New York, USA",
-          "countryCode": "US",
-          "dob": "1998-12-31 21:00:00",
-          "gender": "female",
-          "isAlive": true,
-          "hasChangedName": false,
-          "hasChangedGender": false,
-          "parents": [],
-          "createdAt": "2024-08-07T19:54:58.797Z",
-          "updatedAt": "2024-08-07T19:54:58.797Z"
-        }
-      }
-    ],
+    "parents": [],
     "relatedEvents": [
       {
         "id": 17,

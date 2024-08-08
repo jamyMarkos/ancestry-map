@@ -177,5 +177,18 @@
     },
     "createdAt": "2024-08-08T07:09:47.929Z",
     "updatedAt": "2024-08-08T07:09:47.929Z"
+  },
+  {
+    "id": 9458879,
+    "userId": null,
+    "personId": 51376014,
+    "type": "birth",
+    "eventDate": "1998-12-31 21:00:00",
+    "location": "New York, USA",
+    "details": null,
+    "marriageId": null,
+    "eventPlace": "New York, USA",
+    "createdAt": "2024-08-08T08:54:35.131Z",
+    "updatedAt": "2024-08-08T08:54:35.131Z"
   }
 ]
