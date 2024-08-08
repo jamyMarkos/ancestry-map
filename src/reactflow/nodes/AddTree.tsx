@@ -8,7 +8,6 @@ import EditEventModal from "@/components/Modal/EditEventModal";
 import { globalStore } from "@/stores/global-store";
 import axios from "axios";
 import { EventType } from "@/components/SavedDataSection/FamilyDetails";
-import { PeopleData } from "@/stores/people-store";
 import { sortEventsByDate } from "@/utils/sortEvents";
 
 const AddTree = () => {
@@ -20,8 +19,6 @@ const AddTree = () => {
   } = globalStore();
   const [eventData, setEventData] = useState<EventType[]>([]);
   const { nodeSelectedId } = globalStore();
-  const [spouseId, setSpouseId] = useState<number | undefined>(undefined);
-  const [spouseData, setSpouseData] = useState<PeopleData | null>(null);
   const [selectedEventId, setSelectedEventId] = useState<number>(0);
 
   // Fetch the event data
@@ -40,42 +37,6 @@ const AddTree = () => {
     fetchSingleEvent();
   }, [nodeSelectedId]);
 
-  // useEffect(() => {
-  //   eventData.map((data) => {
-  //     if (data.type === "marriage") {
-  //       setSpouseId(data.marriage?.people[0]?.id || undefined);
-  //     }
-  //   });
-  // }, [eventData]);
-
-  useEffect(() => {
-    eventData.forEach((data) => {
-      if (
-        data.type === "marriage" &&
-        data.marriage &&
-        data.marriage.people &&
-        data.marriage.people.length > 0
-      ) {
-        setSpouseId(data.marriage.people[0].id);
-      }
-    });
-  }, [eventData]);
-
-  // Fetch the spouse of the selected person
-  useEffect(() => {
-    const fetchSpouse = async () => {
-      try {
-        const response = await axios.get(`/api/family/${spouseId}`);
-        setSpouseData(response.data?.result);
-        console.log("hey");
-        console.log("in the family details, the wife data || ", spouseData);
-      } catch (err) {
-        console.log("Error:", err);
-      }
-    };
-    fetchSpouse();
-  }, [spouseId]);
-
   const handleEditClick = (eventId: number) => {
     setEditEventModal(true);
     setSelectedEventId(eventId);
@@ -91,7 +52,7 @@ const AddTree = () => {
           >
             <div className="block py-1 px-2 left-content">
               <span className="block text-birthtext text-6">
-                {moment(event?.date).format("DD/MM/YYYY")}
+                {moment(event?.eventDate).format("DD/MM/YYYY")}
               </span>
               <span className="block text-birthtext text-6">
                 {event?.place}
@@ -104,14 +65,10 @@ const AddTree = () => {
               {event?.type === "Birth" && (
                 <span className="block text-birthtext text-6">{`${event?.firstName} ${event.lastName}`}</span>
               )}
-              {/* {event?.type === "marriage" && (
-                <span className="block text-birthtext text-6">{`To ${event?.marriage?.people?.firstName} ${event.marriage?.people?.lastName}`}</span>
-              )} */}
-              {/* i wrote the below line of code */}
               {event?.type === "marriage" && (
                 <span className="block text-birthtext text-6">
-                  {`To ${spouseData?.firstName} ${spouseData?.lastName}`}{" "}
-                  {`${event?.id}`}
+                  {`To ${event?.marriage?.people[0]?.firstName} ${event?.marriage?.people[0]?.lastName}`}{" "}
+                  {`${event?.marriage?.people[0]?.id}`}
                 </span>
               )}
             </div>
@@ -125,7 +82,7 @@ const AddTree = () => {
           </div>
         ))}
       </div>
-      <div className="inline-block pb-2 bg-red-300">
+      <div className="inline-block pb-2 ">
         <button
           onClick={() => setAddEventeModal(true)}
           className="flex items-center border border-birthborder rounded-sm bg-white text-7 py-1 px-1 font-medium w-full"

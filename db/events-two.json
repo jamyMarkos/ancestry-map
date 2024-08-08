@@ -172,5 +172,106 @@
     },
     "createdAt": "2024-08-07T08:46:37.246Z",
     "updatedAt": "2024-08-07T08:46:37.246Z"
+  },
+  {
+    "id": 52131980,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "marriage",
+    "eventDate": "2024-08-07T13:07:25.066Z",
+    "details": null,
+    "marriageId": null,
+    "location": "Hawassa",
+    "personId": 14,
+    "marriage": {
+      "firstName": "Rachel",
+      "lastName": "Greene",
+      "gender": "female"
+    },
+    "createdAt": "2024-08-07T13:07:38.187Z",
+    "updatedAt": "2024-08-07T13:07:38.187Z"
+  },
+  {
+    "id": 91750278,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "marriage",
+    "eventDate": "2024-08-07T13:18:14.563Z",
+    "details": null,
+    "marriageId": null,
+    "location": "Wolayta",
+    "personId": 14,
+    "marriage": {
+      "firstName": "Chelsea",
+      "lastName": "Pritchett",
+      "gender": "female"
+    },
+    "createdAt": "2024-08-07T13:18:25.681Z",
+    "updatedAt": "2024-08-07T13:18:25.681Z"
+  },
+  {
+    "id": 42975258,
+    "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+    "type": "marriage",
+    "eventDate": "2024-08-02T14:23:03.000Z",
+    "details": null,
+    "marriageId": 95411640,
+    "location": "Wolayta",
+    "personId": 14,
+    "marriage": {
+      "id": 37309553,
+      "personId": 14,
+      "spouseId": null,
+      "status": "married",
+      "people": [
+        {
+          "id": null,
+          "firstName": "barcaaaaaaaaaaaa",
+          "lastName": "Pritchett"
+        }
+      ]
+    },
+    "createdAt": "2024-08-07T14:23:16.196Z",
+    "updatedAt": "2024-08-07T14:23:16.196Z"
+  },
+  {
+    "id": 20192540,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "marriage",
+    "eventDate": "2024-08-07T13:27:16.768Z",
+    "details": null,
+    "marriageId": null,
+    "location": "Hawassa",
+    "personId": 14,
+    "marriage": {
+      "firstName": "jfljsflsj",
+      "lastName": "afdsaaafd",
+      "gender": "female"
+    },
+    "createdAt": "2024-08-07T13:27:29.866Z",
+    "updatedAt": "2024-08-07T13:27:29.866Z"
+  },
+  {
+    "id": 9985043,
+    "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+    "type": "marriage",
+    "eventDate": "2024-08-07T14:20:50.449Z",
+    "details": null,
+    "marriageId": 53528006,
+    "location": "Hawassa",
+    "personId": 14,
+    "marriage": {
+      "id": 12533687,
+      "personId": 14,
+      "spouseId": null,
+      "status": "married",
+      "people": [
+        {
+          "id": "",
+          "firstName": "Abebe ",
+          "lastName": "beso"
+        }
+      ]
+    },
+    "createdAt": "2024-08-07T14:22:51.106Z",
+    "updatedAt": "2024-08-07T14:22:51.106Z"
   }
 ]

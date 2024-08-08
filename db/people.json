@@ -8,9 +8,7 @@
     "dob": null,
     "gender": null,
     "isAlive": true,
-    "parents": [
-      14
-    ],
+    "parents": [14],
     "spouses": []
   },
   {
@@ -39,10 +37,7 @@
     "dob": "1995-05-23T00:00:00.000Z",
     "gender": "male",
     "isAlive": true,
-    "parents": [
-      13,
-      15
-    ],
+    "parents": [13, 15],
     "spouses": []
   },
   {
@@ -1377,5 +1372,53 @@
     "parents": [],
     "createdAt": "2024-08-07T08:05:01.482Z",
     "updatedAt": "2024-08-07T08:05:01.482Z"
+  },
+  {
+    "id": 54727269,
+    "isUser": false,
+    "firstName": "John",
+    "lastName": "Doe",
+    "birthPlace": "New York, USA",
+    "countryCode": "US",
+    "dob": "1998-12-31 21:00:00",
+    "gender": "female",
+    "isAlive": true,
+    "hasChangedName": false,
+    "hasChangedGender": false,
+    "parents": [],
+    "createdAt": "2024-08-07T08:37:22.359Z",
+    "updatedAt": "2024-08-07T08:37:22.359Z"
+  },
+  {
+    "id": 14924840,
+    "isUser": false,
+    "firstName": "Johnny",
+    "lastName": "Doe",
+    "birthPlace": "New York, USA",
+    "countryCode": "US",
+    "dob": "1998-12-31 21:00:00",
+    "gender": "female",
+    "isAlive": true,
+    "hasChangedName": false,
+    "hasChangedGender": false,
+    "parents": [],
+    "createdAt": "2024-08-07T08:37:56.619Z",
+    "updatedAt": "2024-08-07T08:37:56.619Z"
+  },
+  {
+    "id": 12242715,
+    "isUser": false,
+    "firstName": "Lomity",
+    "lastName": "Doe",
+    "birthPlace": "New York, USA",
+    "countryCode": "US",
+    "dob": "1998-12-31 21:00:00",
+    "gender": "female",
+    "isAlive": true,
+    "hasChangedName": false,
+    "hasChangedGender": false,
+    "parents": [],
+    "createdAt": "2024-08-08T06:41:31.031Z",
+    "updatedAt": "2024-08-08T06:41:31.031Z"
   }
 ]

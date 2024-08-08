@@ -102,14 +102,14 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
       dob: startDate
         ? startDate.toISOString().slice(0, 19).replace("T", " ")
         : null, // Format the date
-      gender: leftOrRight === 0 ? "female" : "male", // Get the selected gender value
+      gender: leftOrRight === 0 ? "male" : "female", // Get the selected gender value
 
       // gender:  selectedGender ? selectedGender.value : null, // Get the selected gender value
 
       isAlive: true, // Assuming this is a static value
       hasChangedName: false, // Assuming this is a static value
       hasChangedGender: false, // Assuming this is a static value
-      parents: [], // Example parent IDs; modify as needed
+      parents: [],
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -141,15 +141,12 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
       );
 
       const res = await axios.post("/api/family", postData);
-      console.log("post request answer:", res.data, postData);
       const result = await axios.patch(`/api/family/${childId}`, {
         parents: [
           ...res.data?.result?.parents,
           { parent: { ...res?.data?.result } },
         ],
       });
-
-      console.log("patch request answer", result);
 
       setAddPeopleModal(false);
     } catch (error) {

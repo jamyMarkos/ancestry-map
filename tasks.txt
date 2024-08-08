@@ -1,3 +1,22 @@
+August 8/2024
+                                   
+                                   
+                                   
+                                   
+                                   
+                                    August 7/ 2024
+    fixes
+
+1. adding the correct event, there is some issue
+2. update the user data in family json, when the name of the person changes
+
+Questions for Yeabsira
+1. should there be an event type when editing an event 
+2. should there be a gender....because i couldn't find it in the backend json data
+3.
+
+
+
 Questions to Ask Yeabsira
     - how do you want to handle the icons/flags
         1. are they going to become from the backend
@@ -31,4 +50,7 @@ Edit Event Feature
 
         Plan
             -  
+
+
+
 

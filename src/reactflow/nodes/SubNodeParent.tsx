@@ -6,6 +6,8 @@ import { birthJsonData } from "@/components/jsonData";
 import axios from "axios";
 import type { Node, NodeProps } from "@xyflow/react";
 import useNodeStore from "@/stores/node-store";
+import { globalStore } from "@/stores/global-store";
+import { useRouter } from "next/navigation";
 
 export type PersonNodeData = {
   id: number;
@@ -43,8 +45,12 @@ interface SubNodeParentData {
 }
 
 const SubNodeParent = ({ data }: any) => {
+  const router = useRouter();
   const { people } = useNodeStore();
   const personId = data.personId;
+
+  const { spouseId, setSpouseId, addPeopleModal, setAddPeopleModal } =
+    globalStore();
 
   const findCountryCodeById = (people: any, personId: number) => {
     const person = people.find((p: any) => String(p.id) === String(personId));
@@ -55,27 +61,69 @@ const SubNodeParent = ({ data }: any) => {
   const personCountryCode = findCountryCodeById(people, personId);
   const spouseCountryCode = findCountryCodeById(people, data.spouseId);
 
+  const person = people.find((p: any) => String(p.id) === String(personId));
+
+  // const leftSpouseGender = people.find(
+  //   (p: any) => String(p.id) === String(personId)
+  // )?.gender;
+  // const rightSpouseGender = people.find(
+  //   (p: any) => String(p.id) === String(data.spouseId)
+  // )?.gender;
+
+  const handleSpouseClick = () => {
+    setSpouseId(data.personId);
+    console.log("object123", spouseId);
+
+    // router.push("/add-People");
+    setAddPeopleModal(!addPeopleModal);
+  };
+
   return (
     <div className="nodrag">
       <Handle type="target" position={Position.Top} />
       <div className="">
         <div className="block p-0.5 line">
           <div className="flex rounded bg-white w-44 h-12">
-            <DetailPeople
-              name={data?.label + ` `}
-              place="USA"
-              personId={data?.personId}
-              countryCode={personCountryCode}
-            />
-            {data?.spouse ? (
-              <DetailPeople
-                name={data?.spouse + ` `}
-                place="ETHIOPIA"
-                personId={data?.spouseId}
-                countryCode={spouseCountryCode}
-              />
+            {/* Render based on gender */}
+
+            {person?.gender === "male" ? (
+              <>
+                <DetailPeople
+                  name={data?.label + ` `}
+                  place="USA"
+                  personId={data?.personId}
+                  countryCode={personCountryCode}
+                />
+                {data?.spouse ? (
+                  <DetailPeople
+                    name={data?.spouse + ` `}
+                    place="ETHIOPIA"
+                    personId={data?.spouseId}
+                    countryCode={spouseCountryCode}
+                  />
+                ) : (
+                  <AddPeople title="Add spouse" onClick={handleSpouseClick} />
+                )}
+              </>
             ) : (
-              <AddPeople title="Add spouse" />
+              <>
+                {data?.spouse ? (
+                  <DetailPeople
+                    name={data?.spouse + ` `}
+                    place="ETHIOPIA"
+                    personId={data?.spouseId}
+                    countryCode={spouseCountryCode}
+                  />
+                ) : (
+                  <AddPeople title="Add spouse" />
+                )}
+                <DetailPeople
+                  name={data?.label + ` `}
+                  place="USA"
+                  personId={data?.personId}
+                  countryCode={personCountryCode}
+                />
+              </>
             )}
           </div>
           {/* <div className="flex rounded bg-white w-44 h-12"></div> */}

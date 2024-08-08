@@ -9,12 +9,8 @@ import { RxCross2 } from "react-icons/rx";
 import { TiLocationOutline } from "react-icons/ti";
 import Dropdown from "@/ui-kits/Dropdown";
 import Input from "@/ui-kits/Input";
-import { lifeEventData } from "../jsonData";
 import { globalStore } from "@/stores/global-store";
 import axios from "axios";
-import { peopleStore } from "@/stores/people-store";
-import { BASE_URL } from "../../../config";
-import { Router } from "next/router";
 
 const optionsEvent = [
   { label: "Marriage", value: "marriage" },
@@ -31,7 +27,7 @@ type EditEventModalProps = {
   eventId: number;
 };
 
-const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
+const EditEventModal: FC<EditEventModalProps> = ({ eventId }) => {
   const [firstNameSpouse, setFirstNameSpouse] = useState<any>(null);
   const [secondNameSpouse, setSecondNameSpouse] = useState<any>(null);
   const [idSpouse, setIdSpouse] = useState<any>(null);
@@ -66,7 +62,7 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
           setStartDate(fetchedDate);
         } else {
           console.error("Invalid date fetched:", eventData.eventDate);
-          setStartDate(new Date()); // Fallback to current date or handle as needed
+          setStartDate(new Date());
         }
       } catch (error) {
         console.log("Error fetching event data:", error);
@@ -76,14 +72,12 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
     fetchEventData();
   }, [eventId]);
 
-  console.log(event);
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const updatedEventData = {
       id: eventId,
-      userId: "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx", // Assuming you have the userId available
+      userId: "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
       type: selectedEvent?.value,
       eventDate: startDate.toISOString() || null,
       location: marriagePlace || null,
@@ -117,32 +111,11 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
         `/api/events/edit/${eventId}`,
         updatedEventData
       );
-      console.log("Event updated successfully:", response.data);
       setEditEventModal(false);
     } catch (error) {
       console.log("Error updating event:", error);
     }
   };
-
-  const eventData = {
-    id: eventId,
-    type: selectedEvent?.value,
-    eventDate: startDate.toISOString(),
-    location: marriagePlace,
-    personId: selectedPersonId ? Number(selectedPersonId) : newPersonId,
-    marriage:
-      selectedEvent?.value === "marriage"
-        ? {
-            firstName: firstNameSpouse,
-            lastName: secondNameSpouse,
-            gender: selectedGender?.value,
-          }
-        : null,
-  };
-
-  console.log("in the event detail modal", firstNameSpouse);
-  console.log("in the event detail modal", secondNameSpouse);
-  // console.log(values?.secondNameSpouse);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -281,4 +254,4 @@ const AddEventModal: FC<EditEventModalProps> = ({ eventId }) => {
   );
 };
 
-export default AddEventModal;
+export default EditEventModal;
