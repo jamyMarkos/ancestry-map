@@ -26,8 +26,8 @@ type AddSpouseModalProps = {
 
 const AddSpouseModal: FC<AddSpouseModalProps> = ({ spouseId }) => {
   const {
-    addPeopleModal,
-    setAddPeopleModal,
+    isAddSpouseModalOpen,
+    setIsAddSpouseModalOpen,
     newPersonId,
     setNewPersonId,
     leftOrRight,
@@ -144,7 +144,7 @@ const AddSpouseModal: FC<AddSpouseModalProps> = ({ spouseId }) => {
         postDataToCreteBirthEvent
       );
 
-      //   const res = await axios.post("/api/family", postData);
+      const res = await axios.post("/api/family", postData);
       //   const result = await axios.patch(`/api/family/${childId}`, {
       //     parents: [
       //       ...res.data?.result?.parents,
@@ -152,7 +152,7 @@ const AddSpouseModal: FC<AddSpouseModalProps> = ({ spouseId }) => {
       //     ],
       //   });
 
-      setAddPeopleModal(false);
+      setIsAddSpouseModalOpen(false);
     } catch (error) {
       console.error("Error saving data:", error);
       // Handle error (e.g., show a notification)
@@ -163,7 +163,7 @@ const AddSpouseModal: FC<AddSpouseModalProps> = ({ spouseId }) => {
     <Fragment>
       <ReactModal
         className="font-pathway mobile:w-[380px] w-72 m-auto md:h-[calc(100vh-237px)] h-[calc(100vh-64px)] overflow-auto z-50 absolute md:top-[237px] top-16 border-l border-[#E2E8F0] right-[0%] bg-white p-0 opacity-100 focus:outline-none overflow-y-auto"
-        isOpen={addPeopleModal}
+        isOpen={isAddSpouseModalOpen}
         onAfterOpen={() => (document.body.style.overflow = "hidden")}
         onAfterClose={() => (document.body.style.overflow = "unset")}
       >
@@ -240,7 +240,7 @@ const AddSpouseModal: FC<AddSpouseModalProps> = ({ spouseId }) => {
           <div className="border-b border-[#E2E8F0]" />
           <div className="flex items-center gap-3 justify-end my-3 px-5">
             <button
-              onClick={() => setAddPeopleModal(false)}
+              onClick={() => setIsAddSpouseModalOpen(false)}
               type="button"
               className="border border-[#E2E8F0] text-sm font-medium text-black text-opacity-75 py-2 w-20 rounded-md"
             >
