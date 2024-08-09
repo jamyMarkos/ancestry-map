@@ -8,6 +8,7 @@ interface AddPeopleProps {
   onClick?: () => void;
   leftOrRight?: number;
   spouseId?: number;
+  onSpouseClick?: () => void;
 }
 const AddPeople = ({
   title,
@@ -21,7 +22,6 @@ const AddPeople = ({
     if (leftOrRight !== undefined) {
       setLeftOrRight(leftOrRight);
     }
-    console.log("leftOrRight", leftOrRight);
   };
 
   return (

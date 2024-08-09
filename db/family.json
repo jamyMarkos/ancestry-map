@@ -13,6 +13,7 @@
     "isAdopted": false,
     "hasChangedName": false,
     "hasChangedGender": false,
+    "spouseId": null,
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:36:20.797Z",
     "updatedAt": "2024-07-30T13:36:20.797Z",
@@ -97,9 +98,10 @@
     "isAdopted": false,
     "hasChangedName": false,
     "hasChangedGender": false,
+    "spouseId": null,
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:41:53.849Z",
-    "updatedAt": "2024-07-30T13:41:53.849Z",
+    "updatedAt": "2024-08-08T21:41:36.979Z",
     "parents": [
       {
         "parent": {
@@ -135,7 +137,6 @@
           "isAlive": null,
           "isAdopted": false,
           "hasChangedName": false,
-
           "hasChangedGender": false,
           "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
           "createdAt": "2024-07-30T13:41:54.434Z",
@@ -173,7 +174,26 @@
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:41:54.434Z",
     "updatedAt": "2024-07-30T13:41:54.434Z",
-    "parents": [],
+    "parents": [
+      {
+        "parent": {
+          "id": 9636154,
+          "isUser": false,
+          "firstName": "Johnson",
+          "lastName": "Doe",
+          "birthPlace": "New York, USA",
+          "countryCode": "US",
+          "dob": "1998-12-31 21:00:00",
+          "gender": "female",
+          "isAlive": true,
+          "hasChangedName": false,
+          "hasChangedGender": false,
+          "parents": [],
+          "createdAt": "2024-08-09T05:46:48.726Z",
+          "updatedAt": "2024-08-09T05:46:48.726Z"
+        }
+      }
+    ],
     "relatedEvents": [
       {
         "id": 17,
@@ -197,5 +217,82 @@
         ]
       }
     ]
+  },
+  {
+    "id": 22722498,
+    "isUser": false,
+    "firstName": "Arsenal",
+    "lastName": "Adane",
+    "birthPlace": "New York,TEx",
+    "countryCode": "US",
+    "dob": "2024-08-14 21:00:00",
+    "gender": "male",
+    "isAlive": true,
+    "hasChangedName": false,
+    "hasChangedGender": false,
+    "parents": [
+      {
+        "parent": {
+          "id": 12,
+          "firstName": "You",
+          "lastName": "",
+          "gender": null,
+          "dob": null,
+          "deathDate": null,
+          "birthPlace": null,
+          "countryCode": "IT",
+          "isUser": true,
+          "isAlive": null,
+          "isAdopted": false,
+          "hasChangedName": false,
+          "hasChangedGender": false,
+          "spouseId": null,
+          "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+          "createdAt": "2024-07-30T13:36:20.797Z",
+          "updatedAt": "2024-07-30T13:36:20.797Z",
+          "parents": [
+            {
+              "parent": {
+                "id": 14,
+                "firstName": "Jay",
+                "lastName": "Pritchett",
+                "gender": "male",
+                "dob": "1995-05-23T00:00:00.000Z",
+                "deathDate": null,
+                "birthPlace": "New York, New York, United States of America",
+                "countryCode": "US",
+                "isUser": false,
+                "isAlive": null,
+                "isAdopted": false,
+                "hasChangedName": false,
+                "hasChangedGender": false,
+                "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
+                "createdAt": "2024-07-30T13:41:53.849Z",
+                "updatedAt": "2024-07-30T13:41:53.849Z"
+              }
+            }
+          ],
+          "relatedEvents": []
+        }
+      }
+    ],
+    "createdAt": "2024-08-09T05:24:22.191Z",
+    "updatedAt": "2024-08-09T05:24:22.191Z"
+  },
+  {
+    "id": 9636154,
+    "isUser": false,
+    "firstName": "Johnson",
+    "lastName": "Doe",
+    "birthPlace": "New York, USA",
+    "countryCode": "US",
+    "dob": "1998-12-31 21:00:00",
+    "gender": "female",
+    "isAlive": true,
+    "hasChangedName": false,
+    "hasChangedGender": false,
+    "parents": [],
+    "createdAt": "2024-08-09T05:46:48.726Z",
+    "updatedAt": "2024-08-09T05:46:48.726Z"
   }
 ]

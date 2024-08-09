@@ -190,5 +190,88 @@
     "eventPlace": "New York, USA",
     "createdAt": "2024-08-08T08:54:35.131Z",
     "updatedAt": "2024-08-08T08:54:35.131Z"
+  },
+  {
+    "id": 91219153,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "birth",
+    "eventDate": null,
+    "location": "",
+    "personId": 40098929,
+    "marriage": null,
+    "createdAt": "2024-08-08T21:46:32.326Z",
+    "updatedAt": "2024-08-08T21:46:32.326Z"
+  },
+  {
+    "id": 73120587,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "birth",
+    "eventDate": null,
+    "location": "",
+    "personId": 79677571,
+    "marriage": null,
+    "createdAt": "2024-08-08T21:46:33.279Z",
+    "updatedAt": "2024-08-08T21:46:33.279Z"
+  },
+  {
+    "id": 75254214,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "birth",
+    "eventDate": "2024-07-29T21:00:00.000Z",
+    "location": "Ex eos ut temporibus",
+    "personId": 9936218,
+    "marriage": null,
+    "createdAt": "2024-08-08T21:54:13.610Z",
+    "updatedAt": "2024-08-08T21:54:13.610Z"
+  },
+  {
+    "id": 34718797,
+    "userId": null,
+    "personId": 46565632,
+    "type": "birth",
+    "eventDate": "1998-12-31 21:00:00",
+    "location": "New York, USA",
+    "details": null,
+    "marriageId": null,
+    "eventPlace": "New York, USA",
+    "createdAt": "2024-08-08T21:54:58.432Z",
+    "updatedAt": "2024-08-08T21:54:58.432Z"
+  },
+  {
+    "id": 49279774,
+    "userId": null,
+    "personId": 74092567,
+    "type": "birth",
+    "eventDate": "1998-12-31 21:00:00",
+    "location": "New York, USA",
+    "details": null,
+    "marriageId": null,
+    "eventPlace": "New York, USA",
+    "createdAt": "2024-08-09T05:22:41.847Z",
+    "updatedAt": "2024-08-09T05:22:41.847Z"
+  },
+  {
+    "id": 95599348,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "birth",
+    "eventDate": "2024-08-14T21:00:00.000Z",
+    "location": "New York,TEx",
+    "personId": 22722498,
+    "marriage": null,
+    "createdAt": "2024-08-09T05:24:22.191Z",
+    "updatedAt": "2024-08-09T05:24:22.191Z"
+  },
+  {
+    "id": 69915522,
+    "userId": null,
+    "personId": 9636154,
+    "type": "birth",
+    "eventDate": "1998-12-31 21:00:00",
+    "location": "New York, USA",
+    "details": null,
+    "marriageId": null,
+    "eventPlace": "New York, USA",
+    "createdAt": "2024-08-09T05:46:48.726Z",
+    "updatedAt": "2024-08-09T05:46:48.726Z"
   }
 ]

@@ -1,0 +1,263 @@
+"use client";
+
+import { FC, Fragment, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import ReactModal from "react-modal";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { FaRegCalendarMinus } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
+import { TiLocationOutline } from "react-icons/ti";
+import Dropdown from "@/ui-kits/Dropdown";
+import Input from "@/ui-kits/Input";
+import { globalStore } from "@/stores/global-store";
+import axios from "axios";
+import { peopleStore } from "@/stores/people-store";
+
+const genderOptions = [
+  { label: "Male", value: "male" },
+  { label: "Female", value: "female" },
+  { label: "Transgender", value: "transgender" },
+];
+
+type AddSpouseModalProps = {
+  spouseId: number | null;
+};
+
+const AddSpouseModal: FC<AddSpouseModalProps> = ({ spouseId }) => {
+  const {
+    addPeopleModal,
+    setAddPeopleModal,
+    newPersonId,
+    setNewPersonId,
+    leftOrRight,
+    childId,
+  } = globalStore();
+  const { peopleData, setPeopleData } = peopleStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/people/people-data.json");
+        setPeopleData(response?.data);
+      } catch (err) {
+        console.log("Error:", err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (peopleData) {
+      setValues({
+        firstName: peopleData?.firstName || "",
+        secondName: peopleData?.lastName || "",
+        nickName: "",
+        birthPlace: peopleData?.birthPlace || "",
+      });
+      setStartDate(new Date(peopleData?.dob));
+      setSelectedGender(
+        genderOptions.find((option) => option.value === peopleData?.gender) ||
+          null
+      );
+    }
+  }, [peopleData]);
+
+  const [startDate, setStartDate] = useState<Date | null>(null);
+
+  const [values, setValues] = useState({
+    firstName: "",
+    secondName: "",
+    nickName: "",
+    birthPlace: "",
+  });
+
+  const [selectedGender, setSelectedGender] = useState<any>(null);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
+  const handleGenderChange = (newValue: any) => {
+    setSelectedGender(newValue);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const tempId = Math.floor(Math.random() * (100000000 - 999999) + 999999);
+    setNewPersonId(tempId);
+
+    // Prepare the data to be sent
+    const postData = {
+      id: tempId,
+      isUser: false,
+      firstName: values.firstName,
+      lastName: values.secondName,
+      birthPlace: values.birthPlace,
+      spouseId: Number(spouseId),
+      countryCode: "US",
+      dob: startDate
+        ? startDate.toISOString().slice(0, 19).replace("T", " ")
+        : null, // Format the date
+      //   gender: leftOrRight === 0 ? "male" : "female", // Get the selected gender value
+
+      gender: selectedGender ? selectedGender.value : null, // Get the selected gender value
+
+      isAlive: true, // Assuming this is a static value
+      hasChangedName: false, // Assuming this is a static value
+      hasChangedGender: false, // Assuming this is a static value
+      parents: [],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    // console.log("object", postData);
+
+    const postDataToCreteBirthEvent = {
+      id: Math.floor(Math.random() * (100000000 - 999999) + 999999),
+      userId: null,
+      personId: tempId,
+      type: "birth",
+      eventDate: startDate
+        ? startDate.toISOString().slice(0, 19).replace("T", " ")
+        : null,
+      location: values.birthPlace,
+      details: null,
+      marriageId: null,
+      eventPlace: values.birthPlace,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    try {
+      // Send POST request to the JSON server
+      const response = await axios.post("/api/people", postData);
+
+      // Send POST request to the create Birth event automatically
+      const responseBirthEvent = await axios.post(
+        "/api/events",
+        postDataToCreteBirthEvent
+      );
+
+      //   const res = await axios.post("/api/family", postData);
+      //   const result = await axios.patch(`/api/family/${childId}`, {
+      //     parents: [
+      //       ...res.data?.result?.parents,
+      //       { parent: { ...res?.data?.result } },
+      //     ],
+      //   });
+
+      setAddPeopleModal(false);
+    } catch (error) {
+      console.error("Error saving data:", error);
+      // Handle error (e.g., show a notification)
+    }
+  };
+
+  return (
+    <Fragment>
+      <ReactModal
+        className="font-pathway mobile:w-[380px] w-72 m-auto md:h-[calc(100vh-237px)] h-[calc(100vh-64px)] overflow-auto z-50 absolute md:top-[237px] top-16 border-l border-[#E2E8F0] right-[0%] bg-white p-0 opacity-100 focus:outline-none overflow-y-auto"
+        isOpen={addPeopleModal}
+        onAfterOpen={() => (document.body.style.overflow = "hidden")}
+        onAfterClose={() => (document.body.style.overflow = "unset")}
+      >
+        <div className="p-5 border-b border-[#E2E8F0] flex items-center justify-between gap-2">
+          <h2 className="text-lg text-black text-opacity-80 font-semibold">
+            Birth - Add Spouse Modal
+          </h2>
+          <div className="cursor-pointer" onClick={() => router.push("/")}>
+            <RxCross2 className="w-5 h-5" />
+          </div>
+        </div>
+        {/* <pre>{newPersonId}</pre> */}
+        <form onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-4 p-5">
+            <Input
+              type="text"
+              name="firstName"
+              id="firstName"
+              labelText="First name"
+              resStyle="h-11"
+              onChange={handleInputChange}
+              value={values.firstName}
+            />
+            <Input
+              type="text"
+              name="secondName"
+              id="secondName"
+              labelText="Second name"
+              onChange={handleInputChange}
+              value={values.secondName}
+            />
+            <Input
+              type="text"
+              name="nickName"
+              id="nickName"
+              labelText="Nickname (optional)"
+              onChange={handleInputChange}
+              value={values.nickName}
+            />
+            <div>
+              <p className="text-sm text-black text-opacity-75 font-medium pb-2">
+                Gender
+              </p>
+              <Dropdown
+                options={genderOptions}
+                value={selectedGender}
+                onChange={handleGenderChange}
+              />
+            </div>
+            <div className="relative calender">
+              <p className="text-sm text-black text-opacity-75 font-medium pb-2">
+                Date of birth
+              </p>
+              <FaRegCalendarMinus className="absolute left-3 top-10 text-[#ABADC6] w-[18px] h-[18px]" />
+              <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date as Date)}
+                className="w-full bg-transparent pl-10 h-11 focus:border-black border border-[#E2E8F0] rounded-md"
+              />
+            </div>
+            <div className="relative">
+              <TiLocationOutline className="absolute left-3 top-10 text-[#ABADC6] w-[22px] h-[22px]" />
+              <Input
+                type="text"
+                name="birthPlace"
+                id="birthPlace"
+                labelText="Place of birth"
+                resStyle="!pl-10"
+                onChange={handleInputChange}
+                value={values.birthPlace}
+              />
+            </div>
+          </div>
+          <div className="border-b border-[#E2E8F0]" />
+          <div className="flex items-center gap-3 justify-end my-3 px-5">
+            <button
+              onClick={() => setAddPeopleModal(false)}
+              type="button"
+              className="border border-[#E2E8F0] text-sm font-medium text-black text-opacity-75 py-2 w-20 rounded-md"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="bg-black border border-[#E2E8F0] text-sm font-medium text-white py-2 w-20 rounded-md"
+              onClick={() => router.push("/people-detail")}
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </ReactModal>
+    </Fragment>
+  );
+};
+
+export default AddSpouseModal;

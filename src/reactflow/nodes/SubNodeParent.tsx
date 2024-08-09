@@ -49,8 +49,18 @@ const SubNodeParent = ({ data }: any) => {
   const { people } = useNodeStore();
   const personId = data.personId;
 
-  const { spouseId, setSpouseId, addPeopleModal, setAddPeopleModal } =
-    globalStore();
+  const {
+    spouseId,
+    setSpouseId,
+    isAddSpouseModalOpen,
+    setIsAddSpouseModalOpen,
+    childId,
+    setChildId,
+    addChildModal,
+    setAddChildModal,
+    addPeopleModal,
+    setAddPeopleModal,
+  } = globalStore();
 
   const findCountryCodeById = (people: any, personId: number) => {
     const person = people.find((p: any) => String(p.id) === String(personId));
@@ -63,19 +73,21 @@ const SubNodeParent = ({ data }: any) => {
 
   const person = people.find((p: any) => String(p.id) === String(personId));
 
-  // const leftSpouseGender = people.find(
-  //   (p: any) => String(p.id) === String(personId)
-  // )?.gender;
-  // const rightSpouseGender = people.find(
-  //   (p: any) => String(p.id) === String(data.spouseId)
-  // )?.gender;
-
   const handleSpouseClick = () => {
     setSpouseId(data.personId);
-    console.log("object123", spouseId);
 
-    // router.push("/add-People");
-    setAddPeopleModal(!addPeopleModal);
+    router.push("/add-People");
+    setAddChildModal(false);
+
+    // setChildId(childId);
+    setAddPeopleModal(false);
+    setIsAddSpouseModalOpen(true);
+    console.log(
+      "objectsss",
+      isAddSpouseModalOpen,
+      addChildModal,
+      addPeopleModal
+    );
   };
 
   return (
@@ -115,7 +127,7 @@ const SubNodeParent = ({ data }: any) => {
                     countryCode={spouseCountryCode}
                   />
                 ) : (
-                  <AddPeople title="Add spouse" />
+                  <AddPeople title="Add spouse" onClick={handleSpouseClick} />
                 )}
                 <DetailPeople
                   name={data?.label + ` `}
@@ -126,7 +138,6 @@ const SubNodeParent = ({ data }: any) => {
               </>
             )}
           </div>
-          {/* <div className="flex rounded bg-white w-44 h-12"></div> */}
         </div>
       </div>
       <Handle type="source" position={Position.Bottom} />
