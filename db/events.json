@@ -273,5 +273,29 @@
     "eventPlace": "New York, USA",
     "createdAt": "2024-08-09T05:46:48.726Z",
     "updatedAt": "2024-08-09T05:46:48.726Z"
+  },
+  {
+    "id": 45587635,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "birth",
+    "eventDate": "2024-08-29T21:00:00.000Z",
+    "location": "Austria",
+    "personId": 37510411,
+    "marriage": null,
+    "createdAt": "2024-08-09T06:05:38.085Z",
+    "updatedAt": "2024-08-09T06:05:38.085Z"
+  },
+  {
+    "id": 4659734,
+    "userId": null,
+    "personId": 61012850,
+    "type": "birth",
+    "eventDate": "1998-12-31 21:00:00",
+    "location": "New York, USA",
+    "details": null,
+    "marriageId": null,
+    "eventPlace": "New York, USA",
+    "createdAt": "2024-08-09T06:06:03.023Z",
+    "updatedAt": "2024-08-09T06:06:03.023Z"
   }
 ]

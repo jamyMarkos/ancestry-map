@@ -22,6 +22,13 @@ export default function AddPeople() {
     spouseId,
   } = globalStore();
 
+  console.log(
+    "why is object",
+    addPeopleModal,
+    addChildModal,
+    isAddSpouseModalOpen
+  );
+
   return (
     <>
       <PageHeader
