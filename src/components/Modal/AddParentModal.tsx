@@ -171,7 +171,6 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
             <RxCross2 className="w-5 h-5" />
           </div>
         </div>
-        {/* <pre>{newPersonId}</pre> */}
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4 p-5">
             <Input
