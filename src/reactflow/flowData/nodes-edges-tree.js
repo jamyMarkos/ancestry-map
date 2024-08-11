@@ -118,46 +118,15 @@ export const createNodesAndEdges = (data) => {
 
       // If spouse has no parents, add the "Add Parent" nodes
       if (spouse?.parents.length === 0) {
-        // const isSpouseHusband = spouse.gender === "male";
-        // const spouseAddParentX1 = isSpouseHusband
-        //   ? baseX - horizontalOffset
-        //   : baseX + horizontalOffset;
-        // const spouseAddParentX2 = isSpouseHusband
-        //   ? baseX - 2 * horizontalOffset
-        //   : baseX + 2 * horizontalOffset;
+        const isSpouseHusband = spouse?.gender === "male";
 
-        // if (isSpouseHusband) {
-        //   addParentNode(
-        //     `add-parent1-${person.spouseId}`,
-        //     "addparent",
-        //     "Add parent 1",
-        //     spouseAddParentX1,
-        //     baseY - verticalOffset,
-        //     nodes,
-        //     spouse.id
-        //   );
-
-        //   addEdge(`add-parent1-${person.spouseId}`, spouse.id, edges);
-        // } else {
-        //   addParentNode(
-        //     `add-parent1-${person.spouseId}`,
-        //     "addparent",
-        //     "Add parent 2 2 2",
-        //     spouseAddParentX2,
-        //     baseY - verticalOffset,
-        //     nodes,
-        //     spouse.id
-        //   );
-
-        //   addEdge(`add-parent2-${person.spouseId}`, spouse.id, edges);
-        // }
+        const spouseAddParentX = isSpouseHusband ? addParentX1 : addParentX2;
 
         addParentNode(
           `add-parent2-${person.spouseId}`,
           "addparent",
           "Add parent 2",
-          // isSpouseHusband ? spouseAddParentX2 : spouseAddParentX1,
-          addParentX2,
+          spouseAddParentX,
           baseY - verticalOffset,
           nodes,
           person.spouseId
@@ -278,7 +247,7 @@ export const initialBirthEdges = [
   { id: "e12", source: "3", target: "3", type: edgeType },
 ];
 
-///////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
 
 export const PeopleDetailNode = [
   {

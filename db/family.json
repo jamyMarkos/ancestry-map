@@ -13,7 +13,7 @@
     "isAdopted": false,
     "hasChangedName": false,
     "hasChangedGender": false,
-    "spouseId": 60633622,
+    "spouseId": null,
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:36:20.797Z",
     "updatedAt": "2024-08-10T11:09:17.444Z",
@@ -98,7 +98,7 @@
     "isAdopted": false,
     "hasChangedName": false,
     "hasChangedGender": false,
-    "spouseId": 95422595,
+    "spouseId": null,
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:41:53.849Z",
     "updatedAt": "2024-08-10T11:09:04.529Z",
@@ -174,26 +174,7 @@
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:41:54.434Z",
     "updatedAt": "2024-07-30T13:41:54.434Z",
-    "parents": [
-      {
-        "parent": {
-          "id": 29677644,
-          "isUser": false,
-          "firstName": "far right",
-          "lastName": "Doe",
-          "birthPlace": "New York, USA",
-          "countryCode": "US",
-          "dob": "1998-12-31 21:00:00",
-          "gender": "female",
-          "isAlive": true,
-          "hasChangedName": false,
-          "hasChangedGender": false,
-          "parents": [],
-          "createdAt": "2024-08-10T11:14:27.051Z",
-          "updatedAt": "2024-08-10T11:14:27.051Z"
-        }
-      }
-    ],
+    "parents": [],
     "relatedEvents": [
       {
         "id": 17,
@@ -217,73 +198,5 @@
         ]
       }
     ]
-  },
-  {
-    "id": 95422595,
-    "isUser": false,
-    "firstName": "Herrr",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "spouseId": 14,
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "female",
-    "isAlive": true,
-    "hasChangedName": false,
-    "hasChangedGender": false,
-    "parents": [],
-    "createdAt": "2024-08-10T11:09:03.304Z",
-    "updatedAt": "2024-08-10T11:09:03.304Z"
-  },
-  {
-    "id": 60633622,
-    "isUser": false,
-    "firstName": "Johnny",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "spouseId": 12,
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "male",
-    "isAlive": true,
-    "hasChangedName": false,
-    "hasChangedGender": false,
-    "parents": [],
-    "createdAt": "2024-08-10T11:09:16.392Z",
-    "updatedAt": "2024-08-10T11:09:16.392Z"
-  },
-  {
-    "id": 29677644,
-    "isUser": false,
-    "firstName": "far right",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "female",
-    "isAlive": true,
-    "hasChangedName": false,
-    "hasChangedGender": false,
-    "parents": [],
-    "createdAt": "2024-08-10T11:14:27.051Z",
-    "updatedAt": "2024-08-10T11:16:41.851Z",
-    "spouseId": 75940056
-  },
-  {
-    "id": 75940056,
-    "isUser": false,
-    "firstName": "left Zeru",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "spouseId": 29677644,
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "male",
-    "isAlive": true,
-    "hasChangedName": false,
-    "hasChangedGender": false,
-    "parents": [],
-    "createdAt": "2024-08-10T11:16:40.465Z",
-    "updatedAt": "2024-08-10T11:16:40.465Z"
   }
 ]
