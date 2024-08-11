@@ -51,31 +51,6 @@
     }
   },
   {
-    "id": 57,
-    "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-    "type": "marriage",
-    "eventDate": "2024-06-30T08:26:07.000Z",
-    "location": "London, United Kingdom",
-    "details": null,
-    "marriageId": 48706041,
-    "personId": 13,
-    "createdAt": "2024-08-08T07:39:25.290Z",
-    "updatedAt": "2024-08-08T07:39:25.290Z",
-    "marriage": {
-      "id": 15295482,
-      "personId": 13,
-      "spouseId": null,
-      "status": "married",
-      "people": [
-        {
-          "id": 15,
-          "firstName": "Mary",
-          "lastName": "Pritchettee"
-        }
-      ]
-    }
-  },
-  {
     "id": 1525830,
     "userId": null,
     "personId": 13,
@@ -139,56 +114,5 @@
     },
     "createdAt": "2024-08-08T04:03:28.759Z",
     "updatedAt": "2024-08-08T04:03:28.759Z"
-  },
-  {
-    "id": 43434760,
-    "userId": null,
-    "personId": 12242715,
-    "type": "birth",
-    "eventDate": "1998-12-31 21:00:00",
-    "location": "New York, USA",
-    "details": null,
-    "marriageId": null,
-    "eventPlace": "New York, USA",
-    "createdAt": "2024-08-08T06:41:31.031Z",
-    "updatedAt": "2024-08-08T06:41:31.031Z"
-  },
-  {
-    "id": 2338179,
-    "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
-    "type": "marriage",
-    "eventDate": "2024-08-04T06:48:38.000Z",
-    "details": null,
-    "marriageId": 21727775,
-    "location": "New York, USA",
-    "personId": 12,
-    "marriage": {
-      "id": 92391374,
-      "personId": 12,
-      "spouseId": null,
-      "status": "married",
-      "people": [
-        {
-          "id": 54794534,
-          "firstName": "Rachel",
-          "lastName": "Greeneee"
-        }
-      ]
-    },
-    "createdAt": "2024-08-08T07:09:47.929Z",
-    "updatedAt": "2024-08-08T07:09:47.929Z"
-  },
-  {
-    "id": 9458879,
-    "userId": null,
-    "personId": 51376014,
-    "type": "birth",
-    "eventDate": "1998-12-31 21:00:00",
-    "location": "New York, USA",
-    "details": null,
-    "marriageId": null,
-    "eventPlace": "New York, USA",
-    "createdAt": "2024-08-08T08:54:35.131Z",
-    "updatedAt": "2024-08-08T08:54:35.131Z"
   }
 ]

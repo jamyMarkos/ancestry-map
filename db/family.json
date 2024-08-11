@@ -3,7 +3,7 @@
     "id": 12,
     "firstName": "You",
     "lastName": "",
-    "gender": null,
+    "gender": "female",
     "dob": null,
     "deathDate": null,
     "birthPlace": null,
@@ -13,9 +13,10 @@
     "isAdopted": false,
     "hasChangedName": false,
     "hasChangedGender": false,
+    "spouseId": null,
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:36:20.797Z",
-    "updatedAt": "2024-07-30T13:36:20.797Z",
+    "updatedAt": "2024-08-11T14:01:45.211Z",
     "parents": [
       {
         "parent": {
@@ -97,9 +98,10 @@
     "isAdopted": false,
     "hasChangedName": false,
     "hasChangedGender": false,
+    "spouseId": null,
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:41:53.849Z",
-    "updatedAt": "2024-07-30T13:41:53.849Z",
+    "updatedAt": "2024-08-11T14:13:02.298Z",
     "parents": [
       {
         "parent": {
@@ -135,7 +137,6 @@
           "isAlive": null,
           "isAdopted": false,
           "hasChangedName": false,
-
           "hasChangedGender": false,
           "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
           "createdAt": "2024-07-30T13:41:54.434Z",
@@ -159,7 +160,7 @@
     "id": 15,
     "firstName": "Mary",
     "lastName": "Pritchett",
-    "gender": null,
+    "gender": "female",
     "dob": null,
     "deathDate": null,
     "birthPlace": null,

@@ -14,6 +14,7 @@ interface States {
   nodeSelectedId: number | null;
   leftOrRight: number;
   spouseId: number | null;
+  isAddSpouseModalOpen: boolean;
 }
 
 interface Actions {
@@ -29,12 +30,15 @@ interface Actions {
   setNodeSelectedId: (data: number) => void;
   setLeftOrRight: (id: number) => void;
   setSpouseId: (id: number) => void;
+
+  setIsAddSpouseModalOpen: (data: boolean) => void;
 }
 
 export const globalStore = create<States & Actions>()(
   devtools(
     persist(
       (set) => ({
+        isAddSpouseModalOpen: false,
         addPeopleModal: false,
         addEventModal: false,
         editEventModal: false,
@@ -60,8 +64,10 @@ export const globalStore = create<States & Actions>()(
           set((state) => ({ addEventModal: data }));
         },
         setAddChildModal: (data) => set((state) => ({ addChildModal: data })),
+
         setPeopleDetailModal: (data) =>
           set((state) => ({ peopleDetailModal: data })),
+        setIsAddSpouseModalOpen: (data) => set({ isAddSpouseModalOpen: data }),
       }),
       { name: "AddPeople" }
     )

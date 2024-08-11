@@ -7,6 +7,7 @@ import { globalStore } from "@/stores/global-store";
 import "@xyflow/react/dist/style.css";
 import { useRouter } from "next/navigation";
 import { FaPlus } from "react-icons/fa";
+import AddSpouseModal from "@/components/Modal/AddSpouseModal";
 
 export default function AddPeople() {
   const { push } = useRouter();
@@ -17,9 +18,17 @@ export default function AddPeople() {
     addChildModal,
     setAddChildModal,
     nodeSelectedId,
+    isAddSpouseModalOpen,
+    spouseId,
   } = globalStore();
 
-  console.log("some where in the middle of nowhere", nodeSelectedId);
+  console.log(
+    "why is object",
+    addPeopleModal,
+    addChildModal,
+    isAddSpouseModalOpen
+  );
+
   return (
     <>
       <PageHeader
@@ -45,9 +54,9 @@ export default function AddPeople() {
       />
 
       <div className="w-full h-[calc(100vh-72px)] p-5">
-        <AddPeopleFlow />
         {addPeopleModal && <AddParentModal childId={childId} />}
         {addChildModal && <AddChildModal />}
+        {isAddSpouseModalOpen && <AddSpouseModal spouseId={spouseId} />}
       </div>
     </>
   );

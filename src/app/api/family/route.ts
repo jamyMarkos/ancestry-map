@@ -59,6 +59,22 @@ export async function POST(request: Request, response: NextResponse) {
     // Update the in-memory family data
     familyData.push(newMember);
 
+    // Check if the new member has a spouseId
+    if (newMember.spouseId) {
+      const husbandId = newMember.spouseId;
+
+      // Find the husband in the family data and update his spouseId
+      const husband = familyData.find(
+        (member) => String(member.id) === String(husbandId)
+      );
+
+      if (husband) {
+        // Update the husband's spouseId
+        husband.spouseId = Number(newMember.id);
+        husband.updatedAt = new Date().toISOString();
+      }
+    }
+
     // Write the updated data back to the JSON file asynchronously
     const filePath = path.resolve(process.cwd(), "db/family.json");
     await fs.writeFile(filePath, JSON.stringify(familyData, null, 2));

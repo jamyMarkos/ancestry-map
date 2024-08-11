@@ -6,12 +6,22 @@ import { MdAdd } from "react-icons/md";
 import { globalStore } from "@/stores/global-store";
 function AddChildNode(props: any) {
   const router = useRouter();
-  const { setParentId, addChildModal, setAddChildModal } = globalStore();
+  const {
+    setParentId,
+    addChildModal,
+    setAddChildModal,
+    isAddSpouseModalOpen,
+    addPeopleModal,
+    setIsAddSpouseModalOpen,
+    setAddPeopleModal,
+  } = globalStore();
 
   const handleClick = () => {
     setParentId(props.data.parentId);
     router.push("/add-People");
-    setAddChildModal(!addChildModal);
+    setAddPeopleModal(false);
+    setIsAddSpouseModalOpen(false);
+    setAddChildModal(true);
   };
 
   return (

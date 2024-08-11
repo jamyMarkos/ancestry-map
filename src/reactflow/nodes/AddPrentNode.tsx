@@ -6,12 +6,24 @@ import { globalStore } from "@/stores/global-store";
 
 function AddParentNode(props: any) {
   const router = useRouter();
-  const { setChildId, addPeopleModal, setAddPeopleModal } = globalStore();
+  const {
+    setChildId,
+    addPeopleModal,
+    setAddPeopleModal,
+    addChildModal,
+    setAddChildModal,
+    setIsAddSpouseModalOpen,
+    isAddSpouseModalOpen,
+  } = globalStore();
 
   const handleAddPeopleClick = () => {
     setChildId(props.data.childId);
-    router.push("/add-People");
-    setAddPeopleModal(!addPeopleModal);
+    // router.push("/add-People");
+    setAddChildModal(false);
+    setIsAddSpouseModalOpen(false);
+
+    setAddPeopleModal(true);
+    console.log("object", addPeopleModal, addChildModal, isAddSpouseModalOpen);
   };
 
   return (
@@ -25,7 +37,7 @@ function AddParentNode(props: any) {
               childId={props.data.childId}
             />
             <AddPeople
-              onClick={() => router.push("/add-People")}
+              onClick={handleAddPeopleClick}
               title={props.data.title}
               childId={props.data.childId}
             />

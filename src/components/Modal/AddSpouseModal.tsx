@@ -20,17 +20,18 @@ const genderOptions = [
   { label: "Transgender", value: "transgender" },
 ];
 
-type AddParentModalProps = {
-  childId: number | null;
+type AddSpouseModalProps = {
+  spouseId: number | null;
 };
 
-const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
+const AddSpouseModal: FC<AddSpouseModalProps> = ({ spouseId }) => {
   const {
-    addPeopleModal,
-    setAddPeopleModal,
+    isAddSpouseModalOpen,
+    setIsAddSpouseModalOpen,
     newPersonId,
     setNewPersonId,
     leftOrRight,
+    childId,
   } = globalStore();
   const { peopleData, setPeopleData } = peopleStore();
   const router = useRouter();
@@ -98,13 +99,14 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
       firstName: values.firstName,
       lastName: values.secondName,
       birthPlace: values.birthPlace,
+      spouseId: Number(spouseId),
       countryCode: "US",
       dob: startDate
         ? startDate.toISOString().slice(0, 19).replace("T", " ")
         : null, // Format the date
-      gender: leftOrRight === 0 ? "male" : "female", // Get the selected gender value
+      //   gender: leftOrRight === 0 ? "male" : "female", // Get the selected gender value
 
-      // gender:  selectedGender ? selectedGender.value : null, // Get the selected gender value
+      gender: selectedGender ? selectedGender.value : null, // Get the selected gender value
 
       isAlive: true, // Assuming this is a static value
       hasChangedName: false, // Assuming this is a static value
@@ -113,6 +115,8 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
+
+    // console.log("object", postData);
 
     const postDataToCreteBirthEvent = {
       id: Math.floor(Math.random() * (100000000 - 999999) + 999999),
@@ -141,36 +145,41 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
       );
 
       const res = await axios.post("/api/family", postData);
-      const result = await axios.patch(`/api/family/${childId}`, {
-        parents: [
-          ...res.data?.result?.parents,
-          { parent: { ...res?.data?.result } },
-        ],
-      });
+      //   const result = await axios.patch(`/api/family/${childId}`, {
+      //     parents: [
+      //       ...res.data?.result?.parents,
+      //       { parent: { ...res?.data?.result } },
+      //     ],
+      //   });
 
-      setAddPeopleModal(false);
+      setIsAddSpouseModalOpen(false);
     } catch (error) {
       console.error("Error saving data:", error);
       // Handle error (e.g., show a notification)
     }
   };
 
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   return (
     <Fragment>
       <ReactModal
         className="font-pathway mobile:w-[380px] w-72 m-auto md:h-[calc(100vh-237px)] h-[calc(100vh-64px)] overflow-auto z-50 absolute md:top-[237px] top-16 border-l border-[#E2E8F0] right-[0%] bg-white p-0 opacity-100 focus:outline-none overflow-y-auto"
-        isOpen={addPeopleModal}
+        isOpen={isAddSpouseModalOpen}
         onAfterOpen={() => (document.body.style.overflow = "hidden")}
         onAfterClose={() => (document.body.style.overflow = "unset")}
       >
         <div className="p-5 border-b border-[#E2E8F0] flex items-center justify-between gap-2">
           <h2 className="text-lg text-black text-opacity-80 font-semibold">
-            Birth
+            Birth - Add Spouse Modal
           </h2>
           <div className="cursor-pointer" onClick={() => router.push("/")}>
             <RxCross2 className="w-5 h-5" />
           </div>
         </div>
+        {/* <pre>{newPersonId}</pre> */}
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4 p-5">
             <Input
@@ -235,7 +244,7 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
           <div className="border-b border-[#E2E8F0]" />
           <div className="flex items-center gap-3 justify-end my-3 px-5">
             <button
-              onClick={() => setAddPeopleModal(false)}
+              onClick={() => setIsAddSpouseModalOpen(false)}
               type="button"
               className="border border-[#E2E8F0] text-sm font-medium text-black text-opacity-75 py-2 w-20 rounded-md"
             >
@@ -255,4 +264,4 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
   );
 };
 
-export default AddParentModal;
+export default AddSpouseModal;

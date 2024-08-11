@@ -10,10 +10,10 @@ export const createNodesAndEdges = (data) => {
   const edges = [];
   const verticalOffset = 100;
   const horizontalOffset = 150;
-  let maxY = 0;
 
   const addedSpousesIds = new Set();
   const nodesWithChildren = new Set();
+  const addedChildNodes = new Set();
   // Step 1: Determine which nodes have children
   data.forEach((person) => {
     if (person.parents) {
@@ -36,37 +36,40 @@ export const createNodesAndEdges = (data) => {
     const depth = nodeLevels[person.id];
     const baseX = 0;
     const baseY = depth * verticalOffset;
+
+    const spouse = person.spouseId
+      ? data.find((p) => p.id === person.spouseId)
+      : null;
+
+    const isHusband = spouse && person.gender === "male"; // Assuming gender field or other logic to determine husband
+
+    // Calculate positions for "Add Parent" nodes
+    const addParentX1 = isHusband
+      ? baseX - horizontalOffset
+      : baseX + horizontalOffset;
+    const addParentX2 = isHusband
+      ? baseX - 2 * horizontalOffset
+      : baseX + 2 * horizontalOffset;
+
     // Add the "Add Parent" nodes only if this person has no parents
     if (person?.parents.length === 0) {
       if (!addedSpousesIds.has(person.id)) {
+        const subParentX =
+          person.gender === "male"
+            ? baseX - horizontalOffset
+            : baseX + horizontalOffset;
+
         addParentNode(
           `add-parent1-${nodeId}`,
           "addparent",
           "Add parent 1",
-          baseX - horizontalOffset,
+          subParentX,
           baseY - verticalOffset,
           nodes,
           nodeId
         );
 
         addEdge(`add-parent1-${nodeId}`, nodeId, edges);
-      }
-
-      if (!addedSpousesIds.has(person.id)) {
-        const spouse = data.find((p) => p.id === person.spouseId);
-        if (spouse?.parents.length === 0) {
-          addParentNode(
-            `add-parent2-${person.spouseId}`,
-            "addparent",
-            "Add parent 2 First",
-            baseX + horizontalOffset,
-            baseY - verticalOffset,
-            nodes,
-            person.spouseId
-          );
-
-          addEdge(`add-parent2-${person.spouseId}`, nodeId, edges);
-        }
       }
     }
 
@@ -78,17 +81,47 @@ export const createNodesAndEdges = (data) => {
       addedSpousesIds.add(spouse.id);
     }
 
+    const subParentX =
+      person.gender === "male"
+        ? baseX - horizontalOffset
+        : baseX + horizontalOffset;
+
     if (!addedSpousesIds.has(person.id)) {
+      const spouse = data.find((p) => p.id === person.spouseId);
+
       addNode(
         nodeId,
         "subparent",
         `${person.firstName} ${person.lastName}`,
         spouseLabel,
         person?.spouseId,
-        baseX,
+        subParentX,
         baseY,
         nodes
       );
+
+      if (person?.gender === "male") {
+        // Edges to parents
+        person.parents.forEach((parent) => {
+          addEdge(parent?.parent?.id?.toString(), nodeId, edges);
+        });
+      }
+
+      // If spouse has no parents, add the "Add Parent" nodes
+      if (spouse?.parents.length === 0) {
+        const isSpouseHusband = spouse?.gender === "male";
+        const spouseAddParentX = isSpouseHusband ? addParentX2 : addParentX1;
+        addParentNode(
+          `add-parent2-${person.spouseId}`,
+          "addparent",
+          "Add parent 2",
+          spouseAddParentX,
+          baseY - verticalOffset,
+          nodes,
+          person.spouseId
+        );
+        addEdge(`add-parent2-${person.spouseId}`, nodeId, edges);
+      }
 
       // Add edges to spouse's parents  (if they exist)
       if (person.spouseId) {
@@ -98,31 +131,21 @@ export const createNodesAndEdges = (data) => {
         });
       }
 
-      const spouse = data.find((p) => p.id === person.spouseId);
-
-      // If spouse has no parents, add the "Add Parent" nodes
-      if (spouse?.parents.length === 0) {
-        addParentNode(
-          `add-parent2-${person.spouseId}`,
-          "addparent",
-          "Add parent 2",
-          baseX + horizontalOffset,
-          baseY - verticalOffset,
-          nodes,
-          person.spouseId
-        );
-
-        addEdge(`add-parent2-${person.spouseId}`, nodeId, edges);
+      if (person?.gender === "female") {
+        // Edges to parents
+        person.parents.forEach((parent) => {
+          addEdge(parent?.parent?.id?.toString(), nodeId, edges);
+        });
       }
     }
 
-    // Edges to parents
-    person.parents.forEach((parent) => {
-      addEdge(parent?.parent?.id?.toString(), nodeId, edges);
-    });
-
     // Add "+ Add Child" nodes for each node that has children
-    if (!nodesWithChildren.has(person.id)) {
+    if (
+      !nodesWithChildren.has(person.id) &&
+      (person.spouseId === null || !nodesWithChildren.has(person.spouseId)) &&
+      !addedChildNodes.has(person.id) &&
+      !addedChildNodes.has(person.spouseId)
+    ) {
       addChildNode(
         `add-child-${person.id}`,
         "addChildNode",
@@ -133,6 +156,11 @@ export const createNodesAndEdges = (data) => {
         person.id
       );
       addEdge(person.id.toString(), `add-child-${person.id}`, edges);
+    }
+    // Mark both the person and spouse as having the "+ Add Child" node
+    addedChildNodes.add(person.id);
+    if (person.spouseId) {
+      addedChildNodes.add(person.spouseId);
     }
   });
 
@@ -217,7 +245,7 @@ export const initialBirthEdges = [
   { id: "e12", source: "3", target: "3", type: edgeType },
 ];
 
-///////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
 
 export const PeopleDetailNode = [
   {

@@ -29,9 +29,7 @@ export async function GET(request: NextRequest, context: any) {
 
 export async function PATCH(request: Request, context: any) {
   try {
-    // const { id } = request.nextUrl.searchParams;
     const { params } = context;
-    console.log("params", params);
     const id = params.id;
     const updatedMember = await request.json();
     const childId = parseInt(id || "", 10);
