@@ -159,6 +159,10 @@ const AddSpouseModal: FC<AddSpouseModalProps> = ({ spouseId }) => {
     }
   };
 
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   return (
     <Fragment>
       <ReactModal
