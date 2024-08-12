@@ -144,18 +144,9 @@ const AddSpouseModal: FC<AddSpouseModalProps> = ({ spouseId }) => {
         postDataToCreteBirthEvent
       );
 
-      const res = await axios.post("/api/family", postData);
-      //   const result = await axios.patch(`/api/family/${childId}`, {
-      //     parents: [
-      //       ...res.data?.result?.parents,
-      //       { parent: { ...res?.data?.result } },
-      //     ],
-      //   });
-
       setIsAddSpouseModalOpen(false);
     } catch (error) {
       console.error("Error saving data:", error);
-      // Handle error (e.g., show a notification)
     }
   };
 

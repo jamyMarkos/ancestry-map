@@ -16,10 +16,8 @@
     "spouseId": null,
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:36:20.797Z",
-    "updatedAt": "2024-08-11T14:01:45.211Z",
-    "parents": [
-      14
-    ],
+    "updatedAt": "2024-08-12T23:40:32.117Z",
+    "parents": [14],
     "relatedEvents": []
   },
   {
@@ -82,11 +80,8 @@
     "spouseId": null,
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:41:53.849Z",
-    "updatedAt": "2024-08-11T14:13:02.298Z",
-    "parents": [
-      13,
-      15
-    ],
+    "updatedAt": "2024-08-12T23:40:06.616Z",
+    "parents": [13, 15],
     "relatedEvents": [
       {
         "id": 16,
@@ -117,9 +112,7 @@
     "userId": "user_2gTTLhjT1fFk0g6uVKvKmXSTuXx",
     "createdAt": "2024-07-30T13:41:54.434Z",
     "updatedAt": "2024-07-30T13:41:54.434Z",
-    "parents": [
-      10767496
-    ],
+    "parents": [],
     "relatedEvents": [
       {
         "id": 17,
@@ -143,57 +136,5 @@
         ]
       }
     ]
-  },
-  {
-    "id": 10767496,
-    "isUser": false,
-    "firstName": "Mary Mum",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "female",
-    "isAlive": true,
-    "hasChangedName": false,
-    "hasChangedGender": false,
-    "parents": [
-      76192350
-    ],
-    "createdAt": "2024-08-12T23:24:04.424Z",
-    "updatedAt": "2024-08-12T23:24:04.424Z"
-  },
-  {
-    "id": 76192350,
-    "isUser": false,
-    "firstName": "Mary Grand Mum",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "female",
-    "isAlive": true,
-    "hasChangedName": false,
-    "hasChangedGender": false,
-    "parents": [
-      26449668
-    ],
-    "createdAt": "2024-08-12T23:24:31.894Z",
-    "updatedAt": "2024-08-12T23:24:31.894Z"
-  },
-  {
-    "id": 26449668,
-    "isUser": false,
-    "firstName": "Mary Great Grand Father",
-    "lastName": "Doe",
-    "birthPlace": "New York, USA",
-    "countryCode": "US",
-    "dob": "1998-12-31 21:00:00",
-    "gender": "male",
-    "isAlive": true,
-    "hasChangedName": false,
-    "hasChangedGender": false,
-    "parents": [],
-    "createdAt": "2024-08-12T23:25:00.914Z",
-    "updatedAt": "2024-08-12T23:25:00.914Z"
   }
 ]

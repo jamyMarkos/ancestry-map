@@ -95,7 +95,7 @@ export const createNodesAndEdges = (data) => {
       const spouse = data.find((p) => p.id === person.spouseId);
       spouseLabel = `${spouse?.firstName} ${spouse?.lastName}`;
       // Mark the spouse as added so that we don't add them again
-      addedSpousesIds.add(spouse.id);
+      addedSpousesIds.add(spouse?.id);
     }
 
     const subParentX =
@@ -143,7 +143,7 @@ export const createNodesAndEdges = (data) => {
       // Add edges to spouse's parents  (if they exist)
       if (person.spouseId) {
         const spouse = data.find((p) => p.id === person.spouseId);
-        spouse.parents.forEach((id) => {
+        spouse?.parents.forEach((id) => {
           addEdge(id?.toString(), nodeId, edges);
         });
       }
