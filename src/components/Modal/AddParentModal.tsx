@@ -131,27 +131,21 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
     };
 
     try {
-      // Send POST request to the JSON server
-      const response = await axios.post("/api/people", postData);
-
       // Send POST request to the create Birth event automatically
       const responseBirthEvent = await axios.post(
         "/api/events",
         postDataToCreteBirthEvent
       );
 
-      const res = await axios.post("/api/family", postData);
-      const result = await axios.patch(`/api/family/${childId}`, {
-        parents: [
-          ...res.data?.result?.parents,
-          { parent: { ...res?.data?.result } },
-        ],
+      const res = await axios.post("/api/people", postData);
+
+      const result = await axios.patch(`/api/people/${childId}`, {
+        parents: [...res.data?.result?.parents, res?.data?.result?.id],
       });
 
       setAddPeopleModal(false);
     } catch (error) {
       console.error("Error saving data:", error);
-      // Handle error (e.g., show a notification)
     }
   };
 

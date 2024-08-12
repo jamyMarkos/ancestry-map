@@ -13,6 +13,7 @@ export const createNodesAndEdges = (data) => {
 
   const addedSpousesIds = new Set();
   const nodesWithChildren = new Set();
+  const TrialnodesWithChildren = new Set();
   const addedChildNodes = new Set();
   // Step 1: Determine which nodes have children
   data.forEach((person) => {
@@ -23,11 +24,27 @@ export const createNodesAndEdges = (data) => {
     }
   });
 
+  // new code....above
+  data.forEach((person) => {
+    if (person.parents.length > 0) {
+      person.parents.forEach((id) => {
+        TrialnodesWithChildren.add(id);
+      });
+    }
+  });
+
   let maxDepth = 0;
   const nodeLevels = {};
   data.forEach((person) => {
     nodeLevels[person.id] = calculateDepth(person.id, data);
     maxDepth = Math.max(maxDepth, nodeLevels[person.id]);
+  });
+
+  let maxDepthTwo = 0;
+  const nodeLevelsTwo = {};
+  data.forEach((person) => {
+    nodeLevelsTwo[person.id] = calculateDepth(person.id, data);
+    maxDepthTwo = Math.max(maxDepthTwo, nodeLevelsTwo[person.id]);
   });
 
   // Function to add nodes and edges
@@ -102,8 +119,8 @@ export const createNodesAndEdges = (data) => {
 
       if (person?.gender === "male") {
         // Edges to parents
-        person.parents.forEach((parent) => {
-          addEdge(parent?.parent?.id?.toString(), nodeId, edges);
+        person.parents.forEach((id) => {
+          addEdge(id?.toString(), nodeId, edges);
         });
       }
 
@@ -126,23 +143,24 @@ export const createNodesAndEdges = (data) => {
       // Add edges to spouse's parents  (if they exist)
       if (person.spouseId) {
         const spouse = data.find((p) => p.id === person.spouseId);
-        spouse.parents.forEach((parent) => {
-          addEdge(parent?.parent?.id?.toString(), nodeId, edges);
+        spouse.parents.forEach((id) => {
+          addEdge(id?.toString(), nodeId, edges);
         });
       }
 
       if (person?.gender === "female") {
         // Edges to parents
-        person.parents.forEach((parent) => {
-          addEdge(parent?.parent?.id?.toString(), nodeId, edges);
+        person.parents.forEach((id) => {
+          addEdge(id?.toString(), nodeId, edges);
         });
       }
     }
 
     // Add "+ Add Child" nodes for each node that has children
     if (
-      !nodesWithChildren.has(person.id) &&
-      (person.spouseId === null || !nodesWithChildren.has(person.spouseId)) &&
+      !TrialnodesWithChildren.has(person.id) &&
+      (person.spouseId === null ||
+        !TrialnodesWithChildren.has(person.spouseId)) &&
       !addedChildNodes.has(person.id) &&
       !addedChildNodes.has(person.spouseId)
     ) {
@@ -178,6 +196,19 @@ function calculateDepth(id, data, depth = 0) {
   );
   return Math.max(...parentDepths);
 }
+
+// i don't know why this function doesnot work
+
+// function calculateDepthTwo(id, data, depth = 0) {
+//   const person = data.find((p) => p.id === id);
+//   if (!person || !person.parents || person.parents.length === 0) {
+//     return depth;
+//   }
+//   const parentDepths = person.parents.map((id) =>
+//     calculateDepth(id, data, depth + 1)
+//   );
+//   return Math.max(...parentDepths);
+// }
 
 // Add a child node
 function addChildNode(id, type, label, x, y, nodes, parentId) {
