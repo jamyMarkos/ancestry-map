@@ -244,5 +244,60 @@
     "eventPlace": "New York, USA",
     "createdAt": "2024-08-12T23:42:21.805Z",
     "updatedAt": "2024-08-12T23:42:21.805Z"
+  },
+  {
+    "id": 41443844,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "birth",
+    "eventDate": "2024-08-11T21:00:00.000Z",
+    "location": "New York, USA",
+    "personId": 31970228,
+    "marriage": null,
+    "createdAt": "2024-08-13T00:09:21.544Z",
+    "updatedAt": "2024-08-13T00:09:21.544Z"
+  },
+  {
+    "id": 83801821,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "birth",
+    "eventDate": "2024-07-28T21:00:00.000Z",
+    "location": "New York, USA",
+    "personId": 2536412,
+    "marriage": null,
+    "createdAt": "2024-08-13T00:16:13.416Z",
+    "updatedAt": "2024-08-13T00:16:13.416Z"
+  },
+  {
+    "id": 98947175,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "birth",
+    "eventDate": "2024-07-28T21:00:00.000Z",
+    "location": "New York, USA",
+    "personId": 20747392,
+    "marriage": null,
+    "createdAt": "2024-08-13T00:20:14.950Z",
+    "updatedAt": "2024-08-13T00:20:14.950Z"
+  },
+  {
+    "id": 26925116,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "birth",
+    "eventDate": "2024-07-28T21:00:00.000Z",
+    "location": "New York, USA",
+    "personId": 92680142,
+    "marriage": null,
+    "createdAt": "2024-08-13T00:21:20.478Z",
+    "updatedAt": "2024-08-13T00:21:20.478Z"
+  },
+  {
+    "id": 13917662,
+    "userId": "user_3gTTZQ6YXa",
+    "type": "birth",
+    "eventDate": "2024-07-29T21:00:00.000Z",
+    "location": "New York, USA",
+    "personId": 85733933,
+    "marriage": null,
+    "createdAt": "2024-08-13T00:22:30.703Z",
+    "updatedAt": "2024-08-13T00:22:30.703Z"
   }
 ]

@@ -37,7 +37,6 @@ const AddChildModal: FC = () => {
     nickName: "",
     birthPlace: "",
   });
-  // console.log("paaaaaaaaaarrrrreeeeeeeennnnnnnt", parentId);
   const [startDate, setStartDate] = useState<Date | null>(null);
 
   const [selectedGender, setSelectedGender] = useState<any>(null);
@@ -94,27 +93,22 @@ const AddChildModal: FC = () => {
     };
 
     try {
-      // add the child to the people registry
-      const response = await axios.post("/api/people", postData);
-
       // Send POST request to the create Birth event automatically
       const responseBirthEvent = await axios.post(
         "/api/events",
         postDataToCreteBirthEvent
       );
 
-      // add the child to the family registry
-      const res = await axios.post("/api/family", postData);
+      // Add the child to the people registry
+      const res = await axios.post("/api/people", postData);
 
-      // fetch the parent of the child
-      const ress = await axios.get(`/api/family/${parentId}`);
+      // Fetch the parent of the child
+      const ress = await axios.get(`/api/people/${parentId}`);
 
-      const result = await axios.patch(
-        "/api/family/" + `${res.data?.result?.id}`,
-        {
-          parents: [{ parent: { ...ress?.data?.result } }],
-        }
-      );
+      // Update the family record with the parent ID
+      const result = await axios.patch(`/api/people/${res.data?.result?.id}`, {
+        parents: [ress?.data?.result?.id], // Correctly add the parent ID to the array
+      });
 
       setAddChildModal(false);
     } catch (error) {
