@@ -18,6 +18,7 @@ const genderOptions = [
   { label: "Male", value: "male" },
   { label: "Female", value: "female" },
   { label: "Transgender", value: "transgender" },
+  { label: "None", value: null },
 ];
 
 type AddSpouseModalProps = {

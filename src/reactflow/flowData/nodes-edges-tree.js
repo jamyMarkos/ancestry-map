@@ -117,12 +117,12 @@ export const createNodesAndEdges = (data) => {
         nodes
       );
 
-      if (person?.gender === "male") {
-        // Edges to parents
-        person.parents.forEach((id) => {
-          addEdge(id?.toString(), nodeId, edges);
-        });
-      }
+      // if (person?.gender === "male") {
+      // Edges to parents
+      person.parents.forEach((id) => {
+        addEdge(id?.toString(), nodeId, edges);
+      });
+      // }
 
       // If spouse has no parents, add the "Add Parent" nodes
       if (spouse?.parents.length === 0) {

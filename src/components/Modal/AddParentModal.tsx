@@ -18,6 +18,7 @@ const genderOptions = [
   { label: "Male", value: "male" },
   { label: "Female", value: "female" },
   { label: "Transgender", value: "transgender" },
+  { label: "None", value: null },
 ];
 
 type AddParentModalProps = {
@@ -102,9 +103,9 @@ const AddParentModal: FC<AddParentModalProps> = ({ childId }) => {
       dob: startDate
         ? startDate.toISOString().slice(0, 19).replace("T", " ")
         : null, // Format the date
-      gender: leftOrRight === 0 ? "male" : "female", // Get the selected gender value
+      // gender: leftOrRight === 0 ? "male" : "female", // Get the selected gender value
 
-      // gender:  selectedGender ? selectedGender.value : null, // Get the selected gender value
+      gender: selectedGender ? selectedGender.value : null, // Get the selected gender value
 
       isAlive: true, // Assuming this is a static value
       hasChangedName: false, // Assuming this is a static value
